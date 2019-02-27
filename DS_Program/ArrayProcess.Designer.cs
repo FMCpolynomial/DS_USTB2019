@@ -49,6 +49,8 @@
             this.radio_Tail = new System.Windows.Forms.RadioButton();
             this.radio_Head = new System.Windows.Forms.RadioButton();
             this.radio_ten = new System.Windows.Forms.RadioButton();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button_ClearTerm = new System.Windows.Forms.Button();
             this.button_Exit = new System.Windows.Forms.Button();
             this.button_Insert = new System.Windows.Forms.Button();
             this.button_Modify = new System.Windows.Forms.Button();
@@ -58,7 +60,6 @@
             this.Console = new System.Windows.Forms.RichTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.Terminal = new System.Windows.Forms.RichTextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -150,7 +151,7 @@
             // radio_Random
             // 
             this.radio_Random.AutoSize = true;
-            this.radio_Random.Location = new System.Drawing.Point(144, 38);
+            this.radio_Random.Location = new System.Drawing.Point(165, 38);
             this.radio_Random.Name = "radio_Random";
             this.radio_Random.Size = new System.Drawing.Size(117, 35);
             this.radio_Random.TabIndex = 2;
@@ -184,6 +185,7 @@
             this.button_Clear.TabIndex = 3;
             this.button_Clear.Text = "清空";
             this.button_Clear.UseVisualStyleBackColor = true;
+            this.button_Clear.Click += new System.EventHandler(this.button_Clear_Click);
             // 
             // button_Init
             // 
@@ -193,6 +195,7 @@
             this.button_Init.TabIndex = 3;
             this.button_Init.Text = "初始化";
             this.button_Init.UseVisualStyleBackColor = true;
+            this.button_Init.Click += new System.EventHandler(this.button_Init_Click);
             // 
             // textBox_DataNum
             // 
@@ -201,6 +204,7 @@
             this.textBox_DataNum.Name = "textBox_DataNum";
             this.textBox_DataNum.Size = new System.Drawing.Size(100, 39);
             this.textBox_DataNum.TabIndex = 1;
+            this.textBox_DataNum.Text = "20";
             // 
             // textBox_MaxSize
             // 
@@ -209,6 +213,7 @@
             this.textBox_MaxSize.Name = "textBox_MaxSize";
             this.textBox_MaxSize.Size = new System.Drawing.Size(100, 39);
             this.textBox_MaxSize.TabIndex = 1;
+            this.textBox_MaxSize.Text = "1000";
             // 
             // label2
             // 
@@ -234,6 +239,7 @@
             // 
             this.groupBox2.Controls.Add(this.groupBox6);
             this.groupBox2.Controls.Add(this.groupBox5);
+            this.groupBox2.Controls.Add(this.button_ClearTerm);
             this.groupBox2.Controls.Add(this.button_Exit);
             this.groupBox2.Controls.Add(this.button_Insert);
             this.groupBox2.Controls.Add(this.button_Modify);
@@ -310,11 +316,29 @@
             this.radio_ten.TabStop = true;
             this.radio_ten.UseVisualStyleBackColor = true;
             // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox1.Location = new System.Drawing.Point(46, 114);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(90, 39);
+            this.textBox1.TabIndex = 1;
+            // 
+            // button_ClearTerm
+            // 
+            this.button_ClearTerm.Location = new System.Drawing.Point(38, 404);
+            this.button_ClearTerm.Name = "button_ClearTerm";
+            this.button_ClearTerm.Size = new System.Drawing.Size(86, 87);
+            this.button_ClearTerm.TabIndex = 3;
+            this.button_ClearTerm.Text = "清空Log";
+            this.button_ClearTerm.UseVisualStyleBackColor = true;
+            this.button_ClearTerm.Click += new System.EventHandler(this.button_ClearTerm_Click);
+            // 
             // button_Exit
             // 
-            this.button_Exit.Location = new System.Drawing.Point(38, 404);
+            this.button_Exit.Location = new System.Drawing.Point(130, 404);
             this.button_Exit.Name = "button_Exit";
-            this.button_Exit.Size = new System.Drawing.Size(286, 87);
+            this.button_Exit.Size = new System.Drawing.Size(194, 87);
             this.button_Exit.TabIndex = 3;
             this.button_Exit.Text = "退出";
             this.button_Exit.UseVisualStyleBackColor = true;
@@ -409,14 +433,6 @@
             this.Terminal.TabIndex = 0;
             this.Terminal.Text = "";
             // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.Location = new System.Drawing.Point(46, 114);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(96, 39);
-            this.textBox1.TabIndex = 1;
-            // 
             // ArrayProcess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
@@ -481,5 +497,6 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button_ClearTerm;
     }
 }
