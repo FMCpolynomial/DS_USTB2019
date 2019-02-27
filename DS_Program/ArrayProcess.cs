@@ -220,10 +220,9 @@ namespace DS_Program
         {
             InitializeComponent();
             Log_Terminal("Initialization.");
-            Generate_PrimeNum(44);
         }
 
-#region 程序变量
+#region  程序变量
 
         // 顺序表
         CSeqList<int> _cSeqList;
@@ -298,7 +297,7 @@ namespace DS_Program
                     Log_Terminal($"随机数列第{i}:\t {tmp_List[i].ToString()}");
                 }
 
-                iterateAssign();
+                iterate_Assign_plus_Log();
             }
 
             if (radio_Sequence.Checked)
@@ -311,7 +310,7 @@ namespace DS_Program
                     Log_Terminal($"顺序数列第{i}:\t {tmp_List[i].ToString()}");
                 }
 
-                iterateAssign();
+                iterate_Assign_plus_Log();
             }
         }
 
@@ -392,7 +391,7 @@ namespace DS_Program
                 Generate_Fibonacci(ArraySize);
                 disturbListOrder();
 
-                iterateAssign();
+                iterate_Assign_plus_Log();
             }
 
             if (radio_Sequence.Checked)
@@ -401,7 +400,7 @@ namespace DS_Program
 
                 //这个是给素数和fib用的
                 Generate_Fibonacci(ArraySize);
-                iterateAssign();
+                iterate_Assign_plus_Log();
             }
         }
 
@@ -459,7 +458,7 @@ namespace DS_Program
                 Generate_PrimeNum(ArraySize);
                 disturbListOrder();
 
-                iterateAssign();
+                iterate_Assign_plus_Log();
             }
 
             if (radio_Sequence.Checked)
@@ -468,7 +467,7 @@ namespace DS_Program
 
                 //这个是给素数和fib用的
                 Generate_PrimeNum(ArraySize);
-                iterateAssign();
+                iterate_Assign_plus_Log();
             }
         }
 
@@ -485,8 +484,8 @@ namespace DS_Program
             tmp_List = newList;
         }
 
-        // 遍历赋值并遍历输出
-        void iterateAssign()
+        // 遍历赋值并遍历输出 => 初始化
+        void iterate_Assign_plus_Log()
         {
             for (int i = 0; i < tmp_List.Count; i++)
             {
@@ -499,6 +498,30 @@ namespace DS_Program
             Log_Terminal($"ArraySize     \t{ArraySize}");
             Log_Terminal($"cSeqList.Count\t{_cSeqList.DataSize}");
             Log_Terminal($"tmp_List.Count\t{tmp_List.Count}");
+        }
+
+        // 遍历赋值并遍历输出 => 结点移动
+        void iterate_Log()
+        {
+            for (int i = 0; i < _cSeqList.DataSize; i++)
+            {
+                //为了和老师的序号同步,序号集体加1
+                Log_Console($"{i + 1}\t[{_cSeqList[i]}]");
+            }
+
+            Log_Terminal($"ArraySize     \t{ArraySize}");
+            Log_Terminal($"cSeqList.Count\t{_cSeqList.DataSize}");
+            Log_Terminal($"tmp_List.Count\t{tmp_List.Count}");
+        }
+
+#endregion
+
+#region 程序part2:结点移动
+
+        bool Check_cSeqList()
+        {
+            if (_cSeqList == null) return false;
+            return true;
         }
 
 #endregion
@@ -528,6 +551,107 @@ namespace DS_Program
         private void button_PrimeNum_Click(object sender, EventArgs e)
         {
             Initialize_PrimeNum();
+        }
+
+        private void button_Del_Click(object sender, EventArgs e)
+        {
+            if (!Check_cSeqList())
+            {
+                Log_Terminal("顺序表未加载!", logType.Error);
+                return;
+            }
+
+            if (radio_Head.Checked)
+            {
+                _cSeqList.Delete(1);
+            }
+            else if (radio_Tail.Checked)
+            {
+                _cSeqList.Delete(_cSeqList.DataSize - 1);
+            }
+            else if (radio_ten.Checked)
+            {
+                // 输入安全性检测    
+                if (!IsInputNumSafe(textBox_DataPos, out ProcessPos, "ProcessPos")) return;
+//                if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData")) return;
+
+                if (ProcessPos <= ArraySize && ProcessPos >= 1)
+                {
+                    _cSeqList.Delete(ProcessPos);
+                }
+                else
+                {
+                    Log_Terminal($"ArraySize:\t{ArraySize.ToString()}", logType.Warning);
+                    Log_Terminal($"ProcessPos:\t{ProcessPos.ToString()}", logType.Warning);
+                    Log_Terminal("操作位置非法!", logType.Error);
+                    return;
+                }
+            }
+            else
+            {
+                Log_Terminal("操作位置未选择!", logType.Error);
+                return;
+            }
+
+            ArraySize--;
+            Console.Clear();
+            iterate_Log();
+        }
+
+        private void button_Modify_Click(object sender, EventArgs e)
+        {
+            if (!Check_cSeqList())
+            {
+                Log_Terminal("顺序表未加载!", logType.Error);
+                return;
+            }
+
+            if (radio_Head.Checked)
+            {
+//                _cSeqList.Delete(0);
+            }
+            else if (radio_Tail.Checked)
+            {
+//                _cSeqList.Delete(_cSeqList.DataSize - 1);
+            }
+            else if (radio_ten.Checked)
+            {
+                // 输入安全性检测    
+                if (!IsInputNumSafe(textBox_DataPos, out ProcessPos, "ProcessPos")) return;
+                if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData")) return;
+            }
+            else
+            {
+                Log_Terminal("操作位置未选择!", logType.Error);
+            }
+        }
+
+        private void button_Insert_Click(object sender, EventArgs e)
+        {
+            if (!Check_cSeqList())
+            {
+                Log_Terminal("顺序表未加载!", logType.Error);
+                return;
+            }
+
+            if (radio_Head.Checked)
+            {
+//                _cSeqList.Delete(0);
+            }
+            else if (radio_Tail.Checked)
+            {
+//                _cSeqList.Delete(_cSeqList.DataSize - 1);
+            }
+            else if (radio_ten.Checked)
+            {
+                // 输入安全性检测    
+                if (!IsInputNumSafe(textBox_DataPos, out ProcessPos, "ProcessPos")) return;
+                if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData")) return;
+            }
+            else
+            {
+                Log_Terminal("操作位置未选择!", logType.Error);
+            }
         }
 
 #endregion

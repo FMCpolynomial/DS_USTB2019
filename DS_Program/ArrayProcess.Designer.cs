@@ -49,7 +49,7 @@
             this.radio_Tail = new System.Windows.Forms.RadioButton();
             this.radio_Head = new System.Windows.Forms.RadioButton();
             this.radio_ten = new System.Windows.Forms.RadioButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_DataPos = new System.Windows.Forms.TextBox();
             this.button_ClearTerm = new System.Windows.Forms.Button();
             this.button_Exit = new System.Windows.Forms.Button();
             this.button_Insert = new System.Windows.Forms.Button();
@@ -278,7 +278,7 @@
             this.groupBox5.Controls.Add(this.radio_Tail);
             this.groupBox5.Controls.Add(this.radio_Head);
             this.groupBox5.Controls.Add(this.radio_ten);
-            this.groupBox5.Controls.Add(this.textBox1);
+            this.groupBox5.Controls.Add(this.textBox_DataPos);
             this.groupBox5.Location = new System.Drawing.Point(182, 51);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(142, 229);
@@ -318,13 +318,13 @@
             this.radio_ten.TabStop = true;
             this.radio_ten.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // textBox_DataPos
             // 
-            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.Location = new System.Drawing.Point(46, 114);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(90, 39);
-            this.textBox1.TabIndex = 1;
+            this.textBox_DataPos.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_DataPos.Location = new System.Drawing.Point(46, 114);
+            this.textBox_DataPos.Name = "textBox_DataPos";
+            this.textBox_DataPos.Size = new System.Drawing.Size(90, 39);
+            this.textBox_DataPos.TabIndex = 1;
             // 
             // button_ClearTerm
             // 
@@ -353,15 +353,17 @@
             this.button_Insert.TabIndex = 3;
             this.button_Insert.Text = "插入";
             this.button_Insert.UseVisualStyleBackColor = true;
+            this.button_Insert.Click += new System.EventHandler(this.button_Insert_Click);
             // 
             // button_Modify
             // 
-            this.button_Modify.Location = new System.Drawing.Point(38, 179);
+            this.button_Modify.Location = new System.Drawing.Point(38, 183);
             this.button_Modify.Name = "button_Modify";
             this.button_Modify.Size = new System.Drawing.Size(121, 57);
             this.button_Modify.TabIndex = 3;
             this.button_Modify.Text = "修改";
             this.button_Modify.UseVisualStyleBackColor = true;
+            this.button_Modify.Click += new System.EventHandler(this.button_Modify_Click);
             // 
             // button_Del
             // 
@@ -371,6 +373,7 @@
             this.button_Del.TabIndex = 3;
             this.button_Del.Text = "删除";
             this.button_Del.UseVisualStyleBackColor = true;
+            this.button_Del.Click += new System.EventHandler(this.button_Del_Click);
             // 
             // splitContainer1
             // 
@@ -498,7 +501,7 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_DataPos;
         private System.Windows.Forms.Button button_ClearTerm;
     }
 }
