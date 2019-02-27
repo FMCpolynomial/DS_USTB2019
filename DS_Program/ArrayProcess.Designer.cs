@@ -258,7 +258,7 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.textBox_Data);
-            this.groupBox6.Location = new System.Drawing.Point(182, 296);
+            this.groupBox6.Location = new System.Drawing.Point(182, 295);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(142, 74);
             this.groupBox6.TabIndex = 5;
@@ -344,6 +344,7 @@
             this.button_Exit.TabIndex = 3;
             this.button_Exit.Text = "退出";
             this.button_Exit.UseVisualStyleBackColor = true;
+            this.button_Exit.Click += new System.EventHandler(this.button_Exit_Click);
             // 
             // button_Insert
             // 

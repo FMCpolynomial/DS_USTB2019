@@ -509,9 +509,11 @@ namespace DS_Program
                 Log_Console($"{i + 1}\t[{_cSeqList[i]}]");
             }
 
+            Log_Terminal($"-------操作完毕-------", logType.Warning);
             Log_Terminal($"ArraySize     \t{ArraySize}");
             Log_Terminal($"cSeqList.Count\t{_cSeqList.DataSize}");
             Log_Terminal($"tmp_List.Count\t{tmp_List.Count}");
+            Log_Terminal($"---------------------", logType.Warning);
         }
 
 #endregion
@@ -567,13 +569,12 @@ namespace DS_Program
             }
             else if (radio_Tail.Checked)
             {
-                _cSeqList.Delete(_cSeqList.DataSize - 1);
+                _cSeqList.Delete(_cSeqList.DataSize);
             }
             else if (radio_ten.Checked)
             {
                 // 输入安全性检测    
                 if (!IsInputNumSafe(textBox_DataPos, out ProcessPos, "ProcessPos")) return;
-//                if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData")) return;
 
                 if (ProcessPos <= ArraySize && ProcessPos >= 1)
                 {
@@ -582,6 +583,7 @@ namespace DS_Program
                 else
                 {
                     Log_Terminal($"ArraySize:\t{ArraySize.ToString()}", logType.Warning);
+                    Log_Terminal($"_cSeqList.DataSize:\t{_cSeqList.DataSize.ToString()}", logType.Warning);
                     Log_Terminal($"ProcessPos:\t{ProcessPos.ToString()}", logType.Warning);
                     Log_Terminal("操作位置非法!", logType.Error);
                     return;
@@ -606,24 +608,42 @@ namespace DS_Program
                 return;
             }
 
+            if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData")) return;
+
             if (radio_Head.Checked)
             {
-//                _cSeqList.Delete(0);
+                _cSeqList.Update(1, ProcessData);
             }
             else if (radio_Tail.Checked)
             {
-//                _cSeqList.Delete(_cSeqList.DataSize - 1);
+                _cSeqList.Update(_cSeqList.DataSize, ProcessData);
             }
             else if (radio_ten.Checked)
             {
                 // 输入安全性检测    
                 if (!IsInputNumSafe(textBox_DataPos, out ProcessPos, "ProcessPos")) return;
-                if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData")) return;
+
+                if (ProcessPos <= ArraySize && ProcessPos >= 1)
+                {
+                    _cSeqList.Update(ProcessPos, ProcessData);
+                }
+                else
+                {
+                    Log_Terminal($"ArraySize:\t{ArraySize.ToString()}", logType.Warning);
+                    Log_Terminal($"_cSeqList.DataSize:\t{_cSeqList.DataSize.ToString()}", logType.Warning);
+                    Log_Terminal($"ProcessPos:\t{ProcessPos.ToString()}", logType.Warning);
+                    Log_Terminal("操作位置非法!", logType.Error);
+                    return;
+                }
             }
             else
             {
                 Log_Terminal("操作位置未选择!", logType.Error);
+                return;
             }
+
+            Console.Clear();
+            iterate_Log();
         }
 
         private void button_Insert_Click(object sender, EventArgs e)
@@ -634,24 +654,49 @@ namespace DS_Program
                 return;
             }
 
+            if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData")) return;
+
             if (radio_Head.Checked)
             {
-//                _cSeqList.Delete(0);
+                _cSeqList.Inset(1, ProcessData);
             }
             else if (radio_Tail.Checked)
             {
-//                _cSeqList.Delete(_cSeqList.DataSize - 1);
+                _cSeqList.Inset(_cSeqList.DataSize + 1, ProcessData);
             }
             else if (radio_ten.Checked)
             {
                 // 输入安全性检测    
                 if (!IsInputNumSafe(textBox_DataPos, out ProcessPos, "ProcessPos")) return;
-                if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData")) return;
+
+                if (ProcessPos <= ArraySize + 1 && ProcessPos >= 0)
+                {
+                    _cSeqList.Inset(ProcessPos, ProcessData);
+                }
+                else
+                {
+                    Log_Terminal($"ArraySize:\t{ArraySize.ToString()}", logType.Warning);
+                    Log_Terminal($"_cSeqList.DataSize:\t{_cSeqList.DataSize.ToString()}", logType.Warning);
+                    Log_Terminal($"ProcessPos:\t{ProcessPos.ToString()}", logType.Warning);
+                    Log_Terminal("操作位置非法!", logType.Error);
+                    return;
+                }
             }
             else
             {
                 Log_Terminal("操作位置未选择!", logType.Error);
+                return;
             }
+
+            ArraySize++;
+            Console.Clear();
+            iterate_Log();
+        }
+
+        private void button_Exit_Click(object sender, EventArgs e)
+        {
+            Initialize_Clear();
+            Application.Exit();
         }
 
 #endregion
