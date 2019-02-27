@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DS_Program
@@ -12,15 +13,15 @@ namespace DS_Program
 
         public bool IsSafe(int number)
         {
-            if (number > 10000)
+            if (number > 1000)
             {
-                Log_Terminal($"Error: Too Large -> larger than 10000.", logType.Error);
+                Log_Terminal("Error: Too Large -> larger than 1000.", logType.Error);
                 return false;
             }
 
             if (number < 0)
             {
-                Log_Terminal($"Error: Too Small -> smaller than zero.", logType.Error);
+                Log_Terminal("Error: Too Small -> smaller than zero.", logType.Error);
                 return false;
             }
 
@@ -136,6 +137,7 @@ namespace DS_Program
                 get { return datasize; }
             }
 
+            //todo:这里是我乱加的
             public T this[int index]
             {
                 // 暂时只给get不给set
@@ -218,7 +220,7 @@ namespace DS_Program
         {
             InitializeComponent();
             Log_Terminal("Initialization.");
-            Log_Terminal(Initialize_Fibonacii(7).ToString());
+            Generate_PrimeNum(44);
         }
 
 #region 程序变量
@@ -226,12 +228,12 @@ namespace DS_Program
         // 顺序表
         CSeqList<int> _cSeqList;
         // 临时表 => 所有生成的表都先存放在这里 若顺序则直接用 若随机打乱顺序之后使用
-        List<int> tmp_cSeqList = new List<int>();
+        List<int> tmp_List = new List<int>();
 
         // 最大数量
         private int MaxSize;
         // 顺序表长度
-        private int ArraySize = 0;
+        private int ArraySize;
 
         // 操作位置
         private int ProcessPos;
@@ -245,6 +247,8 @@ namespace DS_Program
         // button_初始化
         void Initialize_Init()
         {
+            Initialize_Clear();
+
             // 检测输入安全性
 //            if (!Int32.TryParse(textBox_MaxSize.Text, out MaxSize))
 //            {
@@ -272,62 +276,77 @@ namespace DS_Program
 
             // 输入安全性检测    
             if (!IsInputNumSafe(textBox_MaxSize, out MaxSize, "MaxSize")) return;
-            if (!IsInputNumSafe(textBox_DataNum, out ArraySize, "ArraySize")) return;
+            if (!IsInputNumSafe(textBox_ArraySize, out ArraySize, "ArraySize")) return;
+            if (!radio_Sequence.Checked && !radio_Random.Checked)
+            {
+                Log_Terminal("Radion button Unchecked", logType.Error);
+            }
 
             // 正式运行程序
             _cSeqList = new CSeqList<int>(MaxSize);
             if (radio_Random.Checked)
             {
-                Log_Terminal("随机生成_____");
-                disturbListOrder();
+                Log_Terminal("_____随机生成_____");
+
+//                这个是给素数和fib用的
+//                disturbListOrder();
+
+                Random rand = new Random();
+                for (int i = 0; i < ArraySize; i++)
+                {
+                    tmp_List.Add(rand.Next(MaxSize));
+                    Log_Terminal($"随机数列第{i}:\t {tmp_List[i].ToString()}");
+                }
+
                 iterateAssign();
             }
 
             if (radio_Sequence.Checked)
             {
-                Log_Terminal("顺序生成_____");
+                Log_Terminal("_____顺序生成_____");
 
-//                for (int i = 0; i <; i++)
-//                {
-//                }
+                for (int i = 0; i < ArraySize; i++)
+                {
+                    tmp_List.Add(i + 1);
+                    Log_Terminal($"顺序数列第{i}:\t {tmp_List[i].ToString()}");
+                }
 
                 iterateAssign();
-            }
-
-            if (!radio_Sequence.Checked && !radio_Random.Checked)
-            {
-                Log_Terminal("Radion button Unchecked");
             }
         }
 
         // button_清空
         void Initialize_Clear()
         {
+            _cSeqList = new CSeqList<int>(MaxSize);
             _cSeqList.MakeEmpty();
+
+            MaxSize = 0;
             ArraySize = 0;
+            tmp_List.Clear();
+
             Console.Text = "";
         }
 
         // button_斐波那契
-        int Initialize_Fibonacii(int index)
+        int Generate_Fibonacci(int index)
         {
             index++;
             int f1 = 0, f2 = 1, res = 0;
-            Log_Terminal($"数列第 {1}项： {f2}");
-            tmp_cSeqList.Add(f2);
+            Log_Terminal($"Fibonacci数列第 {1}项： {f2}");
+            List<int> tmp = new List<int>();
+            tmp.Add(f2);
 
             for (int n = 2; n < index; n++)
             {
                 if (n % 2 == 1)
                 {
                     f1 = f1 + f2;
-                    Log_Terminal($"数列第 {n}项： {f1}");
+                    Log_Terminal($"Fibonacci数列第 {n}项： {f1}");
 
                     // 扩充
-//                    tmp_cSeqList.Inset(ArraySize, f1);
-//                    ArraySize = tmp_cSeqList.DataSize;
-                    tmp_cSeqList.Add(f1);
-                    ArraySize = tmp_cSeqList.Count;
+                    tmp.Add(f1);
+                    ArraySize = tmp.Count;
 
                     if (n == index - 1) res = f1;
                 }
@@ -335,24 +354,122 @@ namespace DS_Program
                 if (n % 2 == 0)
                 {
                     f2 = f1 + f2;
-                    Log_Terminal($"数列第 {n}项： {f2}");
+                    Log_Terminal($"Fibonacci数列第 {n}项： {f2}");
 
                     // 扩充
-//                    tmp_cSeqList.Inset(ArraySize, f2);
-//                    ArraySize = tmp_cSeqList.DataSize;
-                    tmp_cSeqList.Add(f2);
-                    ArraySize = tmp_cSeqList.Count;
+                    tmp.Add(f2);
+                    ArraySize = tmp.Count;
 
                     if (n == index - 1) res = f2;
                 }
+
+                tmp_List = tmp;
             }
+
 
             return res;
         }
 
+        void Initialize_Fibonacci()
+        {
+            Initialize_Clear();
+
+            // 输入安全性检测    
+            if (!IsInputNumSafe(textBox_MaxSize, out MaxSize, "MaxSize")) return;
+            if (!IsInputNumSafe(textBox_ArraySize, out ArraySize, "ArraySize")) return;
+            if (!radio_Sequence.Checked && !radio_Random.Checked)
+            {
+                Log_Terminal("Radion button Unchecked", logType.Error);
+            }
+
+            // 正式运行程序
+            _cSeqList = new CSeqList<int>(MaxSize);
+            if (radio_Random.Checked)
+            {
+                Log_Terminal("_____随机生成Fib_____");
+
+                //这个是给素数和fib用的
+                Generate_Fibonacci(ArraySize);
+                disturbListOrder();
+
+                iterateAssign();
+            }
+
+            if (radio_Sequence.Checked)
+            {
+                Log_Terminal("_____顺序生成Fib_____");
+
+                //这个是给素数和fib用的
+                Generate_Fibonacci(ArraySize);
+                iterateAssign();
+            }
+        }
+
         // button_素数
+        void Generate_PrimeNum(int index)
+        {
+            Log_Terminal("只能作用于10000以内的素数查询", logType.Warning);
+            tmp_List.Add(2);
+            Log_Terminal($"素数数列第{1}:\t {tmp_List.Last().ToString()}");
+
+            // 输出1~n之间的所有素数，n>=3
+            int i, j = 0;
+            for (i = 3; i <= 10000; i = i + 2)
+            {
+                int k = (int) Math.Sqrt(i);
+                for (j = 2; j <= k; j++)
+                {
+                    if ((i % j) == 0)
+                    {
+                        break;
+                    }
+                }
+
+                if (j > k)
+                {
+                    tmp_List.Add(i);
+                    Log_Terminal($"素数数列第{tmp_List.Count}:\t {tmp_List.Last().ToString()}");
+                    if (tmp_List.Count == index)
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+
         void Initialize_PrimeNum()
         {
+            Initialize_Clear();
+
+            // 输入安全性检测    
+            if (!IsInputNumSafe(textBox_MaxSize, out MaxSize, "MaxSize")) return;
+            if (!IsInputNumSafe(textBox_ArraySize, out ArraySize, "ArraySize")) return;
+            if (!radio_Sequence.Checked && !radio_Random.Checked)
+            {
+                Log_Terminal("Radion button Unchecked", logType.Error);
+            }
+
+            // 正式运行程序
+            _cSeqList = new CSeqList<int>(MaxSize);
+            if (radio_Random.Checked)
+            {
+                Log_Terminal("_____随机生成Fib_____");
+
+                //这个是给素数和fib用的
+                Generate_PrimeNum(ArraySize);
+                disturbListOrder();
+
+                iterateAssign();
+            }
+
+            if (radio_Sequence.Checked)
+            {
+                Log_Terminal("_____顺序生成Fib_____");
+
+                //这个是给素数和fib用的
+                Generate_PrimeNum(ArraySize);
+                iterateAssign();
+            }
         }
 
         // 打乱顺序
@@ -360,26 +477,28 @@ namespace DS_Program
         {
             var random = new Random();
             List<int> newList = new List<int>();
-            foreach (var item in tmp_cSeqList)
+            foreach (var item in tmp_List)
             {
                 newList.Insert(random.Next(newList.Count), item);
             }
 
-            tmp_cSeqList = newList;
+            tmp_List = newList;
         }
 
         // 遍历赋值并遍历输出
         void iterateAssign()
         {
-            for (int i = 0; i < tmp_cSeqList.Count; i++)
+            for (int i = 0; i < tmp_List.Count; i++)
             {
-                _cSeqList.Inset(i, _cSeqList[i]);
+                _cSeqList.Inset(i + 1, tmp_List[i]);
+
+                //为了和老师的序号同步,序号集体加1
+                Log_Console($"{i + 1}\t[{_cSeqList[i]}]");
             }
 
-            for (int i = 0; i < _cSeqList.DataSize; i++)
-            {
-                Log_Console($"{i + 1}    [{_cSeqList[i]}]");
-            }
+            Log_Terminal($"ArraySize     \t{ArraySize}");
+            Log_Terminal($"cSeqList.Count\t{_cSeqList.DataSize}");
+            Log_Terminal($"tmp_List.Count\t{tmp_List.Count}");
         }
 
 #endregion
@@ -399,6 +518,16 @@ namespace DS_Program
         private void button_Clear_Click(object sender, EventArgs e)
         {
             Console.Text = "";
+        }
+
+        private void button_Fibbnacii_Click(object sender, EventArgs e)
+        {
+            Initialize_Fibonacci();
+        }
+
+        private void button_PrimeNum_Click(object sender, EventArgs e)
+        {
+            Initialize_PrimeNum();
         }
 
 #endregion

@@ -38,7 +38,7 @@
             this.button_Fibbnacii = new System.Windows.Forms.Button();
             this.button_Clear = new System.Windows.Forms.Button();
             this.button_Init = new System.Windows.Forms.Button();
-            this.textBox_DataNum = new System.Windows.Forms.TextBox();
+            this.textBox_ArraySize = new System.Windows.Forms.TextBox();
             this.textBox_MaxSize = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -114,7 +114,7 @@
             this.groupBox1.Controls.Add(this.button_Fibbnacii);
             this.groupBox1.Controls.Add(this.button_Clear);
             this.groupBox1.Controls.Add(this.button_Init);
-            this.groupBox1.Controls.Add(this.textBox_DataNum);
+            this.groupBox1.Controls.Add(this.textBox_ArraySize);
             this.groupBox1.Controls.Add(this.textBox_MaxSize);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -167,6 +167,7 @@
             this.button_PrimeNum.TabIndex = 3;
             this.button_PrimeNum.Text = "素数";
             this.button_PrimeNum.UseVisualStyleBackColor = true;
+            this.button_PrimeNum.Click += new System.EventHandler(this.button_PrimeNum_Click);
             // 
             // button_Fibbnacii
             // 
@@ -176,6 +177,7 @@
             this.button_Fibbnacii.TabIndex = 3;
             this.button_Fibbnacii.Text = "斐波那契";
             this.button_Fibbnacii.UseVisualStyleBackColor = true;
+            this.button_Fibbnacii.Click += new System.EventHandler(this.button_Fibbnacii_Click);
             // 
             // button_Clear
             // 
@@ -197,14 +199,14 @@
             this.button_Init.UseVisualStyleBackColor = true;
             this.button_Init.Click += new System.EventHandler(this.button_Init_Click);
             // 
-            // textBox_DataNum
+            // textBox_ArraySize
             // 
-            this.textBox_DataNum.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_DataNum.Location = new System.Drawing.Point(183, 125);
-            this.textBox_DataNum.Name = "textBox_DataNum";
-            this.textBox_DataNum.Size = new System.Drawing.Size(100, 39);
-            this.textBox_DataNum.TabIndex = 1;
-            this.textBox_DataNum.Text = "20";
+            this.textBox_ArraySize.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_ArraySize.Location = new System.Drawing.Point(183, 125);
+            this.textBox_ArraySize.Name = "textBox_ArraySize";
+            this.textBox_ArraySize.Size = new System.Drawing.Size(100, 39);
+            this.textBox_ArraySize.TabIndex = 1;
+            this.textBox_ArraySize.Text = "20";
             // 
             // textBox_MaxSize
             // 
@@ -492,7 +494,7 @@
         private System.Windows.Forms.RadioButton radio_Tail;
         private System.Windows.Forms.RadioButton radio_ten;
         private System.Windows.Forms.RadioButton radio_Head;
-        private System.Windows.Forms.TextBox textBox_DataNum;
+        private System.Windows.Forms.TextBox textBox_ArraySize;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox7;
