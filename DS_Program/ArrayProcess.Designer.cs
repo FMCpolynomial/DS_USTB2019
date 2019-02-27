@@ -31,46 +31,47 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.radio_Sequence = new System.Windows.Forms.RadioButton();
+            this.radio_Random = new System.Windows.Forms.RadioButton();
             this.button_PrimeNum = new System.Windows.Forms.Button();
             this.button_Fibbnacii = new System.Windows.Forms.Button();
             this.button_Clear = new System.Windows.Forms.Button();
             this.button_Init = new System.Windows.Forms.Button();
-            this.radio_Random = new System.Windows.Forms.RadioButton();
-            this.radio_Sequence = new System.Windows.Forms.RadioButton();
             this.textBox_DataNum = new System.Windows.Forms.TextBox();
             this.textBox_MaxSize = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.textBox_Data = new System.Windows.Forms.TextBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.radio_Tail = new System.Windows.Forms.RadioButton();
+            this.radio_Head = new System.Windows.Forms.RadioButton();
+            this.radio_ten = new System.Windows.Forms.RadioButton();
             this.button_Exit = new System.Windows.Forms.Button();
             this.button_Insert = new System.Windows.Forms.Button();
             this.button_Modify = new System.Windows.Forms.Button();
             this.button_Del = new System.Windows.Forms.Button();
-            this.radio_Tail = new System.Windows.Forms.RadioButton();
-            this.radio_ten = new System.Windows.Forms.RadioButton();
-            this.textBox_Data = new System.Windows.Forms.TextBox();
-            this.radio_Head = new System.Windows.Forms.RadioButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.Console = new System.Windows.Forms.RichTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.Terminal = new System.Windows.Forms.RichTextBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -125,41 +126,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "初始化";
             // 
-            // button_PrimeNum
+            // groupBox7
             // 
-            this.button_PrimeNum.Location = new System.Drawing.Point(188, 375);
-            this.button_PrimeNum.Name = "button_PrimeNum";
-            this.button_PrimeNum.Size = new System.Drawing.Size(121, 57);
-            this.button_PrimeNum.TabIndex = 3;
-            this.button_PrimeNum.Text = "素数";
-            this.button_PrimeNum.UseVisualStyleBackColor = true;
+            this.groupBox7.Controls.Add(this.radio_Sequence);
+            this.groupBox7.Controls.Add(this.radio_Random);
+            this.groupBox7.Location = new System.Drawing.Point(38, 182);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(286, 100);
+            this.groupBox7.TabIndex = 4;
+            this.groupBox7.TabStop = false;
             // 
-            // button_Fibbnacii
+            // radio_Sequence
             // 
-            this.button_Fibbnacii.Location = new System.Drawing.Point(48, 375);
-            this.button_Fibbnacii.Name = "button_Fibbnacii";
-            this.button_Fibbnacii.Size = new System.Drawing.Size(121, 57);
-            this.button_Fibbnacii.TabIndex = 3;
-            this.button_Fibbnacii.Text = "斐波那契";
-            this.button_Fibbnacii.UseVisualStyleBackColor = true;
-            // 
-            // button_Clear
-            // 
-            this.button_Clear.Location = new System.Drawing.Point(188, 304);
-            this.button_Clear.Name = "button_Clear";
-            this.button_Clear.Size = new System.Drawing.Size(121, 57);
-            this.button_Clear.TabIndex = 3;
-            this.button_Clear.Text = "清空";
-            this.button_Clear.UseVisualStyleBackColor = true;
-            // 
-            // button_Init
-            // 
-            this.button_Init.Location = new System.Drawing.Point(48, 304);
-            this.button_Init.Name = "button_Init";
-            this.button_Init.Size = new System.Drawing.Size(121, 57);
-            this.button_Init.TabIndex = 3;
-            this.button_Init.Text = "初始化";
-            this.button_Init.UseVisualStyleBackColor = true;
+            this.radio_Sequence.AutoSize = true;
+            this.radio_Sequence.Location = new System.Drawing.Point(4, 38);
+            this.radio_Sequence.Name = "radio_Sequence";
+            this.radio_Sequence.Size = new System.Drawing.Size(117, 35);
+            this.radio_Sequence.TabIndex = 2;
+            this.radio_Sequence.TabStop = true;
+            this.radio_Sequence.Text = "顺序数";
+            this.radio_Sequence.UseVisualStyleBackColor = true;
             // 
             // radio_Random
             // 
@@ -172,16 +158,41 @@
             this.radio_Random.Text = "随机数";
             this.radio_Random.UseVisualStyleBackColor = true;
             // 
-            // radio_Sequence
+            // button_PrimeNum
             // 
-            this.radio_Sequence.AutoSize = true;
-            this.radio_Sequence.Location = new System.Drawing.Point(4, 38);
-            this.radio_Sequence.Name = "radio_Sequence";
-            this.radio_Sequence.Size = new System.Drawing.Size(117, 35);
-            this.radio_Sequence.TabIndex = 2;
-            this.radio_Sequence.TabStop = true;
-            this.radio_Sequence.Text = "顺序数";
-            this.radio_Sequence.UseVisualStyleBackColor = true;
+            this.button_PrimeNum.Location = new System.Drawing.Point(203, 375);
+            this.button_PrimeNum.Name = "button_PrimeNum";
+            this.button_PrimeNum.Size = new System.Drawing.Size(121, 57);
+            this.button_PrimeNum.TabIndex = 3;
+            this.button_PrimeNum.Text = "素数";
+            this.button_PrimeNum.UseVisualStyleBackColor = true;
+            // 
+            // button_Fibbnacii
+            // 
+            this.button_Fibbnacii.Location = new System.Drawing.Point(38, 375);
+            this.button_Fibbnacii.Name = "button_Fibbnacii";
+            this.button_Fibbnacii.Size = new System.Drawing.Size(121, 57);
+            this.button_Fibbnacii.TabIndex = 3;
+            this.button_Fibbnacii.Text = "斐波那契";
+            this.button_Fibbnacii.UseVisualStyleBackColor = true;
+            // 
+            // button_Clear
+            // 
+            this.button_Clear.Location = new System.Drawing.Point(203, 304);
+            this.button_Clear.Name = "button_Clear";
+            this.button_Clear.Size = new System.Drawing.Size(121, 57);
+            this.button_Clear.TabIndex = 3;
+            this.button_Clear.Text = "清空";
+            this.button_Clear.UseVisualStyleBackColor = true;
+            // 
+            // button_Init
+            // 
+            this.button_Init.Location = new System.Drawing.Point(38, 304);
+            this.button_Init.Name = "button_Init";
+            this.button_Init.Size = new System.Drawing.Size(121, 57);
+            this.button_Init.TabIndex = 3;
+            this.button_Init.Text = "初始化";
+            this.button_Init.UseVisualStyleBackColor = true;
             // 
             // textBox_DataNum
             // 
@@ -236,6 +247,69 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "结点移动";
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.textBox_Data);
+            this.groupBox6.Location = new System.Drawing.Point(182, 296);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(142, 74);
+            this.groupBox6.TabIndex = 5;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "操作数据";
+            // 
+            // textBox_Data
+            // 
+            this.textBox_Data.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_Data.Location = new System.Drawing.Point(0, 35);
+            this.textBox_Data.Name = "textBox_Data";
+            this.textBox_Data.Size = new System.Drawing.Size(142, 39);
+            this.textBox_Data.TabIndex = 1;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.radio_Tail);
+            this.groupBox5.Controls.Add(this.radio_Head);
+            this.groupBox5.Controls.Add(this.radio_ten);
+            this.groupBox5.Controls.Add(this.textBox1);
+            this.groupBox5.Location = new System.Drawing.Point(182, 51);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(142, 229);
+            this.groupBox5.TabIndex = 5;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "操作位置";
+            // 
+            // radio_Tail
+            // 
+            this.radio_Tail.AutoSize = true;
+            this.radio_Tail.Location = new System.Drawing.Point(13, 173);
+            this.radio_Tail.Name = "radio_Tail";
+            this.radio_Tail.Size = new System.Drawing.Size(97, 35);
+            this.radio_Tail.TabIndex = 2;
+            this.radio_Tail.TabStop = true;
+            this.radio_Tail.Text = "    尾";
+            this.radio_Tail.UseVisualStyleBackColor = true;
+            // 
+            // radio_Head
+            // 
+            this.radio_Head.AutoSize = true;
+            this.radio_Head.Location = new System.Drawing.Point(13, 59);
+            this.radio_Head.Name = "radio_Head";
+            this.radio_Head.Size = new System.Drawing.Size(97, 35);
+            this.radio_Head.TabIndex = 2;
+            this.radio_Head.TabStop = true;
+            this.radio_Head.Text = "    首";
+            this.radio_Head.UseVisualStyleBackColor = true;
+            // 
+            // radio_ten
+            // 
+            this.radio_ten.AutoSize = true;
+            this.radio_ten.Location = new System.Drawing.Point(13, 119);
+            this.radio_ten.Name = "radio_ten";
+            this.radio_ten.Size = new System.Drawing.Size(27, 26);
+            this.radio_ten.TabIndex = 2;
+            this.radio_ten.TabStop = true;
+            this.radio_ten.UseVisualStyleBackColor = true;
+            // 
             // button_Exit
             // 
             this.button_Exit.Location = new System.Drawing.Point(38, 404);
@@ -271,47 +345,6 @@
             this.button_Del.TabIndex = 3;
             this.button_Del.Text = "删除";
             this.button_Del.UseVisualStyleBackColor = true;
-            // 
-            // radio_Tail
-            // 
-            this.radio_Tail.AutoSize = true;
-            this.radio_Tail.Location = new System.Drawing.Point(35, 173);
-            this.radio_Tail.Name = "radio_Tail";
-            this.radio_Tail.Size = new System.Drawing.Size(69, 35);
-            this.radio_Tail.TabIndex = 2;
-            this.radio_Tail.TabStop = true;
-            this.radio_Tail.Text = "尾";
-            this.radio_Tail.UseVisualStyleBackColor = true;
-            // 
-            // radio_ten
-            // 
-            this.radio_ten.AutoSize = true;
-            this.radio_ten.Location = new System.Drawing.Point(35, 116);
-            this.radio_ten.Name = "radio_ten";
-            this.radio_ten.Size = new System.Drawing.Size(73, 35);
-            this.radio_ten.TabIndex = 2;
-            this.radio_ten.TabStop = true;
-            this.radio_ten.Text = "10";
-            this.radio_ten.UseVisualStyleBackColor = true;
-            // 
-            // textBox_Data
-            // 
-            this.textBox_Data.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_Data.Location = new System.Drawing.Point(0, 35);
-            this.textBox_Data.Name = "textBox_Data";
-            this.textBox_Data.Size = new System.Drawing.Size(142, 39);
-            this.textBox_Data.TabIndex = 1;
-            // 
-            // radio_Head
-            // 
-            this.radio_Head.AutoSize = true;
-            this.radio_Head.Location = new System.Drawing.Point(35, 59);
-            this.radio_Head.Name = "radio_Head";
-            this.radio_Head.Size = new System.Drawing.Size(69, 35);
-            this.radio_Head.TabIndex = 2;
-            this.radio_Head.TabStop = true;
-            this.radio_Head.Text = "首";
-            this.radio_Head.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
             // 
@@ -369,44 +402,20 @@
             // Terminal
             // 
             this.Terminal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Terminal.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Terminal.Font = new System.Drawing.Font("微软雅黑", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Terminal.Location = new System.Drawing.Point(3, 35);
             this.Terminal.Name = "Terminal";
             this.Terminal.Size = new System.Drawing.Size(910, 647);
             this.Terminal.TabIndex = 0;
             this.Terminal.Text = "";
             // 
-            // groupBox5
+            // textBox1
             // 
-            this.groupBox5.Controls.Add(this.radio_Tail);
-            this.groupBox5.Controls.Add(this.radio_Head);
-            this.groupBox5.Controls.Add(this.radio_ten);
-            this.groupBox5.Location = new System.Drawing.Point(182, 51);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(142, 229);
-            this.groupBox5.TabIndex = 5;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "操作位置";
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.textBox_Data);
-            this.groupBox6.Location = new System.Drawing.Point(182, 296);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(142, 74);
-            this.groupBox6.TabIndex = 5;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "操作数据";
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.radio_Sequence);
-            this.groupBox7.Controls.Add(this.radio_Random);
-            this.groupBox7.Location = new System.Drawing.Point(48, 182);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(261, 100);
-            this.groupBox7.TabIndex = 4;
-            this.groupBox7.TabStop = false;
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox1.Location = new System.Drawing.Point(46, 114);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(96, 39);
+            this.textBox1.TabIndex = 1;
             // 
             // ArrayProcess
             // 
@@ -422,19 +431,19 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -471,5 +480,6 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
