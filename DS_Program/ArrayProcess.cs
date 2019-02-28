@@ -90,6 +90,20 @@ namespace DS_Program
             Terminal.SelectionColor = Terminal.ForeColor;
         }
 
+        // 通用性Event
+        private void Alert_None_More_Form(object sender, EventArgs e)
+        {
+            Log_Terminal("当前已存在窗体,新建无效", logType.Error);
+        }
+
+        //warning:重载大法好!
+        public override string ToString()
+        {
+            Log_Terminal("当前已存在窗体,新建无效", logType.Error);
+            return base.ToString();
+        }
+
+
         public void Log_Console(string log, logType logtype = logType.CommonLog, bool addNewLine = true)
         {
             if (addNewLine)
