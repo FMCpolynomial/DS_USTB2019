@@ -49,7 +49,7 @@
             this.radio_TailInsert = new System.Windows.Forms.RadioButton();
             this.button_Clear = new System.Windows.Forms.Button();
             this.button_Init = new System.Windows.Forms.Button();
-            this.textBox_ArraySize = new System.Windows.Forms.TextBox();
+            this.textBox_ListSize = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button_NextNode = new System.Windows.Forms.Button();
@@ -169,7 +169,7 @@
             this.button_Reverse.TabIndex = 3;
             this.button_Reverse.Text = "倒置";
             this.button_Reverse.UseVisualStyleBackColor = true;
-            this.button_Reverse.Click += new System.EventHandler(this.button_Modify_Click);
+            this.button_Reverse.Click += new System.EventHandler(this.button_Reverse_Click);
             // 
             // textBox_DataPos
             // 
@@ -230,7 +230,7 @@
             this.button_Find.TabIndex = 3;
             this.button_Find.Text = "查找";
             this.button_Find.UseVisualStyleBackColor = true;
-            this.button_Find.Click += new System.EventHandler(this.button_Modify_Click);
+            this.button_Find.Click += new System.EventHandler(this.button_Find_Click);
             // 
             // button_Modify
             // 
@@ -285,7 +285,7 @@
             this.groupBox1.Controls.Add(this.radio_TailInsert);
             this.groupBox1.Controls.Add(this.button_Clear);
             this.groupBox1.Controls.Add(this.button_Init);
-            this.groupBox1.Controls.Add(this.textBox_ArraySize);
+            this.groupBox1.Controls.Add(this.textBox_ListSize);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -339,14 +339,14 @@
             this.button_Init.UseVisualStyleBackColor = true;
             this.button_Init.Click += new System.EventHandler(this.button_Init_Click);
             // 
-            // textBox_ArraySize
+            // textBox_ListSize
             // 
-            this.textBox_ArraySize.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_ArraySize.Location = new System.Drawing.Point(183, 41);
-            this.textBox_ArraySize.Name = "textBox_ArraySize";
-            this.textBox_ArraySize.Size = new System.Drawing.Size(141, 39);
-            this.textBox_ArraySize.TabIndex = 1;
-            this.textBox_ArraySize.Text = "20";
+            this.textBox_ListSize.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_ListSize.Location = new System.Drawing.Point(183, 41);
+            this.textBox_ListSize.Name = "textBox_ListSize";
+            this.textBox_ListSize.Size = new System.Drawing.Size(141, 39);
+            this.textBox_ListSize.TabIndex = 1;
+            this.textBox_ListSize.Text = "20";
             // 
             // label2
             // 
@@ -383,7 +383,7 @@
             this.button_NextNode.TabIndex = 3;
             this.button_NextNode.Text = "下一结点";
             this.button_NextNode.UseVisualStyleBackColor = true;
-            this.button_NextNode.Click += new System.EventHandler(this.button_Modify_Click);
+            this.button_NextNode.Click += new System.EventHandler(this.button_NextNode_Click);
             // 
             // button_HeadNode
             // 
@@ -395,7 +395,7 @@
             this.button_HeadNode.TabIndex = 3;
             this.button_HeadNode.Text = "头结点";
             this.button_HeadNode.UseVisualStyleBackColor = true;
-            this.button_HeadNode.Click += new System.EventHandler(this.button_Modify_Click);
+            this.button_HeadNode.Click += new System.EventHandler(this.button_HeadNode_Click);
             // 
             // groupBox5
             // 
@@ -591,7 +591,7 @@
         private System.Windows.Forms.Button button_Del;
         private System.Windows.Forms.Button button_Exit;
         private System.Windows.Forms.RadioButton radio_Prev;
-        private System.Windows.Forms.TextBox textBox_ArraySize;
+        private System.Windows.Forms.TextBox textBox_ListSize;
         private System.Windows.Forms.TextBox textBox_DataPos;
         private System.Windows.Forms.Button button_ClearTerm;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;

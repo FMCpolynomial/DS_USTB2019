@@ -534,31 +534,37 @@ namespace DS_Program
 
         private void button_Init_Click(object sender, EventArgs e)
         {
+            Log_Terminal($"执行{button_Init.Text}:", logType.Warning);
             Initialize_Init();
         }
 
         private void button_ClearTerm_Click(object sender, EventArgs e)
         {
+            Log_Terminal($"执行{button_ClearTerm.Text}:", logType.Warning);
             Terminal.Text = "";
         }
 
         private void button_Clear_Click(object sender, EventArgs e)
         {
+            Log_Terminal($"执行{button_Clear.Text}:", logType.Warning);
             Console.Text = "";
         }
 
         private void button_Fibbnacii_Click(object sender, EventArgs e)
         {
+            Log_Terminal($"执行{button_Fibbnacii.Text}:", logType.Warning);
             Initialize_Fibonacci();
         }
 
         private void button_PrimeNum_Click(object sender, EventArgs e)
         {
+            Log_Terminal($"执行{button_PrimeNum.Text}:", logType.Warning);
             Initialize_PrimeNum();
         }
 
         private void button_Del_Click(object sender, EventArgs e)
         {
+            Log_Terminal($"执行{button_Del.Text}:", logType.Warning);
             if (!Check_cSeqList())
             {
                 Log_Terminal("顺序表未加载!", logType.Error);
@@ -604,6 +610,7 @@ namespace DS_Program
 
         private void button_Modify_Click(object sender, EventArgs e)
         {
+            Log_Terminal($"执行{button_Modify.Text}:", logType.Warning);
             if (!Check_cSeqList())
             {
                 Log_Terminal("顺序表未加载!", logType.Error);
@@ -650,6 +657,7 @@ namespace DS_Program
 
         private void button_Insert_Click(object sender, EventArgs e)
         {
+            Log_Terminal($"执行{button_Insert.Text}:", logType.Warning);
             if (!Check_cSeqList())
             {
                 Log_Terminal("顺序表未加载!", logType.Error);
@@ -697,6 +705,7 @@ namespace DS_Program
 
         private void button_Exit_Click(object sender, EventArgs e)
         {
+            Log_Terminal($"执行{button_Exit.Text}:", logType.Warning);
             Initialize_Clear();
             //todo:这里这么做有点争议,先这么着吧
             Dispose();

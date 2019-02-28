@@ -124,92 +124,195 @@ namespace DS_Program
 
 #endregion
 
-#region 顺序表定义
+#region 链表定义
 
-        [SuppressMessage("ReSharper", "UnusedMember.Local")]
-        class CSeqList<T> //顺序表泛型类
+        //单链表结点类
+        class CSListnode<T>
         {
-            private T[] data; //顺序表数据
-            private int MaxSize; //最大空间
-            private int datasize; //实际元素个数
-            public int DataSize
+            private T data;
+            private CSListnode<T> next;
+
+            public T Data
             {
-                get { return datasize; }
+                get { return data; }
+                set { data = value; }
+            }
+            public CSListnode<T> Next
+            {
+                get { return next; }
+                set { next = value; }
             }
 
-            //todo:这里是我乱加的
-            public T this[int index]
+            public CSListnode()
             {
-                // 暂时只给get不给set
-                get => data[index];
-//                set => data[index];
+                next = null;
             }
 
-
-            public CSeqList(int MaxSize) //构造函数
+            public CSListnode(T data)
             {
-                this.MaxSize = MaxSize;
-                data = new T[MaxSize];
-                datasize = 0;
+                this.data = data;
+                next = null;
             }
 
-            public CSeqList(int MaxSize, T[] data, int n)
+            public CSListnode(T data, CSListnode<T> next)
             {
-                this.MaxSize = MaxSize;
-                this.data = new T[MaxSize];
-                for (int i = 0; i < n; i++)
-                    this.data[i] = data[i];
-                datasize = n;
+                this.data = data;
+                this.next = next;
             }
+        }
 
-            public bool Inset(int k, T dt)
-            {
-                if (k < 1 || k > datasize + 1)
-                    return false;
-                if (datasize == MaxSize)
-                    return false;
-                for (int i = datasize - 1; i >= k - 1; i--)
-                    data[i + 1] = data[i];
-                data[k - 1] = dt;
-                datasize++;
-                return true;
-            }
+        //单链表类
+        class CSList<T>
+        {
+            private CSListnode<T> head; //头结点的引用
+            private CSListnode<T> current; //当前结点的引用
 
-            public bool Delete(int k)
+            //单链表长度
+            public int Length
             {
-                if (k < 1 || k > datasize)
-                    return false;
-                for (int i = k - 1; i < datasize - 1; i++)
-                    data[i] = data[i + 1];
-                datasize--;
-                return true;
-            }
-
-            public bool Update(int k, T dt)
-            {
-                if (k < 1 || k > datasize)
-                    return false;
-                data[k - 1] = dt;
-                return true;
-            }
-
-            public void MakeEmpty()
-            {
-                datasize = 0;
-                //todo:这里是我乱加的
-                data = new T[MaxSize];
-            }
-
-            public string MyPrint()
-            {
-                string strout = "";
-                for (int i = 0; i < MaxSize; i++)
+                get
                 {
-                    if (i < datasize)
-                        strout += (i + 1) + "\t【" + data[i] + "】\n";
-                }
+                    CSListnode<T> p = head.Next;
+                    int count = 0;
+                    while (p != null)
+                    {
+                        p = p.Next;
+                        count++;
+                    }
 
-                return strout;
+                    return count;
+                }
+            }
+
+            //尾结点
+            public CSListnode<T> Rear
+            {
+                get
+                {
+                    CSListnode<T> p = head;
+                    while (p.Next != null)
+                        p = p.Next;
+                    return p;
+                }
+            }
+
+            public CSList() //构造函数，空表，只有头结点
+            {
+                head = new CSListnode<T>();
+                current = head; //只是一个引用，不是一个对象实体
+            }
+
+            public void MakeEmpty() //清空单链表
+            {
+                head.Next = null;
+                current = head;
+            }
+
+            public T FirstNode() //指针指向头结点 -> 返回头结点的值
+            {
+                current = head;
+                return current.Data;
+            }
+
+            public T NextNode() //指针指向下一个结点 -> 返回下个结点的值
+            {
+                if (current.Next != null)
+                    current = current.Next;
+                return current.Data;
+            }
+
+            //////////////////////
+            //类运算
+            //////////////////////
+
+            public void InsertHead(T value) //头插法插入结点
+            {
+                head.Next = new CSListnode<T>(value, head.Next);
+                current = head.Next;
+            }
+
+            public void AppendRear(T value) //尾插法插入结点
+            {
+                current = new CSListnode<T>(value, null);
+                Rear.Next = current;
+            }
+
+            public void CreateHead(T[] dt, int n) //头插法生成n个结点
+            {
+                MakeEmpty();
+                for (int i = 1; i <= n; i++)
+                    head.Next = new CSListnode<T>(dt[i - 1], head.Next);
+                current = head.Next;
+            }
+
+            public void CreateRear(T[] dt, int n) //尾插法生成n个结点
+            {
+                MakeEmpty();
+                for (int i = 1; i <= n; i++)
+                {
+                    current.Next = new CSListnode<T>(dt[i - 1], null);
+                    current = current.Next;
+                }
+            }
+
+            public void Insert(T value, bool before) //插入结点,true前false后
+            {
+                if (current == head)
+                    before = false;
+                if (before)
+                {
+                    CSListnode<T> p = head;
+                    while (p.Next != current)
+                        p = p.Next;
+                    p.Next = new CSListnode<T>(value, p.Next);
+                    current = p.Next;
+                }
+                else
+                {
+                    current.Next = new CSListnode<T>(value, current.Next);
+                    current = current.Next;
+                }
+            }
+
+            public enum ListPos
+            {
+                front = 1,
+                back = 0
+            }
+
+            public void Insert(T value, ListPos listPos) //插入结点,listPos.front|back
+            {
+                if (current == head)
+                    listPos = ListPos.back;
+//                    before = false;
+
+                if (listPos == ListPos.front)
+                {
+                    CSListnode<T> p = head;
+                    while (p.Next != current)
+                        p = p.Next;
+                    p.Next = new CSListnode<T>(value, p.Next);
+                    current = p.Next;
+                }
+                else
+                {
+                    current.Next = new CSListnode<T>(value, current.Next);
+                    current = current.Next;
+                }
+            }
+
+            public void Delete() //删除当前结点
+            {
+                if (current == head)
+                    return;
+                CSListnode<T> p = head;
+                while (p.Next != current)
+                    p = p.Next;
+                p.Next = current.Next;
+                if (p.Next != null)
+                    current = p.Next;
+                else
+                    current = p;
             }
         }
 
@@ -224,20 +327,20 @@ namespace DS_Program
 
 #region  程序变量
 
-        // 顺序表
-        CSeqList<int> _cSeqList;
-        // 临时表 => 所有生成的表都先存放在这里 若顺序则直接用 若随机打乱顺序之后使用
-        List<int> tmp_List = new List<int>();
+        // 链表本体
+        private CSList<int> m_slist;
 
-        // 最大数量
-        private int MaxSize;
-        // 顺序表长度
-        private int ArraySize;
+        // 链表长度
+        private int ListSize;
 
         // 操作位置
         private int ProcessPos;
+        // 操作地址
+        private int ProcessAddress;
         // 操作数据
         private int ProcessData;
+        // 操作下指针
+        private int ProcessNext;
 
 #endregion
 
@@ -248,282 +351,70 @@ namespace DS_Program
         {
             Initialize_Clear();
 
-            // 检测输入安全性:留着给大家参考
-//            if (!Int32.TryParse(textBox_MaxSize.Text, out MaxSize))
-//            {
-//                Log_Terminal("MaxSize Checked Error", logType.Error);
-//                return;
-//            }
-//
-//            if (!IsSafe(MaxSize))
-//            {
-//                Log_Terminal("MaxSize Safety Error", logType.Error);
-//                return;
-//            }
-//
-//            if (!Int32.TryParse(textBox_DataNum.Text, out ArraySize))
-//            {
-//                Log_Terminal("ArraySize Checked Error", logType.Error);
-//                return;
-//            }
-//
-//            if (!IsSafe(ArraySize))
-//            {
-//                Log_Terminal("ArraySize Safety Error", logType.Error);
-//                return;
-//            }
 
-            // 输入安全性检测    
-            if (!IsInputNumSafe(textBox_ArraySize, out ArraySize, "ArraySize")) return;
+            // 检查是否有选择前茶还是后插
+            bool frontT_backF;
             if (!radio_HeadInsert.Checked && !radio_TailInsert.Checked)
             {
-                Log_Terminal("Radion button Unchecked", logType.Error);
+                Log_Terminal("初始化部分 Radion button Unchecked", logType.Error);
+                return;
             }
-
-            // 正式运行程序
-            _cSeqList = new CSeqList<int>(MaxSize);
-            if (radio_TailInsert.Checked)
+            else if (radio_HeadInsert.Checked)
             {
-                Log_Terminal("_____随机生成_____");
-
-//                这个是给素数和fib用的
-//                disturbListOrder();
-
-                Random rand = new Random();
-                for (int i = 0; i < ArraySize; i++)
-                {
-                    tmp_List.Add(rand.Next(MaxSize));
-                    Log_Terminal($"随机数列第{i}:\t {tmp_List[i].ToString()}");
-                }
-
-                iterate_Assign_plus_Log();
+                frontT_backF = true;
             }
-
-            if (radio_HeadInsert.Checked)
+            else
             {
-                Log_Terminal("_____顺序生成_____");
-
-                for (int i = 0; i < ArraySize; i++)
-                {
-                    tmp_List.Add(i + 1);
-                    Log_Terminal($"顺序数列第{i}:\t {tmp_List[i].ToString()}");
-                }
-
-                iterate_Assign_plus_Log();
+                frontT_backF = false;
             }
+
+            // 检查输入安全性
+            if (!IsInputNumSafe(textBox_ListSize, out ListSize, "ListSize")) return;
+
+
+            m_slist = new CSList<int>();
+            for (int i = 0; i < ListSize; i++)
+            {
+                // todo:这里修改生成的链表的内容
+                // 这里就默认顺序生成了
+                int insertNum = i;
+
+                m_slist.Insert(i, frontT_backF);
+            }
+
+            Log_Terminal($"m_slist.Length:\t{m_slist.Length}");
+            Log_Terminal("-------生成链表完成-------", logType.Warning);
         }
 
         // button_清空
         void Initialize_Clear()
         {
-            _cSeqList = new CSeqList<int>(MaxSize);
-            _cSeqList.MakeEmpty();
-
-            MaxSize = 0;
-            ArraySize = 0;
-            tmp_List.Clear();
-
-            Console.Text = "";
-        }
-
-        // button_斐波那契
-        int Generate_Fibonacci(int index)
-        {
-            index++;
-            int f1 = 0, f2 = 1, res = 0;
-            Log_Terminal($"Fibonacci数列第 {1}项： {f2}");
-            List<int> tmp = new List<int>();
-            tmp.Add(f2);
-
-            for (int n = 2; n < index; n++)
-            {
-                if (n % 2 == 1)
-                {
-                    f1 = f1 + f2;
-                    Log_Terminal($"Fibonacci数列第 {n}项： {f1}");
-
-                    // 扩充
-                    tmp.Add(f1);
-                    ArraySize = tmp.Count;
-
-                    if (n == index - 1) res = f1;
-                }
-
-                if (n % 2 == 0)
-                {
-                    f2 = f1 + f2;
-                    Log_Terminal($"Fibonacci数列第 {n}项： {f2}");
-
-                    // 扩充
-                    tmp.Add(f2);
-                    ArraySize = tmp.Count;
-
-                    if (n == index - 1) res = f2;
-                }
-
-                tmp_List = tmp;
-            }
-
-
-            return res;
-        }
-
-        void Initialize_Fibonacci()
-        {
-            Initialize_Clear();
-
-            // 输入安全性检测    
-            if (!IsInputNumSafe(textBox_ArraySize, out ArraySize, "ArraySize")) return;
-            if (!radio_HeadInsert.Checked && !radio_TailInsert.Checked)
-            {
-                Log_Terminal("Radion button Unchecked", logType.Error);
-            }
-
-            // 正式运行程序
-            _cSeqList = new CSeqList<int>(MaxSize);
-            if (radio_TailInsert.Checked)
-            {
-                Log_Terminal("_____随机生成Fib_____");
-
-                //这个是给素数和fib用的
-                Generate_Fibonacci(ArraySize);
-                disturbListOrder();
-
-                iterate_Assign_plus_Log();
-            }
-
-            if (radio_HeadInsert.Checked)
-            {
-                Log_Terminal("_____顺序生成Fib_____");
-
-                //这个是给素数和fib用的
-                Generate_Fibonacci(ArraySize);
-                iterate_Assign_plus_Log();
-            }
-        }
-
-        // button_素数
-        void Generate_PrimeNum(int index)
-        {
-            Log_Terminal("只能作用于10000以内的素数查询", logType.Warning);
-            tmp_List.Add(2);
-            Log_Terminal($"素数数列第{1}:\t {tmp_List.Last().ToString()}");
-
-            // 输出1~n之间的所有素数，n>=3
-            int i, j = 0;
-            for (i = 3; i <= 10000; i = i + 2)
-            {
-                int k = (int) Math.Sqrt(i);
-                for (j = 2; j <= k; j++)
-                {
-                    if ((i % j) == 0)
-                    {
-                        break;
-                    }
-                }
-
-                if (j > k)
-                {
-                    tmp_List.Add(i);
-                    Log_Terminal($"素数数列第{tmp_List.Count}:\t {tmp_List.Last().ToString()}");
-                    if (tmp_List.Count == index)
-                    {
-                        return;
-                    }
-                }
-            }
-        }
-
-        void Initialize_PrimeNum()
-        {
-            Initialize_Clear();
-
-            // 输入安全性检测    
-            if (!IsInputNumSafe(textBox_ArraySize, out ArraySize, "ArraySize")) return;
-            if (!radio_HeadInsert.Checked && !radio_TailInsert.Checked)
-            {
-                Log_Terminal("Radion button Unchecked", logType.Error);
-            }
-
-            // 正式运行程序
-            _cSeqList = new CSeqList<int>(MaxSize);
-            if (radio_TailInsert.Checked)
-            {
-                Log_Terminal("_____随机生成Fib_____");
-
-                //这个是给素数和fib用的
-                Generate_PrimeNum(ArraySize);
-                disturbListOrder();
-
-                iterate_Assign_plus_Log();
-            }
-
-            if (radio_HeadInsert.Checked)
-            {
-                Log_Terminal("_____顺序生成Fib_____");
-
-                //这个是给素数和fib用的
-                Generate_PrimeNum(ArraySize);
-                iterate_Assign_plus_Log();
-            }
-        }
-
-        // 打乱顺序
-        void disturbListOrder()
-        {
-            var random = new Random();
-            List<int> newList = new List<int>();
-            foreach (var item in tmp_List)
-            {
-                newList.Insert(random.Next(newList.Count), item);
-            }
-
-            tmp_List = newList;
+            m_slist = new CSList<int>();
+            Log_Terminal($"m_slist.Length:\t{m_slist.Length}");
+            Log_Terminal("-------清空链表完成-------", logType.Warning);
         }
 
         // 遍历赋值并遍历输出 => 初始化
         void iterate_Assign_plus_Log()
         {
-            for (int i = 0; i < tmp_List.Count; i++)
-            {
-                _cSeqList.Inset(i + 1, tmp_List[i]);
-
-                //为了和老师的序号同步,序号集体加1
-                Log_Console($"{i + 1}\t[{_cSeqList[i]}]");
-            }
-
-            Log_Terminal($"---------------------", logType.Warning);
-            Log_Terminal($"ArraySize     \t{ArraySize}");
-            Log_Terminal($"cSeqList.Count\t{_cSeqList.DataSize}");
-            Log_Terminal($"tmp_List.Count\t{tmp_List.Count}");
-            Log_Terminal($"-------生成完毕-------", logType.Warning);
         }
 
         // 遍历赋值并遍历输出 => 结点移动
         void iterate_Log()
         {
-            for (int i = 0; i < _cSeqList.DataSize; i++)
-            {
-                //为了和老师的序号同步,序号集体加1
-                Log_Console($"{i + 1}\t[{_cSeqList[i]}]");
-            }
-
-            Log_Terminal($"-------操作完毕-------", logType.Warning);
-            Log_Terminal($"ArraySize     \t{ArraySize}");
-            Log_Terminal($"cSeqList.Count\t{_cSeqList.DataSize}");
-            Log_Terminal($"tmp_List.Count\t{tmp_List.Count}");
-            Log_Terminal($"---------------------", logType.Warning);
         }
 
 #endregion
 
 #region 程序part2:结点移动
 
-        bool Check_cSeqList()
-        {
-            if (_cSeqList == null) return false;
-            return true;
-        }
+#endregion
+
+#region 程序part3:结点操作
+
+#endregion
+
+#region 程序part4:显示
 
 #endregion
 
@@ -532,6 +423,7 @@ namespace DS_Program
         private void button_Init_Click(object sender, EventArgs e)
         {
             Initialize_Init();
+            Log_Terminal($"执行{button_Init.Text}:", logType.Warning);
         }
 
         private void button_ClearTerm_Click(object sender, EventArgs e)
@@ -559,9 +451,30 @@ namespace DS_Program
         private void button_Exit_Click(object sender, EventArgs e)
         {
             Initialize_Clear();
+
             //todo:这里这么做有点争议,先这么着吧
             Dispose();
             Close();
+        }
+
+        private void button_HeadNode_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void button_NextNode_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void button_Find_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void button_Reverse_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
 #endregion
