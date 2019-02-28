@@ -7,21 +7,21 @@ using System.Windows.Forms;
 
 namespace DS_Program
 {
-    public partial class ArrayProcess : Form
+    public partial class ListProcess : Form
     {
 #region 安全性检测
 
-        public bool IsSafe(int number)
+        public bool IsSafe(int number, int limitUP = 100, int limitDOWN = 0)
         {
-            if (number > 1000)
+            if (number > limitUP)
             {
-                Log_Terminal("Error: Too Large -> larger than 1000.", logType.Error);
+                Log_Terminal($"Error: Too Large -> larger than {limitUP.ToString()}.", logType.Error);
                 return false;
             }
 
-            if (number < 0)
+            if (number < limitDOWN)
             {
-                Log_Terminal("Error: Too Small -> smaller than zero.", logType.Error);
+                Log_Terminal($"Error: Too Small -> smaller than {limitDOWN.ToString()}.", logType.Error);
                 return false;
             }
 
@@ -216,10 +216,10 @@ namespace DS_Program
 #endregion
 
         // 程序启动
-        public ArrayProcess()
+        public ListProcess()
         {
             InitializeComponent();
-            Log_Terminal("Initialization 顺序表.");
+            Log_Terminal("Initialization. 链表");
         }
 
 #region  程序变量
@@ -274,16 +274,15 @@ namespace DS_Program
 //            }
 
             // 输入安全性检测    
-            if (!IsInputNumSafe(textBox_MaxSize, out MaxSize, "MaxSize")) return;
             if (!IsInputNumSafe(textBox_ArraySize, out ArraySize, "ArraySize")) return;
-            if (!radio_Sequence.Checked && !radio_Random.Checked)
+            if (!radio_HeadInsert.Checked && !radio_TailInsert.Checked)
             {
                 Log_Terminal("Radion button Unchecked", logType.Error);
             }
 
             // 正式运行程序
             _cSeqList = new CSeqList<int>(MaxSize);
-            if (radio_Random.Checked)
+            if (radio_TailInsert.Checked)
             {
                 Log_Terminal("_____随机生成_____");
 
@@ -300,7 +299,7 @@ namespace DS_Program
                 iterate_Assign_plus_Log();
             }
 
-            if (radio_Sequence.Checked)
+            if (radio_HeadInsert.Checked)
             {
                 Log_Terminal("_____顺序生成_____");
 
@@ -374,16 +373,15 @@ namespace DS_Program
             Initialize_Clear();
 
             // 输入安全性检测    
-            if (!IsInputNumSafe(textBox_MaxSize, out MaxSize, "MaxSize")) return;
             if (!IsInputNumSafe(textBox_ArraySize, out ArraySize, "ArraySize")) return;
-            if (!radio_Sequence.Checked && !radio_Random.Checked)
+            if (!radio_HeadInsert.Checked && !radio_TailInsert.Checked)
             {
                 Log_Terminal("Radion button Unchecked", logType.Error);
             }
 
             // 正式运行程序
             _cSeqList = new CSeqList<int>(MaxSize);
-            if (radio_Random.Checked)
+            if (radio_TailInsert.Checked)
             {
                 Log_Terminal("_____随机生成Fib_____");
 
@@ -394,7 +392,7 @@ namespace DS_Program
                 iterate_Assign_plus_Log();
             }
 
-            if (radio_Sequence.Checked)
+            if (radio_HeadInsert.Checked)
             {
                 Log_Terminal("_____顺序生成Fib_____");
 
@@ -441,16 +439,15 @@ namespace DS_Program
             Initialize_Clear();
 
             // 输入安全性检测    
-            if (!IsInputNumSafe(textBox_MaxSize, out MaxSize, "MaxSize")) return;
             if (!IsInputNumSafe(textBox_ArraySize, out ArraySize, "ArraySize")) return;
-            if (!radio_Sequence.Checked && !radio_Random.Checked)
+            if (!radio_HeadInsert.Checked && !radio_TailInsert.Checked)
             {
                 Log_Terminal("Radion button Unchecked", logType.Error);
             }
 
             // 正式运行程序
             _cSeqList = new CSeqList<int>(MaxSize);
-            if (radio_Random.Checked)
+            if (radio_TailInsert.Checked)
             {
                 Log_Terminal("_____随机生成Fib_____");
 
@@ -461,7 +458,7 @@ namespace DS_Program
                 iterate_Assign_plus_Log();
             }
 
-            if (radio_Sequence.Checked)
+            if (radio_HeadInsert.Checked)
             {
                 Log_Terminal("_____顺序生成Fib_____");
 
@@ -547,152 +544,16 @@ namespace DS_Program
             Console.Text = "";
         }
 
-        private void button_Fibbnacii_Click(object sender, EventArgs e)
-        {
-            Initialize_Fibonacci();
-        }
-
-        private void button_PrimeNum_Click(object sender, EventArgs e)
-        {
-            Initialize_PrimeNum();
-        }
-
         private void button_Del_Click(object sender, EventArgs e)
         {
-            if (!Check_cSeqList())
-            {
-                Log_Terminal("顺序表未加载!", logType.Error);
-                return;
-            }
-
-            if (radio_Head.Checked)
-            {
-                _cSeqList.Delete(1);
-            }
-            else if (radio_Tail.Checked)
-            {
-                _cSeqList.Delete(_cSeqList.DataSize);
-            }
-            else if (radio_ten.Checked)
-            {
-                // 输入安全性检测    
-                if (!IsInputNumSafe(textBox_DataPos, out ProcessPos, "ProcessPos")) return;
-
-                if (ProcessPos <= ArraySize && ProcessPos >= 1)
-                {
-                    _cSeqList.Delete(ProcessPos);
-                }
-                else
-                {
-                    Log_Terminal($"ArraySize:\t{ArraySize.ToString()}", logType.Warning);
-                    Log_Terminal($"_cSeqList.DataSize:\t{_cSeqList.DataSize.ToString()}", logType.Warning);
-                    Log_Terminal($"ProcessPos:\t{ProcessPos.ToString()}", logType.Warning);
-                    Log_Terminal("操作位置非法!", logType.Error);
-                    return;
-                }
-            }
-            else
-            {
-                Log_Terminal("操作位置未选择!", logType.Error);
-                return;
-            }
-
-            ArraySize--;
-            Console.Clear();
-            iterate_Log();
         }
 
         private void button_Modify_Click(object sender, EventArgs e)
         {
-            if (!Check_cSeqList())
-            {
-                Log_Terminal("顺序表未加载!", logType.Error);
-                return;
-            }
-
-            if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData")) return;
-
-            if (radio_Head.Checked)
-            {
-                _cSeqList.Update(1, ProcessData);
-            }
-            else if (radio_Tail.Checked)
-            {
-                _cSeqList.Update(_cSeqList.DataSize, ProcessData);
-            }
-            else if (radio_ten.Checked)
-            {
-                // 输入安全性检测    
-                if (!IsInputNumSafe(textBox_DataPos, out ProcessPos, "ProcessPos")) return;
-
-                if (ProcessPos <= ArraySize && ProcessPos >= 1)
-                {
-                    _cSeqList.Update(ProcessPos, ProcessData);
-                }
-                else
-                {
-                    Log_Terminal($"ArraySize:\t{ArraySize.ToString()}", logType.Warning);
-                    Log_Terminal($"_cSeqList.DataSize:\t{_cSeqList.DataSize.ToString()}", logType.Warning);
-                    Log_Terminal($"ProcessPos:\t{ProcessPos.ToString()}", logType.Warning);
-                    Log_Terminal("操作位置非法!", logType.Error);
-                    return;
-                }
-            }
-            else
-            {
-                Log_Terminal("操作位置未选择!", logType.Error);
-                return;
-            }
-
-            Console.Clear();
-            iterate_Log();
         }
 
         private void button_Insert_Click(object sender, EventArgs e)
         {
-            if (!Check_cSeqList())
-            {
-                Log_Terminal("顺序表未加载!", logType.Error);
-                return;
-            }
-
-            if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData")) return;
-
-            if (radio_Head.Checked)
-            {
-                _cSeqList.Inset(1, ProcessData);
-            }
-            else if (radio_Tail.Checked)
-            {
-                _cSeqList.Inset(_cSeqList.DataSize + 1, ProcessData);
-            }
-            else if (radio_ten.Checked)
-            {
-                // 输入安全性检测    
-                if (!IsInputNumSafe(textBox_DataPos, out ProcessPos, "ProcessPos")) return;
-
-                if (ProcessPos <= ArraySize + 1 && ProcessPos >= 0)
-                {
-                    _cSeqList.Inset(ProcessPos, ProcessData);
-                }
-                else
-                {
-                    Log_Terminal($"ArraySize:\t{ArraySize.ToString()}", logType.Warning);
-                    Log_Terminal($"_cSeqList.DataSize:\t{_cSeqList.DataSize.ToString()}", logType.Warning);
-                    Log_Terminal($"ProcessPos:\t{ProcessPos.ToString()}", logType.Warning);
-                    Log_Terminal("操作位置非法!", logType.Error);
-                    return;
-                }
-            }
-            else
-            {
-                Log_Terminal("操作位置未选择!", logType.Error);
-                return;
-            }
-
-            ArraySize++;
-            Console.Clear();
-            iterate_Log();
         }
 
         private void button_Exit_Click(object sender, EventArgs e)

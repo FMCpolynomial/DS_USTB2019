@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ListProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListProcess.Designer.cs">
+      <DependentUpon>ListProcess.cs</DependentUpon>
+    </Compile>
     <Compile Include="ArrayProcess.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +65,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ListProcess.resx">
+      <DependentUpon>ListProcess.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ArrayProcess.resx">
       <DependentUpon>ArrayProcess.cs</DependentUpon>
     </EmbeddedResource>
