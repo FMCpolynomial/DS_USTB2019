@@ -1,4 +1,7 @@
-﻿namespace DS_Program
+﻿using System;
+using System.Windows.Forms;
+
+namespace DS_Program
 {
     partial class RootForm
     {
@@ -51,6 +54,7 @@
             this.tabControl.TabIndex = 0;
             //自己写event真牛逼哟
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.TabChange);
+            this.tabControl.DoubleClick+= new EventHandler(this.ReverseForm);
             // 
             // tabPage_顺序表
             // 
@@ -100,7 +104,6 @@
             this.Controls.Add(this.tabControl);
             this.Name = "RootForm";
             this.Text = "数据结构应用程序";
-            this.Load += new System.EventHandler(this.RootForm_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPage_顺序表.ResumeLayout(false);
             this.tabPage_链表.ResumeLayout(false);

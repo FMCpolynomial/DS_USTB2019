@@ -323,6 +323,10 @@ namespace DS_Program
         {
             InitializeComponent();
             Log_Terminal("Initialization. 链表");
+
+//            Graphics myg = this.CreateGraphics();
+//            Brush bkbrush = new SolidBrush(Color.FromArgb(255, 19, 14));
+//            myg.FillRectangle(bkbrush, 0, 0, 200, 300);
         }
 
 #region  程序变量
@@ -397,7 +401,50 @@ namespace DS_Program
         // 遍历赋值并遍历输出 => 初始化
         void iterate_Assign_plus_Log()
         {
+            //通过画刷进行填充
+            Graphics myg = Console.CreateGraphics();
+            Brush bkbrush = new SolidBrush(Color.White);
+            myg.FillRectangle(bkbrush, 0, 0, 200, 300);
+//            myg.FillRectangle(bkbrush, x1, y1, xd, yd);
+//            Color bkColor = Color.FromArgb(255, 125, 125, 125);
+//            bkBrush = new SolidBrush(bkColor0);
+//
+//            //通过画笔进行画线
+//            Pen pen1 = new Pen(Color.Red, 1);
+//            p1 = new Point(x1, y1);
+//            p2 = new Point(x2, y2);
+//            myg.Draw1(penLine, p1, p2);
+//
+//            //画箭头             System.Drawing.Drawing2D.AdjustableArrowCap lineCap = new System.Drawing.Drawing2D.AdjustableArrowCap(4, 4, true);
+//            Pen penLine = new Pen(Color.Red, 1);
+//            penLine.CustomEndCap = lineCap;
+//            myg.DrawLine(penLine, p1, p2);
+//
+//            //显示字符串
+//            string str = “显示";
+//            Font font = new Font("Arial", 12);
+//            SolidBrush b1 = new SolidBrush(Color.Blue);
+//            StringFormat sf1 = new StringFormat();
+//            myg.DrawString(str, font, b1, x0, y0, sf1);
         }
+
+        void DrawSList() //单链表的遍历并显示
+        {
+//            CSListnode<int> cp = m_slist.Current;
+//            int n = m_slist.Length;
+//            m_slist.FirstNode();
+//            for (int i = 0; i <= n; i++)
+//            {
+//                tb_address.Text = "" + m_slist.Current.GetHashCode();
+//                tb_data.Text = "" + m_slist.Current.Data;
+//                if (m_slist.Next != null)
+//                    tb_next.Text = "" + m_slist.Next.GetHashCode();
+//                m_slist.NextNode();
+//            }
+//
+//            m_slist.Current = cp;
+        }
+
 
         // 遍历赋值并遍历输出 => 结点移动
         void iterate_Log()
@@ -422,34 +469,40 @@ namespace DS_Program
 
         private void button_Init_Click(object sender, EventArgs e)
         {
-            Initialize_Init();
             Log_Terminal($"执行{button_Init.Text}:", logType.Warning);
+            Initialize_Init();
         }
 
         private void button_ClearTerm_Click(object sender, EventArgs e)
         {
+            Log_Terminal($"执行{button_ClearTerm.Text}:", logType.Warning);
             Terminal.Text = "";
         }
 
         private void button_Clear_Click(object sender, EventArgs e)
         {
+            Log_Terminal($"执行{button_Clear.Text}:", logType.Warning);
             Console.Text = "";
         }
 
         private void button_Del_Click(object sender, EventArgs e)
         {
+            Log_Terminal($"执行{button_Del.Text}:", logType.Warning);
         }
 
         private void button_Modify_Click(object sender, EventArgs e)
         {
+            Log_Terminal($"执行{button_Modify.Text}:", logType.Warning);
         }
 
         private void button_Insert_Click(object sender, EventArgs e)
         {
+            Log_Terminal($"执行{button_Insert.Text}:", logType.Warning);
         }
 
         private void button_Exit_Click(object sender, EventArgs e)
         {
+            Log_Terminal($"执行{button_Exit.Text}:", logType.Warning);
             Initialize_Clear();
 
             //todo:这里这么做有点争议,先这么着吧
@@ -459,22 +512,22 @@ namespace DS_Program
 
         private void button_HeadNode_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Log_Terminal($"执行{button_HeadNode.Text}:", logType.Warning);
         }
 
         private void button_NextNode_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Log_Terminal($"执行{button_NextNode.Text}:", logType.Warning);
         }
 
         private void button_Find_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Log_Terminal($"执行{button_Find.Text}:", logType.Warning);
         }
 
         private void button_Reverse_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Log_Terminal($"执行{button_Reverse.Text}:", logType.Warning);
         }
 
 #endregion
