@@ -16,10 +16,12 @@ namespace DS_Program
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
+
             //暂时先这么着
-            //Application.Run(new RootForm());
-            Application.Run(new ArrayProcess());
+            Application.Run(new RootForm());
+            //Application.Run(new ArrayProcess());
+
+
         }
     }
 }

@@ -248,7 +248,7 @@ namespace DS_Program
         {
             Initialize_Clear();
 
-            // 检测输入安全性
+            // 检测输入安全性:留着给大家参考
 //            if (!Int32.TryParse(textBox_MaxSize.Text, out MaxSize))
 //            {
 //                Log_Terminal("MaxSize Checked Error", logType.Error);
@@ -495,9 +495,11 @@ namespace DS_Program
                 Log_Console($"{i + 1}\t[{_cSeqList[i]}]");
             }
 
+            Log_Terminal($"---------------------", logType.Warning);
             Log_Terminal($"ArraySize     \t{ArraySize}");
             Log_Terminal($"cSeqList.Count\t{_cSeqList.DataSize}");
             Log_Terminal($"tmp_List.Count\t{tmp_List.Count}");
+            Log_Terminal($"-------生成完毕-------", logType.Warning);
         }
 
         // 遍历赋值并遍历输出 => 结点移动
@@ -696,7 +698,9 @@ namespace DS_Program
         private void button_Exit_Click(object sender, EventArgs e)
         {
             Initialize_Clear();
-            Application.Exit();
+            //todo:这里这么做有点争议,先这么着吧
+            Dispose();
+            Close();
         }
 
 #endregion
