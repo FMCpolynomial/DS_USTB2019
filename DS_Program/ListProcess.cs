@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing.Drawing2D;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -107,8 +108,8 @@ namespace DS_Program
         //单链表结点类
         class CSListnode<T>
         {
-            private T data;
-            private CSListnode<T> next;
+            public T data;
+            public CSListnode<T> next;
 
             public T Data
             {
@@ -142,8 +143,8 @@ namespace DS_Program
         //单链表类
         class CSList<T>
         {
-            private CSListnode<T> head; //头结点的引用
-            private CSListnode<T> current; //当前结点的引用
+            public CSListnode<T> head; //头结点的引用
+            public CSListnode<T> current; //当前结点的引用
 
             //单链表长度
             public int Length
@@ -186,17 +187,18 @@ namespace DS_Program
                 current = head;
             }
 
-            public T FirstNode() //指针指向头结点 -> 返回头结点的值
+            //warning:FisrtNode 和 NextNode 我改成了返回结点
+            public CSListnode<T> FirstNode() //指针指向头结点 -> 返回头结点的值
             {
                 current = head;
-                return current.Data;
+                return current;
             }
 
-            public T NextNode() //指针指向下一个结点 -> 返回下个结点的值
+            public CSListnode<T> NextNode() //指针指向下一个结点 -> 返回下个结点的值
             {
                 if (current.Next != null)
                     current = current.Next;
-                return current.Data;
+                return current;
             }
 
             //////////////////////
@@ -308,6 +310,9 @@ namespace DS_Program
         {
             //准备绘图
             myg = Console.CreateGraphics();
+
+            //整理一波
+            Initialize_Clear();
         }
 
 #region  程序变量
@@ -372,9 +377,9 @@ namespace DS_Program
             {
                 // todo:这里修改生成的链表的内容
                 // 这里就默认顺序生成了
-                int insertNum = i;
+                int insertNum = i + 1;
 
-                m_slist.Insert(i, frontT_backF);
+                m_slist.Insert(insertNum, frontT_backF);
             }
 
             Log_Terminal($"m_slist.Length:\t{m_slist.Length}");
@@ -395,51 +400,14 @@ namespace DS_Program
             block_posY.Clear();
             myg.Clear(SystemColors.Control);
             Log_Terminal("-------清空画布完成-------", logType.Warning);
-        }
 
-
-        void iterate_Assign_plus_Log()
-        {
-            //通过画刷进行填充
-
-//            myg.FillRectangle(bkbrush, x1, y1, xd, yd);
-//            Color bkColor = Color.FromArgb(255, 125, 125, 125);
-//            bkBrush = new SolidBrush(bkColor0);
-//
-//            //通过画笔进行画线
-//            Pen pen1 = new Pen(Color.Red, 1);
-//            p1 = new Point(x1, y1);
-//            p2 = new Point(x2, y2);
-//            myg.Draw1(penLine, p1, p2);
-//
-//            //画箭头             System.Drawing.Drawing2D.AdjustableArrowCap lineCap = new System.Drawing.Drawing2D.AdjustableArrowCap(4, 4, true);
-//            Pen penLine = new Pen(Color.Red, 1);
-//            penLine.CustomEndCap = lineCap;
-//            myg.DrawLine(penLine, p1, p2);
-//
-//            //显示字符串
-//            string str = “显示";
-//            Font font = new Font("Arial", 12);
-//            SolidBrush b1 = new SolidBrush(Color.Blue);
-//            StringFormat sf1 = new StringFormat();
-//            myg.DrawString(str, font, b1, x0, y0, sf1);
-        }
-
-        void DrawSList() //单链表的遍历并显示
-        {
-//            CSListnode<int> cp = m_slist.Current;
-//            int n = m_slist.Length;
-//            m_slist.FirstNode();
-//            for (int i = 0; i <= n; i++)
-//            {
-//                tb_address.Text = "" + m_slist.Current.GetHashCode();
-//                tb_data.Text = "" + m_slist.Current.Data;
-//                if (m_slist.Next != null)
-//                    tb_next.Text = "" + m_slist.Next.GetHashCode();
-//                m_slist.NextNode();
-//            }
-//
-//            m_slist.Current = cp;
+            // 1.先生成head
+            block_posX.Add(edge_interval);
+            block_posY.Add(block_height_interval);
+            myg.FillRectangle(new SolidBrush(color_head), block_posX[0], block_posY[0], block_width, block_height);
+            myg.DrawString("HEAD", new Font("Arial", 7), new SolidBrush(Color.Red), block_posX[0], block_posY[0] + 10,
+                new StringFormat());
+            Log_Terminal("-------绘制HEAD结点-------", logType.Warning);
         }
 
 
@@ -470,61 +438,82 @@ namespace DS_Program
         private List<int> block_posX = new List<int>();
         private List<int> block_posY = new List<int>();
 
+        private Color color_head = Color.Gray;
         private Color color_block = Color.Gold;
         private Color color_block_current = Color.Red;
-        private Color color_pen;
+        private Color color_pen = Color.Red;
         private Color color_arrow;
         private Color color_font;
 
         void Paint_Unit(int block_num)
         {
             // 声明各种物件
-            //block
-            Brush bkbrush = new SolidBrush(color_block);
             //pen
-            Pen penLine = new Pen(color_pen, 1);
+            Pen penLine = new Pen(color_pen, 2);
 
 
-            for (int i = 0; i < block_num; i++)
+            var node = m_slist.FirstNode();
+            // 2.再生成其他
+            for (int i = 1; i <= block_num; i++)
             {
                 // 确定基础位置(犯了很多错误在 i % 10)
-                if ((i / 10) % 2 == 0)
+                if (i / 10 % 2 == 0)
                     block_posX.Add(edge_interval + i % 10 * (block_width_interval + block_width));
                 else
                     block_posX.Add(edge_interval + (9 - i % 10) * (block_width_interval + block_width));
 
-                block_posY.Add(block_height_interval + (i / 10) * (block_height_interval + block_height));
+                block_posY.Add(block_height_interval + i / 10 * (block_height_interval + block_height));
 
                 // 画
                 //block
-                myg.FillRectangle(bkbrush, block_posX[i], block_posY[i], block_width, block_height);
+                myg.FillRectangle(new SolidBrush(color_block), block_posX[i], block_posY[i], block_width, block_height);
 
                 //arrow
                 if (i != 0)
                 {
-                    var p1 = new Point(block_posX[i - 1], block_posY[i - 1]);
-                    var p2 = new Point(block_posX[i], block_posY[i]);
-                    System.Drawing.Drawing2D.AdjustableArrowCap lineCap =
-                        new System.Drawing.Drawing2D.AdjustableArrowCap(4, 4, true);
-                    penLine.CustomEndCap = lineCap;
+                    Log_Terminal($"Arrow {i}");
+                    Point p1;
+                    Point p2;
+
+                    if ((i) % 10 == 0)
+                    {
+                        p1 = new Point(block_posX[i - 1] + block_width / 2, block_posY[i - 1] + block_height);
+                        p2 = new Point(block_posX[i] + block_width / 2, block_posY[i]);
+                    }
+                    else
+                    {
+                        if (i / 10 % 2 == 0)
+                        {
+                            p1 = new Point(block_posX[i - 1] + block_width, block_posY[i - 1] + block_height / 2);
+                            p2 = new Point(block_posX[i], block_posY[i] + block_height / 2);
+                        }
+                        else
+                        {
+                            p1 = new Point(block_posX[i - 1], block_posY[i - 1] + block_height / 2);
+                            p2 = new Point(block_posX[i] + block_width, block_posY[i] + block_height / 2);
+                        }
+                    }
+
+                    AdjustableArrowCap lineCap = new AdjustableArrowCap(4, 4, true);
                     myg.DrawLine(penLine, p1, p2);
+                    penLine.CustomEndCap = lineCap;
                 }
 
 
                 // 绘制链表内容
-                string str = (i + 1).ToString();
+                string str = i.ToString();
                 Font font_code = new Font("Arial", 6);
                 SolidBrush b1 = new SolidBrush(Color.Blue);
                 StringFormat sf1 = new StringFormat();
                 myg.DrawString(str, font_code, b1, block_posX[i], block_posY[i], sf1);
 
-                str = (i + 1).ToString();
+                str = node.next.Data.ToString();
+                node = node.next;
                 Font font_content = new Font("Arial", 10);
                 myg.DrawString(str, font_content, b1, block_posX[i], block_posY[i] + 12, sf1);
 
-
-                Log_Terminal($"绘制第{i + 1}个方块:\tX:{block_posX[i]}\tY:{block_posY[i]}");
-//                myg.FillRectangle(bkbrush, 0, 0, 600, 600);
+                System.Threading.Thread.Sleep(40);
+                Log_Terminal($"绘制第{i}个方块:\tX:{block_posX[i]}\tY:{block_posY[i]}");
             }
         }
 
