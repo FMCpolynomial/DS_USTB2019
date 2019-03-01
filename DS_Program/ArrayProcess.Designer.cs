@@ -431,6 +431,7 @@
             this.Console.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Console.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Console.Location = new System.Drawing.Point(3, 35);
+            this.Console.Margin = new System.Windows.Forms.Padding(0);
             this.Console.Name = "Console";
             this.Console.Size = new System.Drawing.Size(1018, 287);
             this.Console.TabIndex = 0;
@@ -442,7 +443,9 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox4.Location = new System.Drawing.Point(0, 0);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(0);
             this.groupBox4.Size = new System.Drawing.Size(1024, 665);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
@@ -452,9 +455,9 @@
             // 
             this.Terminal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Terminal.Font = new System.Drawing.Font("微软雅黑", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Terminal.Location = new System.Drawing.Point(3, 35);
+            this.Terminal.Location = new System.Drawing.Point(0, 32);
             this.Terminal.Name = "Terminal";
-            this.Terminal.Size = new System.Drawing.Size(1018, 627);
+            this.Terminal.Size = new System.Drawing.Size(1024, 633);
             this.Terminal.TabIndex = 0;
             this.Terminal.Text = "";
             // 

@@ -375,15 +375,18 @@ namespace DS_Program
             m_slist = new CSList<int>();
             Log_Terminal($"m_slist.Length:\t{m_slist.Length}");
             Log_Terminal("-------清空链表完成-------", logType.Warning);
+
+            block_posX.Clear();
+            block_posY.Clear();
+            myg.Clear(SystemColors.Control);
+            Log_Terminal("-------清空画布完成-------", logType.Warning);
         }
 
 
         void iterate_Assign_plus_Log()
         {
             //通过画刷进行填充
-            myg = Console.CreateGraphics();
-            Brush bkbrush = new SolidBrush(Color.White);
-            myg.FillRectangle(bkbrush, 0, 0, 200, 300);
+
 //            myg.FillRectangle(bkbrush, x1, y1, xd, yd);
 //            Color bkColor = Color.FromArgb(255, 125, 125, 125);
 //            bkBrush = new SolidBrush(bkColor0);
@@ -462,10 +465,9 @@ namespace DS_Program
         {
             // 声明各种物件
             //block
-
-
             Brush bkbrush = new SolidBrush(color_block);
             //pen
+            Pen penLine = new Pen(color_pen, 1);
 
 
             for (int i = 0; i < block_num; i++)
@@ -485,7 +487,6 @@ namespace DS_Program
                 //arrow
                 if (i != 0)
                 {
-                    Pen penLine = new Pen(color_pen, 1);
                     var p1 = new Point(block_posX[i - 1], block_posY[i - 1]);
                     var p2 = new Point(block_posX[i], block_posY[i]);
                     System.Drawing.Drawing2D.AdjustableArrowCap lineCap =
@@ -502,7 +503,7 @@ namespace DS_Program
                 StringFormat sf1 = new StringFormat();
                 myg.DrawString(str, font, b1, block_posX[i], block_posY[i], sf1);
 
-                Log_Terminal($"绘制第{i + 1}个方块:X:\t{block_posX[i]}Y:\t{block_posY[i]}");
+                Log_Terminal($"绘制第{i + 1}个方块:\tX:{block_posX[i]}\tY:{block_posY[i]}");
             }
         }
 
@@ -537,6 +538,7 @@ namespace DS_Program
         private void button_Clear_Click(object sender, EventArgs e)
         {
             Log_Terminal($"执行{button_Clear.Text}:", logType.Warning);
+            Initialize_Clear();
             Console.Text = "";
         }
 
