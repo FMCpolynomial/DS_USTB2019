@@ -301,6 +301,12 @@ namespace DS_Program
         {
             InitializeComponent();
             Log_Terminal("Initialization. 链表");
+        }
+
+        // 程序启动结束
+        private void ListProcessDone(object sender, EventArgs e)
+        {
+            //准备绘图
             myg = Console.CreateGraphics();
         }
 
@@ -366,7 +372,7 @@ namespace DS_Program
             Log_Terminal($"m_slist.Length:\t{m_slist.Length}");
             Log_Terminal("-------生成链表完成-------", logType.Warning);
 
-            Paint_Unit(50);
+            Paint_Unit(90);
         }
 
         // button_清空

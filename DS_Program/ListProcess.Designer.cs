@@ -1,4 +1,7 @@
-﻿namespace DS_Program
+﻿using System;
+using System.Collections.Generic;
+
+namespace DS_Program
 {
     partial class ListProcess
     {
@@ -558,6 +561,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.Load += new EventHandler(ListProcessDone);
 
         }
 
