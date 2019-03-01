@@ -64,9 +64,9 @@ namespace DS_Program
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button_NextNode = new System.Windows.Forms.Button();
             this.button_HeadNode = new System.Windows.Forms.Button();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.Console = new System.Windows.Forms.Panel();
+            this.Console = new System.Windows.Forms.RichTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.Terminal = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1.SuspendLayout();
@@ -76,10 +76,7 @@ namespace DS_Program
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
@@ -90,7 +87,7 @@ namespace DS_Program
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 370F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.splitContainer1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -350,7 +347,7 @@ namespace DS_Program
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(38, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(110, 31);
+            this.label2.Size = new System.Drawing.Size(117, 31);
             this.label2.TabIndex = 0;
             this.label2.Text = "数据个数";
             // 
@@ -386,7 +383,7 @@ namespace DS_Program
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.Location = new System.Drawing.Point(38, 151);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 31);
+            this.label4.Size = new System.Drawing.Size(72, 31);
             this.label4.TabIndex = 0;
             this.label4.Text = "next";
             // 
@@ -405,7 +402,7 @@ namespace DS_Program
             this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.Location = new System.Drawing.Point(38, 103);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 31);
+            this.label3.Size = new System.Drawing.Size(72, 31);
             this.label3.TabIndex = 0;
             this.label3.Text = "data";
             // 
@@ -424,7 +421,7 @@ namespace DS_Program
             this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(38, 55);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 31);
+            this.label1.Size = new System.Drawing.Size(72, 31);
             this.label1.TabIndex = 0;
             this.label1.Text = "地址";
             // 
@@ -466,61 +463,57 @@ namespace DS_Program
             this.button_HeadNode.UseVisualStyleBackColor = true;
             this.button_HeadNode.Click += new System.EventHandler(this.button_HeadNode_Click);
             // 
-            // splitContainer1
+            // tableLayoutPanel4
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.groupBox4);
-            this.splitContainer1.Size = new System.Drawing.Size(1030, 1000);
-            this.splitContainer1.SplitterDistance = 327;
-            this.splitContainer1.TabIndex = 1;
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.groupBox4, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.groupBox3, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 71.02615F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.97384F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(1024, 994);
+            this.tableLayoutPanel4.TabIndex = 1;
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.Console);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(0);
+            this.groupBox3.Location = new System.Drawing.Point(3, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(0);
-            this.groupBox3.Size = new System.Drawing.Size(1030, 327);
-            this.groupBox3.TabIndex = 1;
+            this.groupBox3.Size = new System.Drawing.Size(1018, 699);
+            this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Console";
             // 
             // Console
             // 
             this.Console.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Console.Location = new System.Drawing.Point(0, 32);
+            this.Console.Enabled = false;
+            this.Console.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Console.Location = new System.Drawing.Point(3, 35);
             this.Console.Margin = new System.Windows.Forms.Padding(0);
             this.Console.Name = "Console";
-            this.Console.Size = new System.Drawing.Size(1030, 295);
+            this.Console.ReadOnly = true;
+            this.Console.Size = new System.Drawing.Size(1012, 661);
             this.Console.TabIndex = 0;
-            this.Console.Paint += new System.Windows.Forms.PaintEventHandler(this.Console_Paint);
+            this.Console.Text = "";
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.Terminal);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox4.Location = new System.Drawing.Point(0, 0);
+            this.groupBox4.Location = new System.Drawing.Point(0, 705);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(0);
-            this.groupBox4.Size = new System.Drawing.Size(1030, 669);
-            this.groupBox4.TabIndex = 1;
+            this.groupBox4.Size = new System.Drawing.Size(1024, 289);
+            this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Terminal";
             // 
@@ -529,9 +522,8 @@ namespace DS_Program
             this.Terminal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Terminal.Font = new System.Drawing.Font("微软雅黑", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Terminal.Location = new System.Drawing.Point(0, 32);
-            this.Terminal.Margin = new System.Windows.Forms.Padding(0);
             this.Terminal.Name = "Terminal";
-            this.Terminal.Size = new System.Drawing.Size(1030, 637);
+            this.Terminal.Size = new System.Drawing.Size(1024, 257);
             this.Terminal.TabIndex = 0;
             this.Terminal.Text = "";
             // 
@@ -544,6 +536,7 @@ namespace DS_Program
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ListProcess";
             this.Text = "ArrayProcess";
+            this.Load += new System.EventHandler(this.ListProcessDone);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
@@ -554,14 +547,10 @@ namespace DS_Program
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.Load += new EventHandler(ListProcessDone);
 
         }
 
@@ -571,10 +560,6 @@ namespace DS_Program
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RichTextBox Terminal;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button_Clear;
         private System.Windows.Forms.Button button_Init;
@@ -604,6 +589,10 @@ namespace DS_Program
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox_ShowAddress;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel Console;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RichTextBox Console;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RichTextBox Terminal;
     }
 }

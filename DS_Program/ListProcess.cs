@@ -338,8 +338,7 @@ namespace DS_Program
         // button_初始化
         void Initialize_Init()
         {
-            Initialize_Clear();
-
+            // 1. 检查安全性
             // 检查是否有选择前茶还是后插
             bool frontT_backF;
             if (!radio_HeadInsert.Checked && !radio_TailInsert.Checked)
@@ -358,7 +357,16 @@ namespace DS_Program
 
             // 检查输入安全性
             if (!IsInputNumSafe(textBox_ListSize, out ListSize, "ListSize")) return;
+            if (!IsSafe(ListSize, 60))
+            {
+                Log_Terminal("链表长度不能超过60,否则无法绘制多余的结点", logType.Warning);
+                return;
+            }
 
+            // 2. 清空
+            Initialize_Clear();
+
+            // 3. 生成基础链表
             m_slist = new CSList<int>();
             for (int i = 0; i < ListSize; i++)
             {
@@ -372,7 +380,8 @@ namespace DS_Program
             Log_Terminal($"m_slist.Length:\t{m_slist.Length}");
             Log_Terminal("-------生成链表完成-------", logType.Warning);
 
-            Paint_Unit(90);
+            // 4. 绘制链表
+            Paint_Unit(ListSize);
         }
 
         // button_清空
@@ -502,14 +511,20 @@ namespace DS_Program
                 }
 
 
-                // 写
-                string str = i.ToString();
-                Font font = new Font("Arial", 10);
+                // 绘制链表内容
+                string str = (i + 1).ToString();
+                Font font_code = new Font("Arial", 6);
                 SolidBrush b1 = new SolidBrush(Color.Blue);
                 StringFormat sf1 = new StringFormat();
-                myg.DrawString(str, font, b1, block_posX[i], block_posY[i], sf1);
+                myg.DrawString(str, font_code, b1, block_posX[i], block_posY[i], sf1);
+
+                str = (i + 1).ToString();
+                Font font_content = new Font("Arial", 10);
+                myg.DrawString(str, font_content, b1, block_posX[i], block_posY[i] + 12, sf1);
+
 
                 Log_Terminal($"绘制第{i + 1}个方块:\tX:{block_posX[i]}\tY:{block_posY[i]}");
+//                myg.FillRectangle(bkbrush, 0, 0, 600, 600);
             }
         }
 
