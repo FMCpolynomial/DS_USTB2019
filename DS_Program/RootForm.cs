@@ -78,7 +78,6 @@ namespace DS_Program
                 return;
             }
 
-
             // 添加新的页面
             panel.Controls.Add(formIn);
             formIn.Show();

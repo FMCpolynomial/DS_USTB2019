@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -97,38 +98,6 @@ namespace DS_Program
         {
             Log_Terminal("当前已存在窗体,新建无效", logType.Error);
             return base.ToString();
-        }
-
-        public void Log_Console(string log, logType logtype = logType.CommonLog, bool addNewLine = true)
-        {
-            if (addNewLine)
-            {
-                log += Environment.NewLine;
-            }
-
-            Color color = new Color();
-            switch (logtype)
-            {
-                case logType.CommonLog:
-                    color = Color.Green;
-                    break;
-                case logType.Warning:
-                    color = Color.Orange;
-                    break;
-                case logType.Error:
-                    color = Color.Red;
-                    break;
-            }
-
-            Console.SelectionStart = Console.TextLength;
-            Console.SelectionLength = 0;
-            Console.SelectionColor = color;
-
-//            string text = $@"[{DateTime.Now.ToLongTimeString()}] {log}";
-            Console.Focus(); //warning:这句话没有的话会使得Console不能跟踪到最新的log 
-            Console.AppendText(log);
-
-            Console.SelectionColor = Console.ForeColor;
         }
 
 #endregion
@@ -332,10 +301,7 @@ namespace DS_Program
         {
             InitializeComponent();
             Log_Terminal("Initialization. 链表");
-
-//            Graphics myg = this.CreateGraphics();
-//            Brush bkbrush = new SolidBrush(Color.FromArgb(255, 19, 14));
-//            myg.FillRectangle(bkbrush, 0, 0, 200, 300);
+            myg = Console.CreateGraphics();
         }
 
 #region  程序变量
@@ -355,6 +321,10 @@ namespace DS_Program
         // 操作下指针
         private int ProcessNext;
 
+
+        // 图形
+        Graphics myg;
+
 #endregion
 
 #region 程序part1:初始化
@@ -363,7 +333,6 @@ namespace DS_Program
         void Initialize_Init()
         {
             Initialize_Clear();
-
 
             // 检查是否有选择前茶还是后插
             bool frontT_backF;
@@ -384,7 +353,6 @@ namespace DS_Program
             // 检查输入安全性
             if (!IsInputNumSafe(textBox_ListSize, out ListSize, "ListSize")) return;
 
-
             m_slist = new CSList<int>();
             for (int i = 0; i < ListSize; i++)
             {
@@ -397,6 +365,8 @@ namespace DS_Program
 
             Log_Terminal($"m_slist.Length:\t{m_slist.Length}");
             Log_Terminal("-------生成链表完成-------", logType.Warning);
+
+            Paint_Unit(50);
         }
 
         // button_清空
@@ -407,11 +377,11 @@ namespace DS_Program
             Log_Terminal("-------清空链表完成-------", logType.Warning);
         }
 
-        // 遍历赋值并遍历输出 => 初始化
+
         void iterate_Assign_plus_Log()
         {
             //通过画刷进行填充
-            Graphics myg = Console.CreateGraphics();
+            myg = Console.CreateGraphics();
             Brush bkbrush = new SolidBrush(Color.White);
             myg.FillRectangle(bkbrush, 0, 0, 200, 300);
 //            myg.FillRectangle(bkbrush, x1, y1, xd, yd);
@@ -458,6 +428,82 @@ namespace DS_Program
         // 遍历赋值并遍历输出 => 结点移动
         void iterate_Log()
         {
+        }
+
+        // 遍历赋值并遍历输出 => 初始化
+        private void Console_Paint(object sender, PaintEventArgs e)
+        {
+            // 写
+            string str;
+            str = "未生成链表";
+
+            Font font = new Font("Arial", 10);
+            SolidBrush b1 = new SolidBrush(Color.Blue);
+            StringFormat sf1 = new StringFormat();
+            myg.DrawString(str, font, b1, Console.Width / 2, Console.Height / 2, sf1);
+        }
+
+        private int block_width = 30;
+        private int block_height = 30;
+        private int edge_interval = 12;
+        private int block_width_interval = 20;
+        private int block_height_interval = 20;
+
+        private List<int> block_posX = new List<int>();
+        private List<int> block_posY = new List<int>();
+
+        private Color color_block = Color.Gold;
+        private Color color_block_current = Color.Red;
+        private Color color_pen;
+        private Color color_arrow;
+        private Color color_font;
+
+        void Paint_Unit(int block_num)
+        {
+            // 声明各种物件
+            //block
+
+
+            Brush bkbrush = new SolidBrush(color_block);
+            //pen
+
+
+            for (int i = 0; i < block_num; i++)
+            {
+                // 确定基础位置(犯了很多错误在 i % 10)
+                if ((i / 10) % 2 == 0)
+                    block_posX.Add(edge_interval + i % 10 * (block_width_interval + block_width));
+                else
+                    block_posX.Add(edge_interval + (9 - i % 10) * (block_width_interval + block_width));
+
+                block_posY.Add(block_height_interval + (i / 10) * (block_height_interval + block_height));
+
+                // 画
+                //block
+                myg.FillRectangle(bkbrush, block_posX[i], block_posY[i], block_width, block_height);
+
+                //arrow
+                if (i != 0)
+                {
+                    Pen penLine = new Pen(color_pen, 1);
+                    var p1 = new Point(block_posX[i - 1], block_posY[i - 1]);
+                    var p2 = new Point(block_posX[i], block_posY[i]);
+                    System.Drawing.Drawing2D.AdjustableArrowCap lineCap =
+                        new System.Drawing.Drawing2D.AdjustableArrowCap(4, 4, true);
+                    penLine.CustomEndCap = lineCap;
+                    myg.DrawLine(penLine, p1, p2);
+                }
+
+
+                // 写
+                string str = i.ToString();
+                Font font = new Font("Arial", 10);
+                SolidBrush b1 = new SolidBrush(Color.Blue);
+                StringFormat sf1 = new StringFormat();
+                myg.DrawString(str, font, b1, block_posX[i], block_posY[i], sf1);
+
+                Log_Terminal($"绘制第{i + 1}个方块:X:\t{block_posX[i]}Y:\t{block_posY[i]}");
+            }
         }
 
 #endregion

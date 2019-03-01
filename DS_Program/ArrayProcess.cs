@@ -28,6 +28,23 @@ namespace DS_Program
             return true;
         }
 
+        public bool IsSafe(int number, int limitUP = 1000, int limitDOWN = 0)
+        {
+            if (number > limitUP)
+            {
+                Log_Terminal($"Error: Too Large -> larger than {limitUP.ToString()}.", logType.Error);
+                return false;
+            }
+
+            if (number < limitDOWN)
+            {
+                Log_Terminal($"Error: Too Small -> smaller than {limitDOWN.ToString()}.", logType.Error);
+                return false;
+            }
+
+            return true;
+        }
+
         public bool IsInputNumSafe(TextBox tb, out int num, string errorStr)
         {
             if (!Int32.TryParse(tb.Text, out num))
@@ -239,9 +256,9 @@ namespace DS_Program
 #region  程序变量
 
         // 顺序表
-        CSeqList<int> _cSeqList;
+        CSeqList<long> _cSeqList;
         // 临时表 => 所有生成的表都先存放在这里 若顺序则直接用 若随机打乱顺序之后使用
-        List<int> tmp_List = new List<int>();
+        List<long> tmp_List = new List<long>();
 
         // 最大数量
         private int MaxSize;
@@ -296,7 +313,7 @@ namespace DS_Program
             }
 
             // 正式运行程序
-            _cSeqList = new CSeqList<int>(MaxSize);
+            _cSeqList = new CSeqList<long>(MaxSize);
             if (radio_Random.Checked)
             {
                 Log_Terminal("_____随机生成_____");
@@ -331,7 +348,7 @@ namespace DS_Program
         // button_清空
         void Initialize_Clear()
         {
-            _cSeqList = new CSeqList<int>(MaxSize);
+            _cSeqList = new CSeqList<long>(MaxSize);
             _cSeqList.MakeEmpty();
 
             MaxSize = 0;
@@ -342,12 +359,12 @@ namespace DS_Program
         }
 
         // button_斐波那契
-        int Generate_Fibonacci(int index)
+        long Generate_Fibonacci(int index)
         {
             index++;
-            int f1 = 0, f2 = 1, res = 0;
+            long f1 = 0, f2 = 1, res = 0;
             Log_Terminal($"Fibonacci数列第 {1}项： {f2}");
-            List<int> tmp = new List<int>();
+            List<long> tmp = new List<long>();
             tmp.Add(f2);
 
             for (int n = 2; n < index; n++)
@@ -379,7 +396,6 @@ namespace DS_Program
                 tmp_List = tmp;
             }
 
-
             return res;
         }
 
@@ -390,13 +406,19 @@ namespace DS_Program
             // 输入安全性检测    
             if (!IsInputNumSafe(textBox_MaxSize, out MaxSize, "MaxSize")) return;
             if (!IsInputNumSafe(textBox_ArraySize, out ArraySize, "ArraySize")) return;
+            if (!IsSafe(ArraySize, 93))
+            {
+                Log_Terminal("斐波那契数最多生成93个", logType.Error);
+                return;
+            }
+
             if (!radio_Sequence.Checked && !radio_Random.Checked)
             {
                 Log_Terminal("Radion button Unchecked", logType.Error);
             }
 
             // 正式运行程序
-            _cSeqList = new CSeqList<int>(MaxSize);
+            _cSeqList = new CSeqList<long>(MaxSize);
             if (radio_Random.Checked)
             {
                 Log_Terminal("_____随机生成Fib_____");
@@ -463,7 +485,7 @@ namespace DS_Program
             }
 
             // 正式运行程序
-            _cSeqList = new CSeqList<int>(MaxSize);
+            _cSeqList = new CSeqList<long>(MaxSize);
             if (radio_Random.Checked)
             {
                 Log_Terminal("_____随机生成Fib_____");
@@ -489,7 +511,7 @@ namespace DS_Program
         void disturbListOrder()
         {
             var random = new Random();
-            List<int> newList = new List<int>();
+            List<long> newList = new List<long>();
             foreach (var item in tmp_List)
             {
                 newList.Insert(random.Next(newList.Count), item);

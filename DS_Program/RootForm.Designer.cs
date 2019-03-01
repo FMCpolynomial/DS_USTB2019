@@ -33,8 +33,8 @@ namespace DS_Program
         {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage_顺序表 = new System.Windows.Forms.TabPage();
-            this.tabPage_链表 = new System.Windows.Forms.TabPage();
             this.panel_顺序表 = new System.Windows.Forms.Panel();
+            this.tabPage_链表 = new System.Windows.Forms.TabPage();
             this.panel_链表 = new System.Windows.Forms.Panel();
             this.tabControl.SuspendLayout();
             this.tabPage_顺序表.SuspendLayout();
@@ -52,9 +52,8 @@ namespace DS_Program
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1422, 1253);
             this.tabControl.TabIndex = 0;
-            //自己写event真牛逼哟
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.TabChange);
-            this.tabControl.DoubleClick+= new EventHandler(this.ReverseForm);
+            this.tabControl.DoubleClick += new System.EventHandler(this.ReverseForm);
             // 
             // tabPage_顺序表
             // 
@@ -67,6 +66,15 @@ namespace DS_Program
             this.tabPage_顺序表.Text = "顺序表";
             this.tabPage_顺序表.UseVisualStyleBackColor = true;
             // 
+            // panel_顺序表
+            // 
+            this.panel_顺序表.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel_顺序表.Location = new System.Drawing.Point(3, 3);
+            this.panel_顺序表.Margin = new System.Windows.Forms.Padding(0);
+            this.panel_顺序表.Name = "panel_顺序表";
+            this.panel_顺序表.Size = new System.Drawing.Size(1400, 1200);
+            this.panel_顺序表.TabIndex = 0;
+            // 
             // tabPage_链表
             // 
             this.tabPage_链表.Controls.Add(this.panel_链表);
@@ -77,15 +85,6 @@ namespace DS_Program
             this.tabPage_链表.TabIndex = 1;
             this.tabPage_链表.Text = "链表";
             this.tabPage_链表.UseVisualStyleBackColor = true;
-            // 
-            // panel_顺序表
-            // 
-            this.panel_顺序表.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_顺序表.Location = new System.Drawing.Point(3, 3);
-            this.panel_顺序表.Margin = new System.Windows.Forms.Padding(0);
-            this.panel_顺序表.Name = "panel_顺序表";
-            this.panel_顺序表.Size = new System.Drawing.Size(1400, 1200);
-            this.panel_顺序表.TabIndex = 0;
             // 
             // panel_链表
             // 
@@ -102,6 +101,7 @@ namespace DS_Program
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1422, 1253);
             this.Controls.Add(this.tabControl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "RootForm";
             this.Text = "数据结构应用程序";
             this.tabControl.ResumeLayout(false);

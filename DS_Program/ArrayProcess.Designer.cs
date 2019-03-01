@@ -50,11 +50,12 @@
             this.radio_Head = new System.Windows.Forms.RadioButton();
             this.radio_ten = new System.Windows.Forms.RadioButton();
             this.textBox_DataPos = new System.Windows.Forms.TextBox();
-            this.button_ClearTerm = new System.Windows.Forms.Button();
-            this.button_Exit = new System.Windows.Forms.Button();
             this.button_Insert = new System.Windows.Forms.Button();
             this.button_Modify = new System.Windows.Forms.Button();
             this.button_Del = new System.Windows.Forms.Button();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.button_ClearTerm = new System.Windows.Forms.Button();
+            this.button_Exit = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.Console = new System.Windows.Forms.RichTextBox();
@@ -67,6 +68,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -97,13 +99,15 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.groupBox1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.groupBox2, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel2.Location = new System.Drawing.Point(1033, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.1831F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.8169F));
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.0603F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.9397F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 126F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(364, 994);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
@@ -122,7 +126,7 @@
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(358, 463);
+            this.groupBox1.Size = new System.Drawing.Size(358, 445);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "初始化";
@@ -131,7 +135,7 @@
             // 
             this.groupBox7.Controls.Add(this.radio_Sequence);
             this.groupBox7.Controls.Add(this.radio_Random);
-            this.groupBox7.Location = new System.Drawing.Point(38, 181);
+            this.groupBox7.Location = new System.Drawing.Point(32, 168);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(286, 100);
             this.groupBox7.TabIndex = 4;
@@ -161,7 +165,7 @@
             // 
             // button_PrimeNum
             // 
-            this.button_PrimeNum.Location = new System.Drawing.Point(203, 374);
+            this.button_PrimeNum.Location = new System.Drawing.Point(197, 361);
             this.button_PrimeNum.Name = "button_PrimeNum";
             this.button_PrimeNum.Size = new System.Drawing.Size(121, 57);
             this.button_PrimeNum.TabIndex = 3;
@@ -171,7 +175,7 @@
             // 
             // button_Fibbnacii
             // 
-            this.button_Fibbnacii.Location = new System.Drawing.Point(38, 374);
+            this.button_Fibbnacii.Location = new System.Drawing.Point(32, 361);
             this.button_Fibbnacii.Name = "button_Fibbnacii";
             this.button_Fibbnacii.Size = new System.Drawing.Size(121, 57);
             this.button_Fibbnacii.TabIndex = 3;
@@ -181,7 +185,7 @@
             // 
             // button_Clear
             // 
-            this.button_Clear.Location = new System.Drawing.Point(203, 303);
+            this.button_Clear.Location = new System.Drawing.Point(197, 290);
             this.button_Clear.Name = "button_Clear";
             this.button_Clear.Size = new System.Drawing.Size(121, 57);
             this.button_Clear.TabIndex = 3;
@@ -191,7 +195,7 @@
             // 
             // button_Init
             // 
-            this.button_Init.Location = new System.Drawing.Point(38, 303);
+            this.button_Init.Location = new System.Drawing.Point(32, 290);
             this.button_Init.Name = "button_Init";
             this.button_Init.Size = new System.Drawing.Size(121, 57);
             this.button_Init.TabIndex = 3;
@@ -202,7 +206,7 @@
             // textBox_ArraySize
             // 
             this.textBox_ArraySize.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_ArraySize.Location = new System.Drawing.Point(183, 124);
+            this.textBox_ArraySize.Location = new System.Drawing.Point(177, 111);
             this.textBox_ArraySize.Name = "textBox_ArraySize";
             this.textBox_ArraySize.Size = new System.Drawing.Size(100, 39);
             this.textBox_ArraySize.TabIndex = 1;
@@ -211,7 +215,7 @@
             // textBox_MaxSize
             // 
             this.textBox_MaxSize.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_MaxSize.Location = new System.Drawing.Point(183, 62);
+            this.textBox_MaxSize.Location = new System.Drawing.Point(177, 49);
             this.textBox_MaxSize.Name = "textBox_MaxSize";
             this.textBox_MaxSize.Size = new System.Drawing.Size(100, 39);
             this.textBox_MaxSize.TabIndex = 1;
@@ -221,7 +225,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(71, 127);
+            this.label2.Location = new System.Drawing.Point(65, 114);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(110, 31);
             this.label2.TabIndex = 0;
@@ -231,7 +235,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(71, 65);
+            this.label1.Location = new System.Drawing.Point(65, 52);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(110, 31);
             this.label1.TabIndex = 0;
@@ -241,16 +245,14 @@
             // 
             this.groupBox2.Controls.Add(this.groupBox6);
             this.groupBox2.Controls.Add(this.groupBox5);
-            this.groupBox2.Controls.Add(this.button_ClearTerm);
-            this.groupBox2.Controls.Add(this.button_Exit);
             this.groupBox2.Controls.Add(this.button_Insert);
             this.groupBox2.Controls.Add(this.button_Modify);
             this.groupBox2.Controls.Add(this.button_Del);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(3, 472);
+            this.groupBox2.Location = new System.Drawing.Point(3, 454);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(358, 519);
+            this.groupBox2.Size = new System.Drawing.Size(358, 410);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "结点移动";
@@ -258,7 +260,7 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.textBox_Data);
-            this.groupBox6.Location = new System.Drawing.Point(182, 297);
+            this.groupBox6.Location = new System.Drawing.Point(180, 309);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(142, 74);
             this.groupBox6.TabIndex = 5;
@@ -279,7 +281,7 @@
             this.groupBox5.Controls.Add(this.radio_Head);
             this.groupBox5.Controls.Add(this.radio_ten);
             this.groupBox5.Controls.Add(this.textBox_DataPos);
-            this.groupBox5.Location = new System.Drawing.Point(182, 53);
+            this.groupBox5.Location = new System.Drawing.Point(180, 65);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(142, 229);
             this.groupBox5.TabIndex = 5;
@@ -326,29 +328,9 @@
             this.textBox_DataPos.Size = new System.Drawing.Size(90, 39);
             this.textBox_DataPos.TabIndex = 1;
             // 
-            // button_ClearTerm
-            // 
-            this.button_ClearTerm.Location = new System.Drawing.Point(38, 406);
-            this.button_ClearTerm.Name = "button_ClearTerm";
-            this.button_ClearTerm.Size = new System.Drawing.Size(86, 87);
-            this.button_ClearTerm.TabIndex = 3;
-            this.button_ClearTerm.Text = "清空Log";
-            this.button_ClearTerm.UseVisualStyleBackColor = true;
-            this.button_ClearTerm.Click += new System.EventHandler(this.button_ClearTerm_Click);
-            // 
-            // button_Exit
-            // 
-            this.button_Exit.Location = new System.Drawing.Point(130, 406);
-            this.button_Exit.Name = "button_Exit";
-            this.button_Exit.Size = new System.Drawing.Size(194, 87);
-            this.button_Exit.TabIndex = 3;
-            this.button_Exit.Text = "退出";
-            this.button_Exit.UseVisualStyleBackColor = true;
-            this.button_Exit.Click += new System.EventHandler(this.button_Exit_Click);
-            // 
             // button_Insert
             // 
-            this.button_Insert.Location = new System.Drawing.Point(38, 315);
+            this.button_Insert.Location = new System.Drawing.Point(36, 327);
             this.button_Insert.Name = "button_Insert";
             this.button_Insert.Size = new System.Drawing.Size(121, 57);
             this.button_Insert.TabIndex = 3;
@@ -358,7 +340,7 @@
             // 
             // button_Modify
             // 
-            this.button_Modify.Location = new System.Drawing.Point(38, 185);
+            this.button_Modify.Location = new System.Drawing.Point(36, 197);
             this.button_Modify.Name = "button_Modify";
             this.button_Modify.Size = new System.Drawing.Size(121, 57);
             this.button_Modify.TabIndex = 3;
@@ -368,13 +350,50 @@
             // 
             // button_Del
             // 
-            this.button_Del.Location = new System.Drawing.Point(38, 53);
+            this.button_Del.Location = new System.Drawing.Point(36, 65);
             this.button_Del.Name = "button_Del";
             this.button_Del.Size = new System.Drawing.Size(121, 57);
             this.button_Del.TabIndex = 3;
             this.button_Del.Text = "删除";
             this.button_Del.UseVisualStyleBackColor = true;
             this.button_Del.Click += new System.EventHandler(this.button_Del_Click);
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.button_ClearTerm, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.button_Exit, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 870);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(358, 121);
+            this.tableLayoutPanel3.TabIndex = 1;
+            // 
+            // button_ClearTerm
+            // 
+            this.button_ClearTerm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button_ClearTerm.Location = new System.Drawing.Point(3, 3);
+            this.button_ClearTerm.Name = "button_ClearTerm";
+            this.button_ClearTerm.Size = new System.Drawing.Size(173, 115);
+            this.button_ClearTerm.TabIndex = 3;
+            this.button_ClearTerm.Text = "清空Log";
+            this.button_ClearTerm.UseVisualStyleBackColor = true;
+            this.button_ClearTerm.Click += new System.EventHandler(this.button_ClearTerm_Click);
+            // 
+            // button_Exit
+            // 
+            this.button_Exit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button_Exit.Location = new System.Drawing.Point(182, 3);
+            this.button_Exit.Name = "button_Exit";
+            this.button_Exit.Size = new System.Drawing.Size(173, 115);
+            this.button_Exit.TabIndex = 3;
+            this.button_Exit.Text = "退出";
+            this.button_Exit.UseVisualStyleBackColor = true;
+            this.button_Exit.Click += new System.EventHandler(this.button_Exit_Click);
             // 
             // splitContainer1
             // 
@@ -392,7 +411,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox4);
             this.splitContainer1.Size = new System.Drawing.Size(1024, 994);
-            this.splitContainer1.SplitterDistance = 326;
+            this.splitContainer1.SplitterDistance = 325;
             this.splitContainer1.TabIndex = 1;
             // 
             // groupBox3
@@ -402,7 +421,7 @@
             this.groupBox3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1024, 326);
+            this.groupBox3.Size = new System.Drawing.Size(1024, 325);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Console";
@@ -413,7 +432,7 @@
             this.Console.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Console.Location = new System.Drawing.Point(3, 35);
             this.Console.Name = "Console";
-            this.Console.Size = new System.Drawing.Size(1018, 288);
+            this.Console.Size = new System.Drawing.Size(1018, 287);
             this.Console.TabIndex = 0;
             this.Console.Text = "";
             // 
@@ -424,7 +443,7 @@
             this.groupBox4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox4.Location = new System.Drawing.Point(0, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1024, 664);
+            this.groupBox4.Size = new System.Drawing.Size(1024, 665);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Terminal";
@@ -435,7 +454,7 @@
             this.Terminal.Font = new System.Drawing.Font("微软雅黑", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Terminal.Location = new System.Drawing.Point(3, 35);
             this.Terminal.Name = "Terminal";
-            this.Terminal.Size = new System.Drawing.Size(1018, 626);
+            this.Terminal.Size = new System.Drawing.Size(1018, 627);
             this.Terminal.TabIndex = 0;
             this.Terminal.Text = "";
             // 
@@ -459,6 +478,7 @@
             this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -503,5 +523,6 @@
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.TextBox textBox_DataPos;
         private System.Windows.Forms.Button button_ClearTerm;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
     }
 }
