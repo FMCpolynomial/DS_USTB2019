@@ -2,9 +2,7 @@
 using System.Drawing.Drawing2D;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Security.AccessControl;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace DS_Program
 {
@@ -108,20 +106,20 @@ namespace DS_Program
 #region 链表定义
 
         //单链表结点类
-        class CSListnode<T>
+        private class CSListnode<T>
         {
-            public T data;
+            private T data;
             public CSListnode<T> next;
 
             public T Data
             {
-                get { return data; }
-                set { data = value; }
+                get => data;
+                set => data = value;
             }
             public CSListnode<T> Next
             {
-                get { return next; }
-                set { next = value; }
+                get => next;
+                set => next = value;
             }
 
             public CSListnode()
@@ -143,7 +141,7 @@ namespace DS_Program
         }
 
         //单链表类
-        class CSList<T>
+        private class CSList<T>
         {
             public CSListnode<T> head; //头结点的引用
             public CSListnode<T> current; //当前结点的引用
@@ -237,8 +235,6 @@ namespace DS_Program
             {
                 if (current.Next != null)
                     current = current.Next;
-                else
-                    System.Console.WriteLine("Current.Next didn't exist!");
 
                 return current;
             }
@@ -247,8 +243,6 @@ namespace DS_Program
             {
                 if (current.Next != null)
                     current = current.Next;
-                else
-                    System.Console.WriteLine("Current.Next didn't exist!");
             }
 
             //////////////////////
@@ -344,6 +338,19 @@ namespace DS_Program
                 else
                     current = p;
             }
+
+            public CSListnode<T> Pop() //输出并删除head.next
+            {
+                CSListnode<T> p;
+                if (head.Next != null)
+                {
+                    p = head.next;
+                    head.next = p.next;
+                    return p;
+                }
+
+                return null;
+            }
         }
 
 #endregion
@@ -381,14 +388,14 @@ namespace DS_Program
 
 
         // 图形
-        Graphics myg;
+        private Graphics myg;
 
 #endregion
 
 #region 程序part1:初始化
 
         // button_初始化
-        void Initialize_Init()
+        private void Initialize_Init()
         {
             // 1. 检查安全性
             // 检查是否有选择前茶还是后插
@@ -439,7 +446,7 @@ namespace DS_Program
         }
 
         // button_清空
-        void Initialize_Clear()
+        private void Initialize_Clear()
         {
             // 清空链表
             m_slist = new CSList<int>();
@@ -463,20 +470,6 @@ namespace DS_Program
             Log_Terminal("-------绘制HEAD结点-------", logType.Warning);
         }
 
-
-        // 遍历赋值并遍历输出 => 初始化
-        private void Console_Paint(object sender, PaintEventArgs e)
-        {
-            // 写
-            string str;
-            str = "未生成链表";
-
-            Font font = new Font("Arial", 10);
-            SolidBrush b1 = new SolidBrush(Color.Blue);
-            StringFormat sf1 = new StringFormat();
-            myg.DrawString(str, font, b1, Console.Width / 2, Console.Height / 2, sf1);
-        }
-
         // 各种
         private int block_width = 30;
         private int block_height = 30;
@@ -495,10 +488,11 @@ namespace DS_Program
         private Color color_code = Color.Blue;
         private Color color_font = Color.Brown;
 
-        Point p1;
-        Point p2;
+        private Point p1;
+        private Point p2;
 
-        void PaintGrahp(int block_num, int index = -1)
+        // 总生成块数目 | 高亮index(-1为不高亮) | 是否在生成前清空面板
+        private void PaintGrahp(int block_num, int index = -1, bool isClearBeforeGeneration = false)
         {
             // 声明各种物件
             //pen
@@ -508,11 +502,30 @@ namespace DS_Program
 
             var node = m_slist.head;
             // 2.再生成其他
-
+            if (isClearBeforeGeneration)
+                myg.Clear(SystemColors.Control);
             block_posX.Clear();
             block_posY.Clear();
+
+            // 画head
             block_posX.Add(edge_interval);
             block_posY.Add(block_height_interval);
+
+            if (index == 0)
+            {
+                myg.FillRectangle(new SolidBrush(color_block_highlight), block_posX[0], block_posY[0], block_width,
+                    block_height);
+            }
+            else
+            {
+                myg.FillRectangle(new SolidBrush(color_head_bg), block_posX[0], block_posY[0], block_width,
+                    block_height);
+            }
+
+            myg.DrawString("HEAD", new Font("Arial", 7), new SolidBrush(color_head_font),
+                block_posX[0], block_posY[0] + 10, new StringFormat());
+
+            // 画普通
             for (int i = 1; i <= block_num; i++)
             {
                 paintUnit_block(i);
@@ -526,35 +539,28 @@ namespace DS_Program
                 //block
                 myg.FillRectangle(brush, block_posX[i], block_posY[i], block_width, block_height);
 
-                //arrow
-                if (i != 0)
+                if (i % 10 == 0)
                 {
-//                    Log_Terminal($"Arrow {i}");
-
-
-                    if ((i) % 10 == 0)
+                    p1 = new Point(block_posX[i - 1] + block_width / 2, block_posY[i - 1] + block_height);
+                    p2 = new Point(block_posX[i] + block_width / 2, block_posY[i]);
+                }
+                else
+                {
+                    if (i / 10 % 2 == 0)
                     {
-                        p1 = new Point(block_posX[i - 1] + block_width / 2, block_posY[i - 1] + block_height);
-                        p2 = new Point(block_posX[i] + block_width / 2, block_posY[i]);
+                        p1 = new Point(block_posX[i - 1] + block_width, block_posY[i - 1] + block_height / 2);
+                        p2 = new Point(block_posX[i], block_posY[i] + block_height / 2);
                     }
                     else
                     {
-                        if (i / 10 % 2 == 0)
-                        {
-                            p1 = new Point(block_posX[i - 1] + block_width, block_posY[i - 1] + block_height / 2);
-                            p2 = new Point(block_posX[i], block_posY[i] + block_height / 2);
-                        }
-                        else
-                        {
-                            p1 = new Point(block_posX[i - 1], block_posY[i - 1] + block_height / 2);
-                            p2 = new Point(block_posX[i] + block_width, block_posY[i] + block_height / 2);
-                        }
+                        p1 = new Point(block_posX[i - 1], block_posY[i - 1] + block_height / 2);
+                        p2 = new Point(block_posX[i] + block_width, block_posY[i] + block_height / 2);
                     }
-
-                    AdjustableArrowCap lineCap = new AdjustableArrowCap(4, 4, true);
-                    myg.DrawLine(penLine, p1, p2);
-                    penLine.CustomEndCap = lineCap;
                 }
+
+                AdjustableArrowCap lineCap = new AdjustableArrowCap(4, 4, true);
+                myg.DrawLine(penLine, p1, p2);
+                penLine.CustomEndCap = lineCap;
 
 
                 // 绘制链表内容
@@ -572,11 +578,11 @@ namespace DS_Program
                 if (checkBox_IsStep.Checked)
                     System.Threading.Thread.Sleep(40);
 
-                Log_Terminal($"绘制第{i}个方块:\tX:{block_posX[i]}\tY:{block_posY[i]}");
+//                Log_Terminal($"绘制第{i}个方块:\tX:{block_posX[i]}\tY:{block_posY[i]}");
             }
         }
 
-        void paintUnit_block(int i, Color color = default(Color))
+        private void paintUnit_block(int i, Color color = default(Color))
         {
             // 确定基础位置(犯了很多错误在 i % 10)
             if (i / 10 % 2 == 0)
@@ -585,10 +591,6 @@ namespace DS_Program
                 block_posX.Add(edge_interval + (9 - i % 10) * (block_width_interval + block_width));
 
             block_posY.Add(block_height_interval + i / 10 * (block_height_interval + block_height));
-
-            // 画
-            //block
-            myg.FillRectangle(new SolidBrush(color), block_posX[i], block_posY[i], block_width, block_height);
         }
 
 #endregion
@@ -599,12 +601,11 @@ namespace DS_Program
         private bool isHeadHighlighted;
         private bool isNodeHighlighted;
 
-        void DrawMoveHeadNode()
+        private void DrawMoveHeadNode()
         {
             if (isHeadHighlighted)
             {
                 Log_Terminal("已选中头结点", logType.Error);
-                return;
             }
 
             isHeadHighlighted = true;
@@ -613,23 +614,15 @@ namespace DS_Program
             // 拿到头结点
             ShowNodeInfo(m_slist.FirstNode());
 
-            // 绘制
-            block_posX.Add(edge_interval);
-            block_posY.Add(block_height_interval);
-            myg.FillRectangle(new SolidBrush(color_block_highlight), block_posX[0], block_posY[0], block_width,
-                block_height);
-            myg.DrawString("HEAD", new Font("Arial", 7), new SolidBrush(color_head_font),
-                block_posX[0], block_posY[0] + 10, new StringFormat());
-            Log_Terminal("-------选中HEAD结点-------", logType.Warning);
 
             // 正常绘制其他结点
-            PaintGrahp(ListSize);
+            PaintGrahp(m_slist.Length, 0);
         }
 
 
         // 带true 的相当于下一个结点的显示
         // 带false的相当于只刷新
-        void DrawMoveNextNode(bool isMoveNext = true)
+        private void DrawMoveNextNode(bool isMoveNext = true)
         {
             if (!isHeadHighlighted && !isNodeHighlighted)
             {
@@ -653,7 +646,6 @@ namespace DS_Program
                 Log_Terminal("-------还原HEAD结点-------", logType.Warning);
             }
 
-
             if (isMoveNext)
             {
                 ShowNodeInfo(m_slist.NextNode());
@@ -661,12 +653,12 @@ namespace DS_Program
             }
 
             // 绘制还原相应点
-            PaintGrahp(ListSize, m_slist.currentIndex);
+            PaintGrahp(m_slist.Length, m_slist.currentIndex, true);
 
             if (isMoveNext)
             {
                 Log_Terminal($"-------选中{m_slist.currentIndex}结点-------", logType.Warning);
-                if (m_slist.currentIndex == ListSize) Log_Terminal("已到达链底", logType.Error);
+                if (m_slist.current.next == null) Log_Terminal("已到达链底", logType.Error);
 
                 // bool change
                 isHeadHighlighted = false;
@@ -678,7 +670,7 @@ namespace DS_Program
 
 #region 程序part3:结点操作
 
-        void ModifyNode()
+        private void ModifyNode()
         {
             if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData"))
             {
@@ -698,14 +690,15 @@ namespace DS_Program
                 return;
             }
 
-            m_slist.current.data = ProcessData;
-            PaintGrahp(ListSize, m_slist.currentIndex);
+            m_slist.current.Data = ProcessData;
+//            PaintGrahp(ListSize, m_slist.currentIndex);
+            DrawMoveNextNode(false);
             ShowNodeInfo(m_slist.current);
 
             Log_Terminal($"已将结点值修改为{ProcessData}", logType.Warning);
         }
 
-        void FindNode()
+        private void FindNode()
         {
             if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData"))
             {
@@ -716,13 +709,16 @@ namespace DS_Program
             var node = m_slist.current;
             for (int i = 0; i <= m_slist.Length; i++)
             {
-                if (node.data == ProcessData)
+                if (node.Data == ProcessData)
                 {
                     m_slist.current = node;
-                    PaintGrahp(ListSize, m_slist.currentIndex);
+//                    PaintGrahp(ListSize, m_slist.currentIndex);
+
+                    DrawMoveNextNode(false);
+                    ShowNodeInfo(node);
+
                     Log_Terminal($"已经查到从当前结点之后第[{i}]个结点是所求值:{ProcessData}", logType.Warning);
                     Log_Terminal("查找只能从当前指针开始找到最近的含所查询值的结点", logType.Warning);
-                    ShowNodeInfo(node);
                     return;
                 }
 
@@ -738,7 +734,7 @@ namespace DS_Program
             }
         }
 
-        void InsertNode()
+        private void InsertNode()
         {
             if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData"))
             {
@@ -746,14 +742,11 @@ namespace DS_Program
                 return;
             }
 
-            if (!IsSafe(ProcessData, 60))
+            if (m_slist.Length >= 59)
             {
-                Log_Terminal("值不超过60比较好", logType.Error);
-
+                Log_Terminal("链表长度不超过59比较好,不会遮挡", logType.Error);
                 return;
             }
-
-            var node = m_slist.head;
 
             // 首
             if (radio_Head.Checked)
@@ -776,10 +769,7 @@ namespace DS_Program
                     return;
                 }
 
-                m_slist.current = m_slist.CurrentPrev;
-
-                Log_Terminal("未找到前结点", logType.Error);
-                return;
+                m_slist.Insert(ProcessData, true);
             }
             // 后
             else if (radio_Back.Checked)
@@ -795,6 +785,45 @@ namespace DS_Program
             ListSize = m_slist.Length;
             DrawMoveNextNode(false);
             ShowNodeInfo(m_slist.current);
+
+            Log_Terminal("插入结束", logType.Warning);
+        }
+
+        private void DeleteNode()
+        {
+            m_slist.Delete();
+
+            Log_Terminal(m_slist.Length.ToString());
+            Log_Terminal(m_slist.currentIndex.ToString());
+
+            DrawMoveNextNode(false);
+            ShowNodeInfo(m_slist.current);
+
+            Log_Terminal("删除结束", logType.Warning);
+        }
+
+        private void ReverseNode()
+        {
+            Log_Terminal("倒置结束", logType.Warning);
+            var node = m_slist.head;
+            Stack<int> stack = new Stack<int>();
+            for (int i = 0; i < m_slist.Length; i++)
+            {
+                if (node.next != null)
+                {
+                    stack.Push(node.next.Data);
+                    node = node.next;
+                }
+            }
+
+            m_slist.MakeEmpty();
+            while (stack.Count != 0)
+            {
+                m_slist.Insert(stack.Pop(), false);
+            }
+
+            DrawMoveNextNode(false);
+            ShowNodeInfo(m_slist.current);
         }
 
 #endregion
@@ -802,7 +831,7 @@ namespace DS_Program
 #region 程序part4:显示
 
         // 显示结点信息
-        void ShowNodeInfo(CSListnode<int> node)
+        private void ShowNodeInfo(CSListnode<int> node)
         {
             textBox_ShowAddress.Text = $@"{node.GetHashCode().ToString()}";
             textBox_ShowData.Text = $@"{node.Data.ToString()}";
@@ -810,7 +839,7 @@ namespace DS_Program
             if (node.next != null)
                 textBox_ShowNext.Text = $@"{node.next.Data}";
             else
-                textBox_ShowNext.Text = "没有Next结点";
+                textBox_ShowNext.Text = @"没有Next结点";
         }
 
 #endregion
@@ -835,7 +864,6 @@ namespace DS_Program
             Initialize_Clear();
             Console.Text = "";
         }
-
 
         private void button_Modify_Click(object sender, EventArgs e)
         {
@@ -870,6 +898,7 @@ namespace DS_Program
             }
 
             Log_Terminal($"执行{button_Del.Text}:");
+            DeleteNode();
         }
 
         private void button_Insert_Click(object sender, EventArgs e)
@@ -906,10 +935,10 @@ namespace DS_Program
             DrawMoveNextNode();
         }
 
-
         private void button_Reverse_Click(object sender, EventArgs e)
         {
             Log_Terminal($"执行{button_Reverse.Text}:");
+            ReverseNode();
         }
 
 #endregion
