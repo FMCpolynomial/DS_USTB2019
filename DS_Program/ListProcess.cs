@@ -194,6 +194,25 @@ namespace DS_Program
                     return res;
                 }
             }
+            public CSListnode<T> CurrentPrev
+            {
+                get
+                {
+                    var p = head;
+                    if (current == head)
+                    {
+                        return head;
+                    }
+
+                    while (p.Next != current)
+                    {
+                        p = p.Next;
+                    }
+
+                    return p;
+                }
+            }
+
 
             public CSList() //构造函数，空表，只有头结点
             {
@@ -353,8 +372,6 @@ namespace DS_Program
 
         // 链表长度
         private int ListSize;
-
-
         // 操作地址
         private int ProcessAddress;
         // 操作数据
@@ -414,10 +431,11 @@ namespace DS_Program
 
             // 4. 绘制链表
             PaintGrahp(ListSize);
-            
+
             // 5. Log
             Log_Terminal($"m_slist.Length:\t{m_slist.Length}");
             Log_Terminal("-------生成链表完成-------", logType.Warning);
+            Log_Terminal(m_slist.Length.ToString(), logType.Warning);
         }
 
         // button_清空
@@ -490,17 +508,13 @@ namespace DS_Program
 
             var node = m_slist.head;
             // 2.再生成其他
+
+            block_posX.Clear();
+            block_posY.Clear();
+            block_posX.Add(edge_interval);
+            block_posY.Add(block_height_interval);
             for (int i = 1; i <= block_num; i++)
             {
-                //这里用paintUnit_block替代了
-//                // 确定基础位置(犯了很多错误在 i % 10)
-//                if (i / 10 % 2 == 0)
-//                    block_posX.Add(edge_interval + i % 10 * (block_width_interval + block_width));
-//                else
-//                    block_posX.Add(edge_interval + (9 - i % 10) * (block_width_interval + block_width));
-//
-//                block_posY.Add(block_height_interval + i / 10 * (block_height_interval + block_height));
-
                 paintUnit_block(i);
 
                 if (index != -1 && i == index)
@@ -613,6 +627,7 @@ namespace DS_Program
         }
 
 
+        // 带true 的相当于下一个结点的显示
         // 带false的相当于只刷新
         void DrawMoveNextNode(bool isMoveNext = true)
         {
@@ -685,22 +700,117 @@ namespace DS_Program
 
             m_slist.current.data = ProcessData;
             PaintGrahp(ListSize, m_slist.currentIndex);
+            ShowNodeInfo(m_slist.current);
+
+            Log_Terminal($"已将结点值修改为{ProcessData}", logType.Warning);
+        }
+
+        void FindNode()
+        {
+            if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData"))
+            {
+                Log_Terminal("输入非法!", logType.Warning);
+                return;
+            }
+
+            var node = m_slist.current;
+            for (int i = 0; i <= m_slist.Length; i++)
+            {
+                if (node.data == ProcessData)
+                {
+                    m_slist.current = node;
+                    PaintGrahp(ListSize, m_slist.currentIndex);
+                    Log_Terminal($"已经查到从当前结点之后第[{i}]个结点是所求值:{ProcessData}", logType.Warning);
+                    Log_Terminal("查找只能从当前指针开始找到最近的含所查询值的结点", logType.Warning);
+                    ShowNodeInfo(node);
+                    return;
+                }
+
+                if (node.next != null)
+                    node = node.next;
+                else
+                {
+                    Log_Terminal("未找到含所查询值的结点", logType.Warning);
+                    return;
+                }
+
+                Log_Terminal($"第{i}个结点不是所求值", logType.Warning);
+            }
+        }
+
+        void InsertNode()
+        {
+            if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData"))
+            {
+                Log_Terminal("输入非法!", logType.Warning);
+                return;
+            }
+
+            if (!IsSafe(ProcessData, 60))
+            {
+                Log_Terminal("值不超过60比较好", logType.Error);
+
+                return;
+            }
+
+            var node = m_slist.head;
+
+            // 首
+            if (radio_Head.Checked)
+            {
+                m_slist.InsertHead(ProcessData);
+                m_slist.current = m_slist.head.next;
+            }
+            // 尾
+            else if (radio_Tail.Checked)
+            {
+                m_slist.AppendRear(ProcessData);
+                m_slist.current = m_slist.Rear;
+            }
+            // 前
+            else if (radio_Prev.Checked)
+            {
+                if (m_slist.current == m_slist.head)
+                {
+                    Log_Terminal("不能在head前插", logType.Error);
+                    return;
+                }
+
+                m_slist.current = m_slist.CurrentPrev;
+
+                Log_Terminal("未找到前结点", logType.Error);
+                return;
+            }
+            // 后
+            else if (radio_Back.Checked)
+            {
+                m_slist.Insert(ProcessData, false);
+            }
+            else
+            {
+                Log_Terminal("请选择插入位置", logType.Error);
+                return;
+            }
+
+            ListSize = m_slist.Length;
+            DrawMoveNextNode(false);
+            ShowNodeInfo(m_slist.current);
         }
 
 #endregion
 
 #region 程序part4:显示
 
+        // 显示结点信息
         void ShowNodeInfo(CSListnode<int> node)
         {
             textBox_ShowAddress.Text = $@"{node.GetHashCode().ToString()}";
             textBox_ShowData.Text = $@"{node.Data.ToString()}";
+
             if (node.next != null)
                 textBox_ShowNext.Text = $@"{node.next.Data}";
             else
-            {
                 textBox_ShowNext.Text = "没有Next结点";
-            }
         }
 
 #endregion
@@ -709,42 +819,74 @@ namespace DS_Program
 
         private void button_Init_Click(object sender, EventArgs e)
         {
-            Log_Terminal($"执行{button_Init.Text}:", logType.Warning);
+            Log_Terminal($"执行{button_Init.Text}:");
             Initialize_Init();
         }
 
         private void button_ClearTerm_Click(object sender, EventArgs e)
         {
-            Log_Terminal($"执行{button_ClearTerm.Text}:", logType.Warning);
+            Log_Terminal($"执行{button_ClearTerm.Text}:");
             Terminal.Text = "";
         }
 
         private void button_Clear_Click(object sender, EventArgs e)
         {
-            Log_Terminal($"执行{button_Clear.Text}:", logType.Warning);
+            Log_Terminal($"执行{button_Clear.Text}:");
             Initialize_Clear();
             Console.Text = "";
         }
 
-        private void button_Del_Click(object sender, EventArgs e)
-        {
-            Log_Terminal($"执行{button_Del.Text}:", logType.Warning);
-        }
 
         private void button_Modify_Click(object sender, EventArgs e)
         {
-            Log_Terminal($"执行{button_Modify.Text}:", logType.Warning);
+            if (!isHeadHighlighted && !isNodeHighlighted)
+            {
+                Log_Terminal("请先选中头结点", logType.Error);
+                return;
+            }
+
+            Log_Terminal($"执行{button_Modify.Text}:");
             ModifyNode();
+        }
+
+        private void button_Find_Click(object sender, EventArgs e)
+        {
+            if (!isHeadHighlighted && !isNodeHighlighted)
+            {
+                Log_Terminal("请先选中头结点", logType.Error);
+                return;
+            }
+
+            Log_Terminal($"执行{button_Find.Text}:");
+            FindNode();
+        }
+
+        private void button_Del_Click(object sender, EventArgs e)
+        {
+            if (!isHeadHighlighted && !isNodeHighlighted)
+            {
+                Log_Terminal("请先选中头结点", logType.Error);
+                return;
+            }
+
+            Log_Terminal($"执行{button_Del.Text}:");
         }
 
         private void button_Insert_Click(object sender, EventArgs e)
         {
-            Log_Terminal($"执行{button_Insert.Text}:", logType.Warning);
+            if (!isHeadHighlighted && !isNodeHighlighted)
+            {
+                Log_Terminal("请先选中头结点", logType.Error);
+                return;
+            }
+
+            Log_Terminal($"执行{button_Insert.Text}:");
+            InsertNode();
         }
 
         private void button_Exit_Click(object sender, EventArgs e)
         {
-            Log_Terminal($"执行{button_Exit.Text}:", logType.Warning);
+            Log_Terminal($"执行{button_Exit.Text}:");
             Initialize_Clear();
 
             //todo:这里这么做有点争议,先这么着吧
@@ -754,24 +896,20 @@ namespace DS_Program
 
         private void button_HeadNode_Click(object sender, EventArgs e)
         {
-            Log_Terminal($"执行{button_HeadNode.Text}:", logType.Warning);
+            Log_Terminal($"执行{button_HeadNode.Text}:");
             DrawMoveHeadNode();
         }
 
         private void button_NextNode_Click(object sender, EventArgs e)
         {
-            Log_Terminal($"执行{button_NextNode.Text}:", logType.Warning);
+            Log_Terminal($"执行{button_NextNode.Text}:");
             DrawMoveNextNode();
         }
 
-        private void button_Find_Click(object sender, EventArgs e)
-        {
-            Log_Terminal($"执行{button_Find.Text}:", logType.Warning);
-        }
 
         private void button_Reverse_Click(object sender, EventArgs e)
         {
-            Log_Terminal($"执行{button_Reverse.Text}:", logType.Warning);
+            Log_Terminal($"执行{button_Reverse.Text}:");
         }
 
 #endregion

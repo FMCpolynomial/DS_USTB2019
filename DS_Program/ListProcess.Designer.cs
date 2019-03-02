@@ -178,6 +178,7 @@ namespace DS_Program
             this.textBox_Data.Name = "textBox_Data";
             this.textBox_Data.Size = new System.Drawing.Size(135, 39);
             this.textBox_Data.TabIndex = 1;
+            this.textBox_Data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // radio_Back
             // 
@@ -353,6 +354,7 @@ namespace DS_Program
             this.textBox_ListSize.Size = new System.Drawing.Size(51, 39);
             this.textBox_ListSize.TabIndex = 1;
             this.textBox_ListSize.Text = "20";
+            this.textBox_ListSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
             // 
@@ -389,6 +391,7 @@ namespace DS_Program
             this.textBox_ShowNext.Size = new System.Drawing.Size(210, 39);
             this.textBox_ShowNext.TabIndex = 1;
             this.textBox_ShowNext.Text = "20";
+            this.textBox_ShowNext.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label4
             // 
@@ -408,6 +411,7 @@ namespace DS_Program
             this.textBox_ShowData.Size = new System.Drawing.Size(210, 39);
             this.textBox_ShowData.TabIndex = 1;
             this.textBox_ShowData.Text = "20";
+            this.textBox_ShowData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label3
             // 
@@ -427,6 +431,7 @@ namespace DS_Program
             this.textBox_ShowAddress.Size = new System.Drawing.Size(210, 39);
             this.textBox_ShowAddress.TabIndex = 1;
             this.textBox_ShowAddress.Text = "20";
+            this.textBox_ShowAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
             // 
@@ -507,7 +512,7 @@ namespace DS_Program
             // Terminal
             // 
             this.Terminal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Terminal.Font = new System.Drawing.Font("微软雅黑", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Terminal.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Terminal.Location = new System.Drawing.Point(0, 32);
             this.Terminal.Name = "Terminal";
             this.Terminal.Size = new System.Drawing.Size(1024, 256);
