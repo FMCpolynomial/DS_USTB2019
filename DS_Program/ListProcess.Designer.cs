@@ -37,7 +37,7 @@ namespace DS_Program
             this.button_Insert = new System.Windows.Forms.Button();
             this.radio_Tail = new System.Windows.Forms.RadioButton();
             this.button_Reverse = new System.Windows.Forms.Button();
-            this.textBox_DataPos = new System.Windows.Forms.TextBox();
+            this.textBox_Data = new System.Windows.Forms.TextBox();
             this.radio_Back = new System.Windows.Forms.RadioButton();
             this.radio_Head = new System.Windows.Forms.RadioButton();
             this.radio_Prev = new System.Windows.Forms.RadioButton();
@@ -48,6 +48,7 @@ namespace DS_Program
             this.button_Exit = new System.Windows.Forms.Button();
             this.button_ClearTerm = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox_IsStep = new System.Windows.Forms.CheckBox();
             this.radio_HeadInsert = new System.Windows.Forms.RadioButton();
             this.radio_TailInsert = new System.Windows.Forms.RadioButton();
             this.button_Clear = new System.Windows.Forms.Button();
@@ -65,10 +66,10 @@ namespace DS_Program
             this.button_NextNode = new System.Windows.Forms.Button();
             this.button_HeadNode = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.Console = new System.Windows.Forms.RichTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.Terminal = new System.Windows.Forms.RichTextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Console = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -77,8 +78,8 @@ namespace DS_Program
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -124,7 +125,7 @@ namespace DS_Program
             this.groupBox8.Controls.Add(this.button_Insert);
             this.groupBox8.Controls.Add(this.radio_Tail);
             this.groupBox8.Controls.Add(this.button_Reverse);
-            this.groupBox8.Controls.Add(this.textBox_DataPos);
+            this.groupBox8.Controls.Add(this.textBox_Data);
             this.groupBox8.Controls.Add(this.radio_Back);
             this.groupBox8.Controls.Add(this.radio_Head);
             this.groupBox8.Controls.Add(this.radio_Prev);
@@ -170,13 +171,13 @@ namespace DS_Program
             this.button_Reverse.UseVisualStyleBackColor = true;
             this.button_Reverse.Click += new System.EventHandler(this.button_Reverse_Click);
             // 
-            // textBox_DataPos
+            // textBox_Data
             // 
-            this.textBox_DataPos.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_DataPos.Location = new System.Drawing.Point(109, 140);
-            this.textBox_DataPos.Name = "textBox_DataPos";
-            this.textBox_DataPos.Size = new System.Drawing.Size(135, 39);
-            this.textBox_DataPos.TabIndex = 1;
+            this.textBox_Data.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_Data.Location = new System.Drawing.Point(109, 140);
+            this.textBox_Data.Name = "textBox_Data";
+            this.textBox_Data.Size = new System.Drawing.Size(135, 39);
+            this.textBox_Data.TabIndex = 1;
             // 
             // radio_Back
             // 
@@ -277,6 +278,7 @@ namespace DS_Program
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBox_IsStep);
             this.groupBox1.Controls.Add(this.radio_HeadInsert);
             this.groupBox1.Controls.Add(this.radio_TailInsert);
             this.groupBox1.Controls.Add(this.button_Clear);
@@ -292,6 +294,16 @@ namespace DS_Program
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "初始化";
+            // 
+            // checkBox_IsStep
+            // 
+            this.checkBox_IsStep.AutoSize = true;
+            this.checkBox_IsStep.Location = new System.Drawing.Point(221, 41);
+            this.checkBox_IsStep.Name = "checkBox_IsStep";
+            this.checkBox_IsStep.Size = new System.Drawing.Size(94, 35);
+            this.checkBox_IsStep.TabIndex = 4;
+            this.checkBox_IsStep.Text = "步进";
+            this.checkBox_IsStep.UseVisualStyleBackColor = true;
             // 
             // radio_HeadInsert
             // 
@@ -336,9 +348,9 @@ namespace DS_Program
             // textBox_ListSize
             // 
             this.textBox_ListSize.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_ListSize.Location = new System.Drawing.Point(183, 39);
+            this.textBox_ListSize.Location = new System.Drawing.Point(153, 39);
             this.textBox_ListSize.Name = "textBox_ListSize";
-            this.textBox_ListSize.Size = new System.Drawing.Size(141, 39);
+            this.textBox_ListSize.Size = new System.Drawing.Size(51, 39);
             this.textBox_ListSize.TabIndex = 1;
             this.textBox_ListSize.Text = "20";
             // 
@@ -478,6 +490,30 @@ namespace DS_Program
             this.tableLayoutPanel4.Size = new System.Drawing.Size(1024, 994);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.Terminal);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox4.Location = new System.Drawing.Point(0, 706);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(0);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(0);
+            this.groupBox4.Size = new System.Drawing.Size(1024, 288);
+            this.groupBox4.TabIndex = 3;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Terminal";
+            // 
+            // Terminal
+            // 
+            this.Terminal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Terminal.Font = new System.Drawing.Font("微软雅黑", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Terminal.Location = new System.Drawing.Point(0, 32);
+            this.Terminal.Name = "Terminal";
+            this.Terminal.Size = new System.Drawing.Size(1024, 256);
+            this.Terminal.TabIndex = 0;
+            this.Terminal.Text = "";
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.Console);
@@ -485,7 +521,7 @@ namespace DS_Program
             this.groupBox3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(3, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1018, 699);
+            this.groupBox3.Size = new System.Drawing.Size(1018, 700);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Console";
@@ -499,33 +535,9 @@ namespace DS_Program
             this.Console.Margin = new System.Windows.Forms.Padding(0);
             this.Console.Name = "Console";
             this.Console.ReadOnly = true;
-            this.Console.Size = new System.Drawing.Size(1012, 661);
+            this.Console.Size = new System.Drawing.Size(1012, 662);
             this.Console.TabIndex = 0;
             this.Console.Text = "";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.Terminal);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox4.Location = new System.Drawing.Point(0, 705);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(0);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(0);
-            this.groupBox4.Size = new System.Drawing.Size(1024, 289);
-            this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Terminal";
-            // 
-            // Terminal
-            // 
-            this.Terminal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Terminal.Font = new System.Drawing.Font("微软雅黑", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Terminal.Location = new System.Drawing.Point(0, 32);
-            this.Terminal.Name = "Terminal";
-            this.Terminal.Size = new System.Drawing.Size(1024, 257);
-            this.Terminal.TabIndex = 0;
-            this.Terminal.Text = "";
             // 
             // ListProcess
             // 
@@ -548,8 +560,8 @@ namespace DS_Program
             this.groupBox5.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -571,7 +583,7 @@ namespace DS_Program
         private System.Windows.Forms.Button button_Exit;
         private System.Windows.Forms.RadioButton radio_Prev;
         private System.Windows.Forms.TextBox textBox_ListSize;
-        private System.Windows.Forms.TextBox textBox_DataPos;
+        private System.Windows.Forms.TextBox textBox_Data;
         private System.Windows.Forms.Button button_ClearTerm;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button button_NextNode;
@@ -594,5 +606,6 @@ namespace DS_Program
         private System.Windows.Forms.RichTextBox Console;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RichTextBox Terminal;
+        private System.Windows.Forms.CheckBox checkBox_IsStep;
     }
 }

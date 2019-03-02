@@ -2,7 +2,9 @@
 using System.Drawing.Drawing2D;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Security.AccessControl;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace DS_Program
 {
@@ -175,6 +177,24 @@ namespace DS_Program
                 }
             }
 
+            public int currentIndex
+            {
+                get
+                {
+                    int res = 0;
+
+
+                    CSListnode<T> p = head;
+                    while (p != current)
+                    {
+                        p = p.Next;
+                        res++;
+                    }
+
+                    return res;
+                }
+            }
+
             public CSList() //构造函数，空表，只有头结点
             {
                 head = new CSListnode<T>();
@@ -198,7 +218,18 @@ namespace DS_Program
             {
                 if (current.Next != null)
                     current = current.Next;
+                else
+                    System.Console.WriteLine("Current.Next didn't exist!");
+
                 return current;
+            }
+
+            public void MoveNext()
+            {
+                if (current.Next != null)
+                    current = current.Next;
+                else
+                    System.Console.WriteLine("Current.Next didn't exist!");
             }
 
             //////////////////////
@@ -323,8 +354,7 @@ namespace DS_Program
         // 链表长度
         private int ListSize;
 
-        // 操作位置
-        private int ProcessPos;
+
         // 操作地址
         private int ProcessAddress;
         // 操作数据
@@ -382,39 +412,39 @@ namespace DS_Program
                 m_slist.Insert(insertNum, frontT_backF);
             }
 
+            // 4. 绘制链表
+            PaintGrahp(ListSize);
+            
+            // 5. Log
             Log_Terminal($"m_slist.Length:\t{m_slist.Length}");
             Log_Terminal("-------生成链表完成-------", logType.Warning);
-
-            // 4. 绘制链表
-            Paint_Unit(ListSize);
         }
 
         // button_清空
         void Initialize_Clear()
         {
+            // 清空链表
             m_slist = new CSList<int>();
             Log_Terminal($"m_slist.Length:\t{m_slist.Length}");
             Log_Terminal("-------清空链表完成-------", logType.Warning);
 
+            // 清空画布
+            isHeadHighlighted = false;
+            isNodeHighlighted = false;
             block_posX.Clear();
             block_posY.Clear();
             myg.Clear(SystemColors.Control);
             Log_Terminal("-------清空画布完成-------", logType.Warning);
 
-            // 1.先生成head
+            // 生成head
             block_posX.Add(edge_interval);
             block_posY.Add(block_height_interval);
-            myg.FillRectangle(new SolidBrush(color_head), block_posX[0], block_posY[0], block_width, block_height);
+            myg.FillRectangle(new SolidBrush(color_head_bg), block_posX[0], block_posY[0], block_width, block_height);
             myg.DrawString("HEAD", new Font("Arial", 7), new SolidBrush(Color.Red), block_posX[0], block_posY[0] + 10,
                 new StringFormat());
             Log_Terminal("-------绘制HEAD结点-------", logType.Warning);
         }
 
-
-        // 遍历赋值并遍历输出 => 结点移动
-        void iterate_Log()
-        {
-        }
 
         // 遍历赋值并遍历输出 => 初始化
         private void Console_Paint(object sender, PaintEventArgs e)
@@ -429,6 +459,7 @@ namespace DS_Program
             myg.DrawString(str, font, b1, Console.Width / 2, Console.Height / 2, sf1);
         }
 
+        // 各种
         private int block_width = 30;
         private int block_height = 30;
         private int edge_interval = 12;
@@ -438,42 +469,54 @@ namespace DS_Program
         private List<int> block_posX = new List<int>();
         private List<int> block_posY = new List<int>();
 
-        private Color color_head = Color.Gray;
+        private Color color_head_bg = Color.Gray;
+        private Color color_head_font = Color.Red;
         private Color color_block = Color.Gold;
-        private Color color_block_current = Color.Red;
+        private Color color_block_highlight = Color.Cyan;
         private Color color_pen = Color.Red;
-        private Color color_arrow;
-        private Color color_font;
+        private Color color_code = Color.Blue;
+        private Color color_font = Color.Brown;
 
-        void Paint_Unit(int block_num)
+        Point p1;
+        Point p2;
+
+        void PaintGrahp(int block_num, int index = -1)
         {
             // 声明各种物件
             //pen
             Pen penLine = new Pen(color_pen, 2);
+            Brush brush;
 
 
-            var node = m_slist.FirstNode();
+            var node = m_slist.head;
             // 2.再生成其他
             for (int i = 1; i <= block_num; i++)
             {
-                // 确定基础位置(犯了很多错误在 i % 10)
-                if (i / 10 % 2 == 0)
-                    block_posX.Add(edge_interval + i % 10 * (block_width_interval + block_width));
-                else
-                    block_posX.Add(edge_interval + (9 - i % 10) * (block_width_interval + block_width));
+                //这里用paintUnit_block替代了
+//                // 确定基础位置(犯了很多错误在 i % 10)
+//                if (i / 10 % 2 == 0)
+//                    block_posX.Add(edge_interval + i % 10 * (block_width_interval + block_width));
+//                else
+//                    block_posX.Add(edge_interval + (9 - i % 10) * (block_width_interval + block_width));
+//
+//                block_posY.Add(block_height_interval + i / 10 * (block_height_interval + block_height));
 
-                block_posY.Add(block_height_interval + i / 10 * (block_height_interval + block_height));
+                paintUnit_block(i);
+
+                if (index != -1 && i == index)
+                    brush = new SolidBrush(color_block_highlight);
+                else
+                    brush = new SolidBrush(color_block);
 
                 // 画
                 //block
-                myg.FillRectangle(new SolidBrush(color_block), block_posX[i], block_posY[i], block_width, block_height);
+                myg.FillRectangle(brush, block_posX[i], block_posY[i], block_width, block_height);
 
                 //arrow
                 if (i != 0)
                 {
-                    Log_Terminal($"Arrow {i}");
-                    Point p1;
-                    Point p2;
+//                    Log_Terminal($"Arrow {i}");
+
 
                     if ((i) % 10 == 0)
                     {
@@ -503,31 +546,162 @@ namespace DS_Program
                 // 绘制链表内容
                 string str = i.ToString();
                 Font font_code = new Font("Arial", 6);
-                SolidBrush b1 = new SolidBrush(Color.Blue);
                 StringFormat sf1 = new StringFormat();
-                myg.DrawString(str, font_code, b1, block_posX[i], block_posY[i], sf1);
+                myg.DrawString(str, font_code, new SolidBrush(color_code), block_posX[i], block_posY[i], sf1);
 
                 str = node.next.Data.ToString();
                 node = node.next;
                 Font font_content = new Font("Arial", 10);
-                myg.DrawString(str, font_content, b1, block_posX[i], block_posY[i] + 12, sf1);
+                myg.DrawString(str, font_content, new SolidBrush(color_font), block_posX[i], block_posY[i] + 12, sf1);
 
-                System.Threading.Thread.Sleep(40);
+                // 是否步进
+                if (checkBox_IsStep.Checked)
+                    System.Threading.Thread.Sleep(40);
+
                 Log_Terminal($"绘制第{i}个方块:\tX:{block_posX[i]}\tY:{block_posY[i]}");
             }
+        }
+
+        void paintUnit_block(int i, Color color = default(Color))
+        {
+            // 确定基础位置(犯了很多错误在 i % 10)
+            if (i / 10 % 2 == 0)
+                block_posX.Add(edge_interval + i % 10 * (block_width_interval + block_width));
+            else
+                block_posX.Add(edge_interval + (9 - i % 10) * (block_width_interval + block_width));
+
+            block_posY.Add(block_height_interval + i / 10 * (block_height_interval + block_height));
+
+            // 画
+            //block
+            myg.FillRectangle(new SolidBrush(color), block_posX[i], block_posY[i], block_width, block_height);
         }
 
 #endregion
 
 #region 程序part2:结点移动
 
+        // 头结点是否被选中
+        private bool isHeadHighlighted;
+        private bool isNodeHighlighted;
+
+        void DrawMoveHeadNode()
+        {
+            if (isHeadHighlighted)
+            {
+                Log_Terminal("已选中头结点", logType.Error);
+                return;
+            }
+
+            isHeadHighlighted = true;
+            isNodeHighlighted = false;
+
+            // 拿到头结点
+            ShowNodeInfo(m_slist.FirstNode());
+
+            // 绘制
+            block_posX.Add(edge_interval);
+            block_posY.Add(block_height_interval);
+            myg.FillRectangle(new SolidBrush(color_block_highlight), block_posX[0], block_posY[0], block_width,
+                block_height);
+            myg.DrawString("HEAD", new Font("Arial", 7), new SolidBrush(color_head_font),
+                block_posX[0], block_posY[0] + 10, new StringFormat());
+            Log_Terminal("-------选中HEAD结点-------", logType.Warning);
+
+            // 正常绘制其他结点
+            PaintGrahp(ListSize);
+        }
+
+
+        // 带false的相当于只刷新
+        void DrawMoveNextNode(bool isMoveNext = true)
+        {
+            if (!isHeadHighlighted && !isNodeHighlighted)
+            {
+                Log_Terminal("请先选中头结点", logType.Error);
+                return;
+            }
+
+            // 移动链表结点
+            if (isHeadHighlighted && !isNodeHighlighted)
+            {
+                // 先还原head
+                block_posX.Add(edge_interval);
+                block_posY.Add(block_height_interval);
+
+                myg.FillRectangle(new SolidBrush(color_head_bg), block_posX[0], block_posY[0],
+                    block_width, block_height);
+                myg.DrawString("HEAD", new Font("Arial", 7),
+                    new SolidBrush(Color.Red),
+                    block_posX[0], block_posY[0] + 10, new StringFormat());
+
+                Log_Terminal("-------还原HEAD结点-------", logType.Warning);
+            }
+
+
+            if (isMoveNext)
+            {
+                ShowNodeInfo(m_slist.NextNode());
+                Log_Terminal($"index: {m_slist.currentIndex}");
+            }
+
+            // 绘制还原相应点
+            PaintGrahp(ListSize, m_slist.currentIndex);
+
+            if (isMoveNext)
+            {
+                Log_Terminal($"-------选中{m_slist.currentIndex}结点-------", logType.Warning);
+                if (m_slist.currentIndex == ListSize) Log_Terminal("已到达链底", logType.Error);
+
+                // bool change
+                isHeadHighlighted = false;
+                isNodeHighlighted = true;
+            }
+        }
+
 #endregion
 
 #region 程序part3:结点操作
 
+        void ModifyNode()
+        {
+            if (!IsInputNumSafe(textBox_Data, out ProcessData, "ProcessData"))
+            {
+                Log_Terminal("输入非法!", logType.Warning);
+                return;
+            }
+
+            if (!IsSafe(ProcessData, 60))
+            {
+                Log_Terminal("值不超过60比较好", logType.Error);
+                return;
+            }
+
+            if (m_slist.current == m_slist.head)
+            {
+                Log_Terminal("head无法被修改", logType.Error);
+                return;
+            }
+
+            m_slist.current.data = ProcessData;
+            PaintGrahp(ListSize, m_slist.currentIndex);
+        }
+
 #endregion
 
 #region 程序part4:显示
+
+        void ShowNodeInfo(CSListnode<int> node)
+        {
+            textBox_ShowAddress.Text = $@"{node.GetHashCode().ToString()}";
+            textBox_ShowData.Text = $@"{node.Data.ToString()}";
+            if (node.next != null)
+                textBox_ShowNext.Text = $@"{node.next.Data}";
+            else
+            {
+                textBox_ShowNext.Text = "没有Next结点";
+            }
+        }
 
 #endregion
 
@@ -560,6 +734,7 @@ namespace DS_Program
         private void button_Modify_Click(object sender, EventArgs e)
         {
             Log_Terminal($"执行{button_Modify.Text}:", logType.Warning);
+            ModifyNode();
         }
 
         private void button_Insert_Click(object sender, EventArgs e)
@@ -580,11 +755,13 @@ namespace DS_Program
         private void button_HeadNode_Click(object sender, EventArgs e)
         {
             Log_Terminal($"执行{button_HeadNode.Text}:", logType.Warning);
+            DrawMoveHeadNode();
         }
 
         private void button_NextNode_Click(object sender, EventArgs e)
         {
             Log_Terminal($"执行{button_NextNode.Text}:", logType.Warning);
+            DrawMoveNextNode();
         }
 
         private void button_Find_Click(object sender, EventArgs e)
