@@ -30,6 +30,7 @@ namespace DS_Program
             {
                 formIn = Form2Tab(tabPage, out panel);
                 panel.Controls.Add(formIn);
+                formIn.Dock = DockStyle.Fill;
                 formIn.Show();
 
                 // 存储相应form

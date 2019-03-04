@@ -81,16 +81,17 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 370F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 185F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.splitContainer1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1400, 1000);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(700, 600);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -102,13 +103,14 @@
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(1033, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(517, 2);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.0603F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.9397F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 126F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(364, 994);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 63F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(181, 596);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // groupBox1
@@ -124,9 +126,11 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(358, 445);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(177, 273);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "初始化";
@@ -135,18 +139,21 @@
             // 
             this.groupBox7.Controls.Add(this.radio_Sequence);
             this.groupBox7.Controls.Add(this.radio_Random);
-            this.groupBox7.Location = new System.Drawing.Point(32, 168);
+            this.groupBox7.Location = new System.Drawing.Point(18, 110);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(286, 100);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox7.Size = new System.Drawing.Size(143, 50);
             this.groupBox7.TabIndex = 4;
             this.groupBox7.TabStop = false;
             // 
             // radio_Sequence
             // 
             this.radio_Sequence.AutoSize = true;
-            this.radio_Sequence.Location = new System.Drawing.Point(4, 38);
+            this.radio_Sequence.Location = new System.Drawing.Point(2, 19);
+            this.radio_Sequence.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radio_Sequence.Name = "radio_Sequence";
-            this.radio_Sequence.Size = new System.Drawing.Size(117, 35);
+            this.radio_Sequence.Size = new System.Drawing.Size(62, 21);
             this.radio_Sequence.TabIndex = 2;
             this.radio_Sequence.TabStop = true;
             this.radio_Sequence.Text = "顺序数";
@@ -155,9 +162,10 @@
             // radio_Random
             // 
             this.radio_Random.AutoSize = true;
-            this.radio_Random.Location = new System.Drawing.Point(165, 38);
+            this.radio_Random.Location = new System.Drawing.Point(82, 19);
+            this.radio_Random.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radio_Random.Name = "radio_Random";
-            this.radio_Random.Size = new System.Drawing.Size(117, 35);
+            this.radio_Random.Size = new System.Drawing.Size(62, 21);
             this.radio_Random.TabIndex = 2;
             this.radio_Random.TabStop = true;
             this.radio_Random.Text = "随机数";
@@ -165,9 +173,10 @@
             // 
             // button_PrimeNum
             // 
-            this.button_PrimeNum.Location = new System.Drawing.Point(197, 361);
+            this.button_PrimeNum.Location = new System.Drawing.Point(100, 206);
+            this.button_PrimeNum.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_PrimeNum.Name = "button_PrimeNum";
-            this.button_PrimeNum.Size = new System.Drawing.Size(121, 57);
+            this.button_PrimeNum.Size = new System.Drawing.Size(60, 28);
             this.button_PrimeNum.TabIndex = 3;
             this.button_PrimeNum.Text = "素数";
             this.button_PrimeNum.UseVisualStyleBackColor = true;
@@ -175,9 +184,10 @@
             // 
             // button_Fibbnacii
             // 
-            this.button_Fibbnacii.Location = new System.Drawing.Point(32, 361);
+            this.button_Fibbnacii.Location = new System.Drawing.Point(18, 206);
+            this.button_Fibbnacii.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Fibbnacii.Name = "button_Fibbnacii";
-            this.button_Fibbnacii.Size = new System.Drawing.Size(121, 57);
+            this.button_Fibbnacii.Size = new System.Drawing.Size(60, 28);
             this.button_Fibbnacii.TabIndex = 3;
             this.button_Fibbnacii.Text = "斐波那契";
             this.button_Fibbnacii.UseVisualStyleBackColor = true;
@@ -185,9 +195,10 @@
             // 
             // button_Clear
             // 
-            this.button_Clear.Location = new System.Drawing.Point(197, 290);
+            this.button_Clear.Location = new System.Drawing.Point(100, 171);
+            this.button_Clear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Clear.Name = "button_Clear";
-            this.button_Clear.Size = new System.Drawing.Size(121, 57);
+            this.button_Clear.Size = new System.Drawing.Size(60, 28);
             this.button_Clear.TabIndex = 3;
             this.button_Clear.Text = "清空";
             this.button_Clear.UseVisualStyleBackColor = true;
@@ -195,9 +206,10 @@
             // 
             // button_Init
             // 
-            this.button_Init.Location = new System.Drawing.Point(32, 290);
+            this.button_Init.Location = new System.Drawing.Point(18, 171);
+            this.button_Init.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Init.Name = "button_Init";
-            this.button_Init.Size = new System.Drawing.Size(121, 57);
+            this.button_Init.Size = new System.Drawing.Size(60, 28);
             this.button_Init.TabIndex = 3;
             this.button_Init.Text = "初始化";
             this.button_Init.UseVisualStyleBackColor = true;
@@ -206,18 +218,20 @@
             // textBox_ArraySize
             // 
             this.textBox_ArraySize.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_ArraySize.Location = new System.Drawing.Point(177, 111);
+            this.textBox_ArraySize.Location = new System.Drawing.Point(90, 82);
+            this.textBox_ArraySize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_ArraySize.Name = "textBox_ArraySize";
-            this.textBox_ArraySize.Size = new System.Drawing.Size(100, 39);
+            this.textBox_ArraySize.Size = new System.Drawing.Size(52, 23);
             this.textBox_ArraySize.TabIndex = 1;
             this.textBox_ArraySize.Text = "20";
             // 
             // textBox_MaxSize
             // 
             this.textBox_MaxSize.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_MaxSize.Location = new System.Drawing.Point(177, 49);
+            this.textBox_MaxSize.Location = new System.Drawing.Point(90, 50);
+            this.textBox_MaxSize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_MaxSize.Name = "textBox_MaxSize";
-            this.textBox_MaxSize.Size = new System.Drawing.Size(100, 39);
+            this.textBox_MaxSize.Size = new System.Drawing.Size(52, 23);
             this.textBox_MaxSize.TabIndex = 1;
             this.textBox_MaxSize.Text = "1000";
             // 
@@ -225,9 +239,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(65, 114);
+            this.label2.Location = new System.Drawing.Point(34, 83);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(110, 31);
+            this.label2.Size = new System.Drawing.Size(56, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "数据个数";
             // 
@@ -235,9 +250,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(65, 52);
+            this.label1.Location = new System.Drawing.Point(34, 52);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 31);
+            this.label1.Size = new System.Drawing.Size(56, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "最大数量";
             // 
@@ -250,9 +266,11 @@
             this.groupBox2.Controls.Add(this.button_Del);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(3, 454);
+            this.groupBox2.Location = new System.Drawing.Point(2, 279);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(358, 410);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(177, 251);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "结点移动";
@@ -260,9 +278,11 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.textBox_Data);
-            this.groupBox6.Location = new System.Drawing.Point(180, 309);
+            this.groupBox6.Location = new System.Drawing.Point(90, 178);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(142, 74);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Size = new System.Drawing.Size(71, 37);
             this.groupBox6.TabIndex = 5;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "操作数据";
@@ -270,9 +290,10 @@
             // textBox_Data
             // 
             this.textBox_Data.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_Data.Location = new System.Drawing.Point(0, 35);
+            this.textBox_Data.Location = new System.Drawing.Point(0, 18);
+            this.textBox_Data.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_Data.Name = "textBox_Data";
-            this.textBox_Data.Size = new System.Drawing.Size(142, 39);
+            this.textBox_Data.Size = new System.Drawing.Size(73, 23);
             this.textBox_Data.TabIndex = 1;
             // 
             // groupBox5
@@ -281,9 +302,11 @@
             this.groupBox5.Controls.Add(this.radio_Head);
             this.groupBox5.Controls.Add(this.radio_ten);
             this.groupBox5.Controls.Add(this.textBox_DataPos);
-            this.groupBox5.Location = new System.Drawing.Point(180, 65);
+            this.groupBox5.Location = new System.Drawing.Point(90, 56);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(142, 229);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Size = new System.Drawing.Size(71, 114);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "操作位置";
@@ -291,9 +314,10 @@
             // radio_Tail
             // 
             this.radio_Tail.AutoSize = true;
-            this.radio_Tail.Location = new System.Drawing.Point(13, 173);
+            this.radio_Tail.Location = new System.Drawing.Point(6, 86);
+            this.radio_Tail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radio_Tail.Name = "radio_Tail";
-            this.radio_Tail.Size = new System.Drawing.Size(97, 35);
+            this.radio_Tail.Size = new System.Drawing.Size(54, 21);
             this.radio_Tail.TabIndex = 2;
             this.radio_Tail.TabStop = true;
             this.radio_Tail.Text = "    尾";
@@ -302,9 +326,10 @@
             // radio_Head
             // 
             this.radio_Head.AutoSize = true;
-            this.radio_Head.Location = new System.Drawing.Point(13, 59);
+            this.radio_Head.Location = new System.Drawing.Point(6, 30);
+            this.radio_Head.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radio_Head.Name = "radio_Head";
-            this.radio_Head.Size = new System.Drawing.Size(97, 35);
+            this.radio_Head.Size = new System.Drawing.Size(54, 21);
             this.radio_Head.TabIndex = 2;
             this.radio_Head.TabStop = true;
             this.radio_Head.Text = "    首";
@@ -313,9 +338,10 @@
             // radio_ten
             // 
             this.radio_ten.AutoSize = true;
-            this.radio_ten.Location = new System.Drawing.Point(13, 119);
+            this.radio_ten.Location = new System.Drawing.Point(6, 60);
+            this.radio_ten.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radio_ten.Name = "radio_ten";
-            this.radio_ten.Size = new System.Drawing.Size(27, 26);
+            this.radio_ten.Size = new System.Drawing.Size(14, 13);
             this.radio_ten.TabIndex = 2;
             this.radio_ten.TabStop = true;
             this.radio_ten.UseVisualStyleBackColor = true;
@@ -323,16 +349,18 @@
             // textBox_DataPos
             // 
             this.textBox_DataPos.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_DataPos.Location = new System.Drawing.Point(46, 114);
+            this.textBox_DataPos.Location = new System.Drawing.Point(23, 57);
+            this.textBox_DataPos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_DataPos.Name = "textBox_DataPos";
-            this.textBox_DataPos.Size = new System.Drawing.Size(90, 39);
+            this.textBox_DataPos.Size = new System.Drawing.Size(47, 23);
             this.textBox_DataPos.TabIndex = 1;
             // 
             // button_Insert
             // 
-            this.button_Insert.Location = new System.Drawing.Point(36, 327);
+            this.button_Insert.Location = new System.Drawing.Point(18, 188);
+            this.button_Insert.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Insert.Name = "button_Insert";
-            this.button_Insert.Size = new System.Drawing.Size(121, 57);
+            this.button_Insert.Size = new System.Drawing.Size(60, 28);
             this.button_Insert.TabIndex = 3;
             this.button_Insert.Text = "插入";
             this.button_Insert.UseVisualStyleBackColor = true;
@@ -340,9 +368,10 @@
             // 
             // button_Modify
             // 
-            this.button_Modify.Location = new System.Drawing.Point(36, 197);
+            this.button_Modify.Location = new System.Drawing.Point(18, 122);
+            this.button_Modify.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Modify.Name = "button_Modify";
-            this.button_Modify.Size = new System.Drawing.Size(121, 57);
+            this.button_Modify.Size = new System.Drawing.Size(60, 28);
             this.button_Modify.TabIndex = 3;
             this.button_Modify.Text = "修改";
             this.button_Modify.UseVisualStyleBackColor = true;
@@ -350,9 +379,10 @@
             // 
             // button_Del
             // 
-            this.button_Del.Location = new System.Drawing.Point(36, 65);
+            this.button_Del.Location = new System.Drawing.Point(18, 56);
+            this.button_Del.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Del.Name = "button_Del";
-            this.button_Del.Size = new System.Drawing.Size(121, 57);
+            this.button_Del.Size = new System.Drawing.Size(60, 28);
             this.button_Del.TabIndex = 3;
             this.button_Del.Text = "删除";
             this.button_Del.UseVisualStyleBackColor = true;
@@ -366,19 +396,21 @@
             this.tableLayoutPanel3.Controls.Add(this.button_ClearTerm, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.button_Exit, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 870);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(2, 534);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(358, 121);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(177, 60);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // button_ClearTerm
             // 
             this.button_ClearTerm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button_ClearTerm.Location = new System.Drawing.Point(3, 3);
+            this.button_ClearTerm.Location = new System.Drawing.Point(2, 2);
+            this.button_ClearTerm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_ClearTerm.Name = "button_ClearTerm";
-            this.button_ClearTerm.Size = new System.Drawing.Size(173, 115);
+            this.button_ClearTerm.Size = new System.Drawing.Size(84, 56);
             this.button_ClearTerm.TabIndex = 3;
             this.button_ClearTerm.Text = "清空Log";
             this.button_ClearTerm.UseVisualStyleBackColor = true;
@@ -387,9 +419,10 @@
             // button_Exit
             // 
             this.button_Exit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button_Exit.Location = new System.Drawing.Point(182, 3);
+            this.button_Exit.Location = new System.Drawing.Point(90, 2);
+            this.button_Exit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Exit.Name = "button_Exit";
-            this.button_Exit.Size = new System.Drawing.Size(173, 115);
+            this.button_Exit.Size = new System.Drawing.Size(85, 56);
             this.button_Exit.TabIndex = 3;
             this.button_Exit.Text = "退出";
             this.button_Exit.UseVisualStyleBackColor = true;
@@ -399,7 +432,8 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer1.Location = new System.Drawing.Point(2, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -410,8 +444,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox4);
-            this.splitContainer1.Size = new System.Drawing.Size(1024, 994);
-            this.splitContainer1.SplitterDistance = 325;
+            this.splitContainer1.Size = new System.Drawing.Size(511, 596);
+            this.splitContainer1.SplitterDistance = 194;
+            this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 1;
             // 
             // groupBox3
@@ -420,8 +455,10 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1024, 325);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Size = new System.Drawing.Size(511, 194);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Console";
@@ -430,10 +467,10 @@
             // 
             this.Console.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Console.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Console.Location = new System.Drawing.Point(3, 35);
+            this.Console.Location = new System.Drawing.Point(2, 18);
             this.Console.Margin = new System.Windows.Forms.Padding(0);
             this.Console.Name = "Console";
-            this.Console.Size = new System.Drawing.Size(1018, 287);
+            this.Console.Size = new System.Drawing.Size(507, 174);
             this.Console.TabIndex = 0;
             this.Console.Text = "";
             // 
@@ -446,7 +483,7 @@
             this.groupBox4.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(0);
-            this.groupBox4.Size = new System.Drawing.Size(1024, 665);
+            this.groupBox4.Size = new System.Drawing.Size(511, 400);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Terminal";
@@ -455,19 +492,21 @@
             // 
             this.Terminal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Terminal.Font = new System.Drawing.Font("微软雅黑", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Terminal.Location = new System.Drawing.Point(0, 32);
+            this.Terminal.Location = new System.Drawing.Point(0, 16);
+            this.Terminal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Terminal.Name = "Terminal";
-            this.Terminal.Size = new System.Drawing.Size(1024, 633);
+            this.Terminal.Size = new System.Drawing.Size(511, 384);
             this.Terminal.TabIndex = 0;
             this.Terminal.Text = "";
             // 
             // ArrayProcess
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1400, 1000);
+            this.ClientSize = new System.Drawing.Size(700, 600);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ArrayProcess";
             this.Text = "ArrayProcess";
             this.tableLayoutPanel1.ResumeLayout(false);
