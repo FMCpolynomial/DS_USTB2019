@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace DS_Program
 {
-    public partial class temporary : Form
+    public partial class StackProcess : Form
     {
-        public temporary()
+        public StackProcess()
         {
             InitializeComponent();
         }

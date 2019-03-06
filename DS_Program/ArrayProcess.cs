@@ -107,12 +107,6 @@ namespace DS_Program
             Terminal.SelectionColor = Terminal.ForeColor;
         }
 
-        // 通用性Event
-        private void Alert_None_More_Form(object sender, EventArgs e)
-        {
-            Log_Terminal("当前已存在窗体,新建无效", logType.Error);
-        }
-
         //warning:重载大法好!
         public override string ToString()
         {
@@ -358,7 +352,7 @@ namespace DS_Program
             Console.Text = "";
         }
 
-        // button_斐波那契
+        // 生成斐波那契数组
         long Generate_Fibonacci(int index)
         {
             index++;
@@ -399,6 +393,7 @@ namespace DS_Program
             return res;
         }
 
+        // button_斐波那契
         void Initialize_Fibonacci()
         {
             Initialize_Clear();
@@ -440,7 +435,7 @@ namespace DS_Program
             }
         }
 
-        // button_素数
+        // 生成素数数组
         void Generate_PrimeNum(int index)
         {
             Log_Terminal("只能作用于10000以内的素数查询", logType.Warning);
@@ -472,6 +467,7 @@ namespace DS_Program
             }
         }
 
+        // button_素数
         void Initialize_PrimeNum()
         {
             Initialize_Clear();
@@ -507,7 +503,7 @@ namespace DS_Program
             }
         }
 
-        // 打乱顺序
+        // 打乱数组顺序
         void disturbListOrder()
         {
             var random = new Random();

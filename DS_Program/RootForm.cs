@@ -9,7 +9,11 @@ namespace DS_Program
         public RootForm()
         {
             InitializeComponent();
-            tabControl.SelectedTab = tabPage_链表;
+
+            //这里规定第一个打开的页面
+            //tabControl.SelectedTab = tabPage_链表;
+            tabControl.SelectedTab = tabPage_栈;
+
             this.Load += new EventHandler(TabChange);
         }
 
@@ -53,6 +57,11 @@ namespace DS_Program
                 {
                     _panel = panel_链表;
                     return new ListProcess {TopLevel = false};
+                }
+                if (tabPage.Text == "栈")
+                {
+                    _panel = panel_栈;
+                    return new StackProcess { TopLevel = false };
                 }
             }
             catch (Exception e)
