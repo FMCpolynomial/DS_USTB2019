@@ -11,8 +11,8 @@ namespace DS_Program
             InitializeComponent();
 
             //这里规定第一个打开的页面
-            //tabControl.SelectedTab = tabPage_链表;
-            tabControl.SelectedTab = tabPage_栈;
+            tabControl.SelectedTab = tabPage_链表;
+            //tabControl.SelectedTab = tabPage_栈;
 
             this.Load += new EventHandler(TabChange);
         }
@@ -52,7 +52,6 @@ namespace DS_Program
                     _panel = panel_顺序表;
                     return new ArrayProcess {TopLevel = false};
                 }
-
                 if (tabPage.Text == "链表")
                 {
                     _panel = panel_链表;
