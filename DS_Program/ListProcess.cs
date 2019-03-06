@@ -89,11 +89,6 @@ namespace DS_Program
             Terminal.SelectionColor = Terminal.ForeColor;
         }
 
-        // 通用性Event
-        private void Alert_None_More_Form(object sender, EventArgs e)
-        {
-        }
-
         //warning:重载大法好!
         public override string ToString()
         {
