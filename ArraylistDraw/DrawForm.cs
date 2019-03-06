@@ -1,34 +1,66 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace painting
 {
     public partial class DrawForm : Form
     {
-        Graphics myg = null;
-        bool isdraw = false;
-        bool isdrawy = false;
+        public DrawForm()
+        {
+            InitializeComponent();
+            myg = CreateGraphics();
+        }
 
-        int minx = 0, maxx = 0;
-        int miny = 0, maxy = 0;
-        int dx = 0;
-        int dy = 0;
-        int midx = 0;
-        int midy = 0;
+        // 窗体加载
+        private void DrawForm_Load(object sender, EventArgs e)
+        {
+            // 上下的padding
+            dx = 5;
+            dy = 5;
+
+            // 为左侧工具栏留下的宽度
+            minx = 250 + dx;
+            miny = dy;
+
+            maxx = Convert.ToInt32(ClientSize.Width - dx);
+            maxy = Convert.ToInt32(Math.Floor((ClientSize.Height - dy) / 10.0) * 10);
+            midx = Convert.ToInt32((minx + maxx) / 2);
+            midy = Convert.ToInt32(Math.Floor((miny + maxy) / 20.0) * 10);
+
+            movey = midy;
+
+            //坐标转换（自己->屏幕）
+            transPtoP1();
+
+            downp = 0;
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            initdraw();
+            drawpolygon();
+        }
+
+#region 全局变量
+
+        Graphics myg;
+        bool isdraw;
+        bool isdrawy;
+
+        int minx, maxx;
+        int miny, maxy;
+        int dx;
+        int dy;
+        int midx;
+        int midy;
 
         int minpy = 0;
         int maxpy = 0;
-        int movey = 0;
+        int movey;
 
-        int downx = 0;
-        int downy = 0;
+        int downx;
+        int downy;
         int downp = -1;
 
         float area = 0;
@@ -37,20 +69,25 @@ namespace painting
 
         DateTime dt;
 
-        Point[] pointv = new Point[]
-                         {
-                             new Point(115,125),
-                             new Point(-56,12),
-                             new Point(0,153),
-                             new Point(-50,150),
-                             new Point(-250,200),
-                             new Point(-50,-110),
-                             new Point(10,-110),
-                             new Point(10,-180),
-                             new Point(60,-90),
-                             new Point(60,0)
-                         };
-        void transPtoP1()//坐标转换（自己->屏幕）
+        Point[] pointv =
+        {
+            new Point(115, 125),
+            new Point(-56, 12),
+            new Point(0, 153),
+            new Point(-50, 150),
+            new Point(-250, 200),
+            new Point(-50, -110),
+            new Point(10, -110),
+            new Point(10, -180),
+            new Point(60, -90),
+            new Point(60, 0)
+        };
+
+#endregion
+
+#region 工具函数
+
+        void transPtoP1() //坐标转换（自己->屏幕）
         {
             for (int i = 0; i < pointv.Length; i++)
             {
@@ -58,7 +95,8 @@ namespace painting
                 pointv[i].Y = midy - pointv[i].Y;
             }
         }
-        void transP1toP()//坐标转换（屏幕->自己）
+
+        void transP1toP() //坐标转换（屏幕->自己）
         {
             for (int i = 0; i < pointv.Length; i++)
             {
@@ -67,32 +105,68 @@ namespace painting
             }
         }
 
+        float form2screen(float index, bool isX)
+        {
+            if (isX)
+                return index - midx;
+            return midy - index;
+        }
+
+#endregion
+
+#region 各种颜色
+
+        Pen pen_AxisBorder = new Pen(Color.Red, 1);
+        Pen pen_PolygonLines = new Pen(Color.DeepPink, 2);
+
+        Brush brush_globalBG;
+        Brush b2 = new SolidBrush(Color.LimeGreen);
+        Brush brush_AxisZero = new SolidBrush(Color.Blue);
+        Brush brush_polygonBG = new SolidBrush(Color.Gold);
+        Brush brush_pointNormal = new SolidBrush(Color.Orange);
+        Brush brush_ActivedPoint = new SolidBrush(Color.DarkBlue);
+        Brush brush_FontNormal = new SolidBrush(Color.Black);
+        Brush brush_FontActived = new SolidBrush(Color.Red);
+
+
+        // 选择背景颜色
+        private void lb_setcolor_Click(object sender, EventArgs e)
+        {
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                lb_setcolor.BackColor = colorDialog.Color;
+            }
+
+            initdraw();
+            drawpolygon();
+        }
+
+#endregion
+
+#region 作画函数
+
         void initdraw()
         {
-            Brush b0 = new SolidBrush(lb_setcolor.BackColor);
-            myg.Clear(Color.FromArgb(255, 224, 224, 224));
-            myg.FillRectangle(b0, minx, miny, maxx - minx, maxy - miny);
+            brush_globalBG = new SolidBrush(lb_setcolor.BackColor);
 
-            Pen pen1 = new Pen(Color.Red, 1);
-            myg.DrawLine(pen1, new Point(minx, miny), new Point(maxx, miny));
-            myg.DrawLine(pen1, new Point(minx, midy), new Point(maxx, midy));
-            myg.DrawLine(pen1, new Point(minx, maxy), new Point(maxx, maxy));
-            myg.DrawLine(pen1, new Point(minx, miny), new Point(minx, maxy));
-            myg.DrawLine(pen1, new Point(midx, miny), new Point(midx, maxy));
-            myg.DrawLine(pen1, new Point(maxx, miny), new Point(maxx, maxy));
-            Brush b1 = new SolidBrush(Color.Blue);
-            myg.FillEllipse(b1, midx - 5, midy - 5, 10, 10);
+            myg.Clear(Color.White);
+            myg.FillRectangle(brush_globalBG, minx, miny, maxx - minx, maxy - miny);
 
+            myg.DrawLine(pen_AxisBorder, new Point(minx, miny), new Point(maxx, miny));
+            myg.DrawLine(pen_AxisBorder, new Point(minx, midy), new Point(maxx, midy));
+            myg.DrawLine(pen_AxisBorder, new Point(minx, maxy), new Point(maxx, maxy));
+            myg.DrawLine(pen_AxisBorder, new Point(minx, miny), new Point(minx, maxy));
+            myg.DrawLine(pen_AxisBorder, new Point(midx, miny), new Point(midx, maxy));
+            myg.DrawLine(pen_AxisBorder, new Point(maxx, miny), new Point(maxx, maxy));
+            myg.FillEllipse(brush_AxisZero, midx - 5, midy - 5, 10, 10);
         }
 
         void drawpolygon()
         {
-            //double area2 = CalArea(pointv);
-            //labelarea2.Text = "面积=" + Math.Round(area2, 2);
-            //labelarea2.Visible = true;
+//            double area2 = CalArea(pointv);
+//            labelarea2.Text = "面积=" + Math.Round(area2, 2);
+//            labelarea2.Visible = true;
 
-            Pen pen1 = new Pen(Color.FromArgb(255, 255, 0, 255), 2);
-            Brush b2 = new SolidBrush(Color.FromArgb(255, 0, 255, 0));
 
             //if (cb_fill.Checked == true)
             //{
@@ -106,36 +180,54 @@ namespace painting
             //  labelarea.Visible = false;
             // }
 
-            myg.DrawPolygon(pen1, pointv);
+            myg.DrawPolygon(pen_PolygonLines, pointv);
 
             //drawallline(pointv);
 
-            Brush b1 = new SolidBrush(Color.FromArgb(255, 255, 100, 0));
+            // - 清空图像
             listBox1.Items.Clear();
+
+            // - 先画背景
+            myg.FillPolygon(brush_polygonBG, pointv);
+
+            // - 画点 & 文字
+            //     - 未被选中
             for (int i = 0; i < pointv.Length; i++)
             {
-                myg.FillEllipse(b1, pointv[i].X - 5, pointv[i].Y - 5, 10, 10);
-                // drawstr(i);
+                myg.FillEllipse(brush_pointNormal, pointv[i].X - 5, pointv[i].Y - 5, 10, 10);
                 listBox1.Items.Add("" + (i + 1) + ".(" + (pointv[i].X - midx) + "," + (midy - pointv[i].Y) + ")");
+
+                // - 画文字
+                // drawstr(i);
+                if (checkBox_显示标号.Checked)
+                    myg.DrawString(i.ToString(), new Font("Arial", 14), brush_FontNormal, pointv[i].X + 5,
+                        pointv[i].Y - 7,
+                        new StringFormat());
             }
+
+            //     - 被选中
             if (downp >= 0)
             {
                 listBox1.SelectedIndex = downp;
-                Brush bt = new SolidBrush(Color.FromArgb(255, 100, 50, 255));
-                myg.FillRectangle(bt, pointv[downp].X - 5, pointv[downp].Y - 5, 10, 10);
+
+                myg.FillRectangle(brush_ActivedPoint, pointv[downp].X - 5, pointv[downp].Y - 5, 10, 10);
+
+                // - 画文字
+                // drawstr(i);
+                if (checkBox_显示标号.Checked)
+                    myg.DrawString(downp.ToString(), new Font("Arial", 14), brush_FontActived,
+                        pointv[downp].X + 5,
+                        pointv[downp].Y - 7,
+                        new StringFormat());
             }
-
-
-        }
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            initdraw();
-            drawpolygon();
         }
 
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
+#endregion
 
+#region 移动顶点事件
+
+        private void DrawForm_MouseDown(object sender, MouseEventArgs e)
+        {
             for (int i = 0; i < pointv.Length; i++)
             {
                 if (Math.Abs(e.Y - movey) <= 5)
@@ -151,26 +243,26 @@ namespace painting
                     downy = e.Y;
                 }
             }
+
             initdraw();
             drawpolygon();
-
         }
 
-
-
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        private void DrawForm_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isdrawy == true)
+            // 基础作图
+            if (isdrawy)
             {
                 movey = e.Y;
                 if (movey < minpy)
                     movey = minpy;
                 else if (movey > maxpy)
                     movey = maxpy;
+
                 initdraw();
                 drawpolygon();
             }
-            else if (isdraw == true)
+            else if (isdraw)
             {
                 {
                     pointv[downp].X = e.X;
@@ -183,47 +275,26 @@ namespace painting
                         pointv[downp].Y = miny + 10;
                     if (e.Y > maxy - 10)
                         pointv[downp].Y = maxy - 10;
-
                 }
-
 
                 initdraw();
                 drawpolygon();
             }
 
-
+            // 更新坐标
+            textBox_Axis.Text = $"\tX:{form2screen(e.X, true)}\t\t  Y:{form2screen(e.Y, false)}";
         }
 
-        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        private void DrawForm_MouseUp(object sender, MouseEventArgs e)
         {
             isdraw = false;
             isdrawy = false;
         }
 
-        public DrawForm()
-        {
-            InitializeComponent();
-        }
+#endregion
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            myg = this.CreateGraphics();
+#region 其他鼠标事件
 
-            dx = 10;
-            minx = 130 + dx;
-            maxx = Convert.ToInt32(this.ClientSize.Width - dx);
-            dy = 10;
-            miny = dy;
-            maxy = Convert.ToInt32(Math.Floor((this.ClientSize.Height - dy) / 10.0) * 10);
-            midx = Convert.ToInt32((minx + maxx) / 2);
-            midy = Convert.ToInt32(Math.Floor((miny + maxy) / 20.0) * 10);
-
-            movey = midy;
-
-            transPtoP1();//坐标转换（自己->屏幕）
-
-            downp = 0;
-
-        }
+#endregion
     }
 }
