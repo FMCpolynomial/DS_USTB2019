@@ -8,7 +8,7 @@ namespace painting
 {
     public partial class DrawForm : Form
     {
-#region Terminal 日志 || Console 输出台
+        #region Terminal 日志 || Console 输出台
 
         // Log 类型
         public enum logType
@@ -51,9 +51,9 @@ namespace painting
             Terminal.SelectionColor = Terminal.ForeColor;
         }
 
-#endregion
+        #endregion
 
-#region 初始化
+        #region 初始化
 
         public DrawForm()
         {
@@ -92,9 +92,9 @@ namespace painting
             drawpolygon();
         }
 
-#endregion
+        #endregion
 
-#region 全局变量
+        #region 全局变量
 
         // 老师遗留
         Graphics myg;
@@ -143,9 +143,9 @@ namespace painting
             new Point(60, 0)
         };
 
-#endregion
+        #endregion
 
-#region 工具函数
+        #region 工具函数
 
         //坐标转换（自己->屏幕）
         void transPtoP1()
@@ -181,7 +181,7 @@ namespace painting
             double area = 0;
             for (int i = 0; i < _Points.Length - 1; i++)
             {
-                area += (_Points[i].X * (double) _Points[i + 1].Y - _Points[i + 1].X * (double) _Points[i].Y) / 2;
+                area += (_Points[i].X * (double)_Points[i + 1].Y - _Points[i + 1].X * (double)_Points[i].Y) / 2;
             }
 
             area +=
@@ -191,9 +191,9 @@ namespace painting
             return area;
         }
 
-#endregion
+        #endregion
 
-#region 各种颜色
+        #region 各种颜色
 
         Pen pen_AxisBorder = new Pen(Color.Red, 1);
         Pen pen_PolygonLines = new Pen(Color.DeepPink, 4);
@@ -222,9 +222,9 @@ namespace painting
             drawpolygon();
         }
 
-#endregion
+        #endregion
 
-#region 作画函数
+        #region 作画函数
 
         void initdraw()
         {
@@ -284,8 +284,13 @@ namespace painting
             //     - 被选中
             if (downp >= 0)
             {
-                listBox1.SelectedIndex = downp;
+                if (!(listBox1.Items.Count >= downp))
+                {
+                    Log_Terminal("结点暂时丢失", logType.Warning);
+                    return;
+                }
 
+                listBox1.SelectedIndex = downp;
                 myg.FillRectangle(brush_ActivedPoint, pointv[downp].X - 5, pointv[downp].Y - 5, 10, 10);
 
                 // - 画文字
@@ -351,9 +356,9 @@ namespace painting
             drawpolygon();
         }
 
-#endregion
+        #endregion
 
-#region 移动顶点事件
+        #region 移动顶点事件
 
         private void DrawForm_MouseDown(object sender, MouseEventArgs e)
         {
@@ -376,6 +381,7 @@ namespace painting
             initdraw();
             drawpolygon();
         }
+
 
         private void DrawForm_MouseMove(object sender, MouseEventArgs e)
         {
@@ -536,9 +542,9 @@ namespace painting
             drawpolygon();
         }
 
-#endregion
+        #endregion
 
-#region 显示
+        #region 显示
 
         // 计时器显示时间
         private void timer1_Tick(object sender, EventArgs e)
@@ -549,9 +555,9 @@ namespace painting
             lb_datetime.Text = date + time;
         }
 
-#endregion
+        #endregion
 
-#region 其他事件
+        #region 其他事件
 
         // 初始化结点
         private void button_Init_Click(object sender, EventArgs e)
@@ -608,6 +614,12 @@ namespace painting
             pointv = points;
             Log_Terminal($"list数量{listBox1.Items.Count}", logType.Warning);
 
+            // debug：这里给downy减一，fixed了删除最后一个节点downy溢出的bug
+
+            Log_Terminal($"删除前downy：{downp}", logType.Warning);
+            downp--;
+            Log_Terminal($"删除后downy：{downp}", logType.Warning);
+
             // 转回来
             transPtoP1();
 
@@ -616,6 +628,6 @@ namespace painting
             drawpolygon();
         }
 
-#endregion
+        #endregion
     }
 }

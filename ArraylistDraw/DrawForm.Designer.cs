@@ -148,7 +148,6 @@ namespace painting
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "面积";
-            
             // 
             // textBox_Square
             // 
