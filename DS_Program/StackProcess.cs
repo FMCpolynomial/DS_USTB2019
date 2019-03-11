@@ -68,5 +68,9 @@ namespace DS_Program
         {
             InitializeComponent();
         }
+
+#region 全局变量
+
+#endregion
     }
 }

@@ -105,5 +105,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArraylistDraw\ArraylistDraw.csproj">
+      <Project>{b5c2c3ed-f589-432b-9006-ae752a3925d2}</Project>
+      <Name>ArraylistDraw</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
