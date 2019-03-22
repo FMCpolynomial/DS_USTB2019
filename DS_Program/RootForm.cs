@@ -12,8 +12,8 @@ namespace DS_Program
             InitializeComponent();
 
             //todo:这里规定第一个打开的页面
+//            tabControl.SelectedTab = tabPage_链表2;
             tabControl.SelectedTab = tabPage_栈;
-            //tabControl.SelectedTab = tabPage_栈;
 
             this.Load += new EventHandler(TabChange);
         }
@@ -76,7 +76,7 @@ namespace DS_Program
                 {
                     _panel = panel_栈;
                     isInsert = true;
-                    return new StackProcess {TopLevel = false};
+                    return new Stack_Calculator {TopLevel = false};
                 }
 
                 if (tabPage.Text == "链表_绘图")
