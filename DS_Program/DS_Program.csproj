@@ -77,6 +77,12 @@
     <Compile Include="Stack_Calculator.Designer.cs">
       <DependentUpon>Stack_Calculator.cs</DependentUpon>
     </Compile>
+    <Compile Include="Stack_PZ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stack_PZ.Designer.cs">
+      <DependentUpon>Stack_PZ.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ListProcess.resx">
       <DependentUpon>ListProcess.cs</DependentUpon>
     </EmbeddedResource>
@@ -100,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Stack_Calculator.resx">
       <DependentUpon>Stack_Calculator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stack_PZ.resx">
+      <DependentUpon>Stack_PZ.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

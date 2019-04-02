@@ -39,10 +39,13 @@ namespace DS_Program
             this.tabPage_栈 = new System.Windows.Forms.TabPage();
             this.panel_栈 = new System.Windows.Forms.Panel();
             this.tabPage_链表2 = new System.Windows.Forms.TabPage();
+            this.tabPage_排列组合 = new System.Windows.Forms.TabPage();
+            this.panel_排列组合 = new System.Windows.Forms.Panel();
             this.tabControl.SuspendLayout();
             this.tabPage_顺序表.SuspendLayout();
             this.tabPage_链表.SuspendLayout();
             this.tabPage_栈.SuspendLayout();
+            this.tabPage_排列组合.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -51,6 +54,7 @@ namespace DS_Program
             this.tabControl.Controls.Add(this.tabPage_链表);
             this.tabControl.Controls.Add(this.tabPage_栈);
             this.tabControl.Controls.Add(this.tabPage_链表2);
+            this.tabControl.Controls.Add(this.tabPage_排列组合);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Margin = new System.Windows.Forms.Padding(0);
@@ -65,7 +69,7 @@ namespace DS_Program
             // 
             this.tabPage_顺序表.Controls.Add(this.panel_顺序表);
             this.tabPage_顺序表.Location = new System.Drawing.Point(8, 39);
-            this.tabPage_顺序表.Margin = new System.Windows.Forms.Padding(4, 8, 4, 8);
+            this.tabPage_顺序表.Margin = new System.Windows.Forms.Padding(4, 10, 4, 10);
             this.tabPage_顺序表.Name = "tabPage_顺序表";
             this.tabPage_顺序表.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage_顺序表.Size = new System.Drawing.Size(1408, 2072);
@@ -107,9 +111,9 @@ namespace DS_Program
             // 
             this.tabPage_栈.Controls.Add(this.panel_栈);
             this.tabPage_栈.Location = new System.Drawing.Point(8, 39);
-            this.tabPage_栈.Margin = new System.Windows.Forms.Padding(6, 12, 6, 12);
+            this.tabPage_栈.Margin = new System.Windows.Forms.Padding(6, 14, 6, 14);
             this.tabPage_栈.Name = "tabPage_栈";
-            this.tabPage_栈.Padding = new System.Windows.Forms.Padding(8, 17, 8, 17);
+            this.tabPage_栈.Padding = new System.Windows.Forms.Padding(8, 20, 8, 20);
             this.tabPage_栈.Size = new System.Drawing.Size(1408, 2072);
             this.tabPage_栈.TabIndex = 3;
             this.tabPage_栈.Text = "栈";
@@ -118,22 +122,41 @@ namespace DS_Program
             // panel_栈
             // 
             this.panel_栈.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_栈.Location = new System.Drawing.Point(8, 17);
-            this.panel_栈.Margin = new System.Windows.Forms.Padding(6, 12, 6, 12);
+            this.panel_栈.Location = new System.Drawing.Point(8, 20);
+            this.panel_栈.Margin = new System.Windows.Forms.Padding(6, 14, 6, 14);
             this.panel_栈.Name = "panel_栈";
-            this.panel_栈.Size = new System.Drawing.Size(1392, 2038);
+            this.panel_栈.Size = new System.Drawing.Size(1392, 2032);
             this.panel_栈.TabIndex = 0;
             // 
             // tabPage_链表2
             // 
             this.tabPage_链表2.Location = new System.Drawing.Point(8, 39);
-            this.tabPage_链表2.Margin = new System.Windows.Forms.Padding(3, 7, 3, 7);
+            this.tabPage_链表2.Margin = new System.Windows.Forms.Padding(3, 8, 3, 8);
             this.tabPage_链表2.Name = "tabPage_链表2";
-            this.tabPage_链表2.Padding = new System.Windows.Forms.Padding(3, 7, 3, 7);
+            this.tabPage_链表2.Padding = new System.Windows.Forms.Padding(3, 8, 3, 8);
             this.tabPage_链表2.Size = new System.Drawing.Size(1408, 2072);
             this.tabPage_链表2.TabIndex = 2;
             this.tabPage_链表2.Text = "链表_绘图";
             this.tabPage_链表2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage_排列组合
+            // 
+            this.tabPage_排列组合.Controls.Add(this.panel_排列组合);
+            this.tabPage_排列组合.Location = new System.Drawing.Point(8, 39);
+            this.tabPage_排列组合.Name = "tabPage_排列组合";
+            this.tabPage_排列组合.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_排列组合.Size = new System.Drawing.Size(1408, 2072);
+            this.tabPage_排列组合.TabIndex = 4;
+            this.tabPage_排列组合.Text = "排列组合";
+            this.tabPage_排列组合.UseVisualStyleBackColor = true;
+            // 
+            // panel_排列组合
+            // 
+            this.panel_排列组合.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel_排列组合.Location = new System.Drawing.Point(3, 3);
+            this.panel_排列组合.Name = "panel_排列组合";
+            this.panel_排列组合.Size = new System.Drawing.Size(1402, 2066);
+            this.panel_排列组合.TabIndex = 0;
             // 
             // RootForm
             // 
@@ -142,13 +165,14 @@ namespace DS_Program
             this.ClientSize = new System.Drawing.Size(1424, 2119);
             this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 8, 4, 8);
+            this.Margin = new System.Windows.Forms.Padding(4, 10, 4, 10);
             this.Name = "RootForm";
             this.Text = "数据结构应用程序  :  双击栏目可以新建已经关闭的相关窗口";
             this.tabControl.ResumeLayout(false);
             this.tabPage_顺序表.ResumeLayout(false);
             this.tabPage_链表.ResumeLayout(false);
             this.tabPage_栈.ResumeLayout(false);
+            this.tabPage_排列组合.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -163,6 +187,8 @@ namespace DS_Program
         private TabPage tabPage_栈;
         private Panel panel_栈;
         private TabPage tabPage_链表2;
+        private TabPage tabPage_排列组合;
+        private Panel panel_排列组合;
     }
 }
 

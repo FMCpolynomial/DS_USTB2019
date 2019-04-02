@@ -12,7 +12,7 @@ namespace DS_Program
             InitializeComponent();
 
             //todo:这里规定第一个打开的页面
-//            tabControl.SelectedTab = tabPage_链表2;
+            //            tabControl.SelectedTab = tabPage_链表2;
             tabControl.SelectedTab = tabPage_栈;
 
             this.Load += new EventHandler(TabChange);
@@ -62,28 +62,35 @@ namespace DS_Program
                 {
                     _panel = panel_顺序表;
                     isInsert = true;
-                    return new ArrayProcess {TopLevel = false};
+                    return new ArrayProcess { TopLevel = false };
                 }
 
                 if (tabPage.Text == "链表")
                 {
                     _panel = panel_链表;
                     isInsert = true;
-                    return new ListProcess {TopLevel = false};
+                    return new ListProcess { TopLevel = false };
                 }
 
                 if (tabPage.Text == "栈")
                 {
                     _panel = panel_栈;
                     isInsert = true;
-                    return new Stack_Calculator {TopLevel = false};
+                    return new Stack_Calculator { TopLevel = false };
                 }
 
                 if (tabPage.Text == "链表_绘图")
                 {
                     _panel = null;
                     isInsert = false;
-                    return new DrawForm() {TopLevel = true};
+                    return new DrawForm() { TopLevel = true };
+                }
+
+                if (tabPage.Text == "排列组合")
+                {
+                    _panel = panel_排列组合;
+                    isInsert = true;
+                    return new Stack_PZ() { TopLevel = false };
                 }
             }
             catch (Exception e)
